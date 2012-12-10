@@ -1,0 +1,41 @@
+{
+	"app": {
+		"description": "Displays customer and order details from BigCommerce.",
+		"parameters": {
+			"url"               : { "label": "Store URL" },
+			"username"      	: { "label": "Username" },
+			"api_token"      	: { "label": "API Token" },
+			"order_id_field_id" : { "label": "Order ID Field ID" }
+    	}
+    },
+
+    "global": {
+		"error": {
+			"title"     : "An error occurred",
+			"message"   : "Please try the previous action again.",
+			"customerNotFound" : "Customer could not be found.",
+			"data"      : "Ticket data could not be read."
+		},
+		"loading"     : "Loading customer data...",
+		"requesting"  : "Requesting customer data from BigCommerce..."
+	},
+
+	"customer" : {
+		"notes"		: "Notes"
+	},
+
+	"orders": {
+		"id"        : "RECENT ORDERS",
+		"status"    : "STATUS"
+	},
+
+	"order": {
+		"status"   			: "Status",
+		"count"				: "Orders count",
+		"ticket"			: "Order details for",
+		"subtotal_inc_tax"	: "Subtotal (inc. tax)",
+		"total_inc_tax"		: "Total (inc. tax)",
+		"date_created"		: "Date Created",
+		"date_shipped"		: "Date Shipped"
+	}
+}

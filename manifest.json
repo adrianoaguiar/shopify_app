@@ -1,0 +1,35 @@
+{
+	"author": {
+	"name": "Zendesk",
+	"email": "support@zendesk.com"
+	},
+
+	"location": "ticket_sidebar",
+	"defaultLocale": "en",
+	"private": false,
+	"singleInstall": true,
+	"frameworkVersion": "0.5",
+
+    "parameters": [
+		{
+		  "name": "url",
+		  "type": "url",
+		  "required": true
+		},
+		{
+		  "name": "username",
+		  "type": "text",
+		  "required": true
+		},
+		{
+		  "name": "api_token",
+		  "type": "text",
+		  "required": true
+		},
+    {
+      "name": "order_id_field_id",
+      "type": "number",
+      "required": false
+    }
+	]
+}

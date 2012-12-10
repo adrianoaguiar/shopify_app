@@ -1,0 +1,56 @@
+<div>
+	<p>
+		{{first_name}} {{last_name}} <a href="{{customer_uri}}" target="_blank">(#{{id}})</a>
+	</p>
+
+	{{#if recentOrders}}
+	<table class="table table-condensed">
+		<thead>
+			<tr>
+				<th>{{t "orders.id"}}</th>
+				<th>{{t "orders.status"}}</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#recentOrders}}
+				<tr class="_tooltip" data-placement="top">
+					<td><a href="{{uri}}" target="_blank">#{{id}}</a></td>
+					<td><span class="badge badge-{{status_id}}">{{status}}</span></td>
+				</tr>
+			{{/recentOrders}}
+		</tbody>
+	</table>
+	{{/if}}
+
+	<h5>{{t "order.count"}}</h5>
+	<p>{{ordersCount}}</p>
+
+	<h5>{{t "customer.notes"}}</h5>
+	<p>{{notes}}</p>
+
+	{{#if ticketOrder}}
+
+		<hr/>
+
+		<h4>{{t "order.ticket"}} <a href="{{ticketOrder.uri}}" target="_blank">#{{ticketOrder.id}}</a></h4>
+
+		<h5>{{t "order.status"}}</h5>
+		<p><span class="badge badge-{{ticketOrder.status_id}}">{{ticketOrder.status}}</span></p>
+
+		<h5>{{t "order.subtotal_inc_tax"}}</h5>
+		<p>{{ticketOrder.subtotal_inc_tax}} {{ticketOrder.currency_code}}</p>
+
+		<h5>{{t "order.total_inc_tax"}}</h5>
+		<p>{{ticketOrder.total_inc_tax}} {{ticketOrder.currency_code}}</p>
+
+		<h5>{{t "order.date_created"}}</h5>
+		<p>{{ticketOrder.date_created}}</p>
+
+		{{#if ticketOrder.date_shipped}}
+			<h5>{{t "order.date_shipped"}}</h5>
+			<p>{{ticketOrder.date_shipped}}</p>
+		{{/if}}
+
+	{{/if}}
+
+</div>

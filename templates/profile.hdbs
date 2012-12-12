@@ -74,7 +74,7 @@
 		{{#if ticketOrder.shipping_lines}}
 			<h5>{{t "order.shipping"}}</h5>
 			{{#each ticketOrder.shipping_lines}}}
-				<p>{{code}} - {{price}}</p>
+				<p>{{price}} ({{code}})</p>
 			{{/each}}
 		{{/if}}
 

@@ -27,19 +27,16 @@
 		"notes"					: "Notes"
 	},
 
-	"orders": {
-		"id"        : "RECENT ORDERS",
-		"status"    : "STATUS"
-	},
-
 	"order": {
+		"ticket"						: "Order details for",
 		"payment_status"   	: "Payment Status",
 		"fulfillment_status": "Fulfillment Status",
+		"notes"							: "Order Notes",
 		"addresses"     	 	: "Addresses",
 		"billing"        		: "Billing",
 		"shipping"       		: "Shipping",
-		"ticket"						: "Order details for",
 		"subtotal"					: "Subtotal Price",
+		"shipping_lines"		:	"Shipping",
 		"total_price"				: "Total Price",
 		"date_created"			: "Date Created"
 	}

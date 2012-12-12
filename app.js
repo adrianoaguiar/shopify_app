@@ -170,6 +170,14 @@
 			this.profileData.ticketOrder = data.order;
 			this.profileData.ticketOrder.uri = helpers.fmt(this.resources.ORDER_URI, this.storeUrl, data.order.id);
 
+			if (!data.order.fulfillment_status) {
+				this.profileData.ticketOrder.fulfillment_status = "not-fulfilled";
+			}
+
+			if (data.order.note === "" || data.order.note === null) { 
+				this.profileData.ticketOrder.note = this.I18n.t('global.error.notes');
+			}
+
 			this.trigger('shopifyData.ready');
 		},
 
@@ -189,6 +197,7 @@
 			// Show fail message
 			this.showError();
 		}
+
 	};
 
 }());

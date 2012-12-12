@@ -4,13 +4,24 @@ table {
 
 .badge {
 	color: white;
-	font-size: 9px;
+	font-size: 10px;
 	padding: 2px 9px;
-	text-transform: uppercase;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
 }
+
+.o-paid,.o-authorized,.o-fulfilled
+{background-color:#80bd4e;color:#fff}
+
+.o-authorized,.o-partial
+{background-color:#d1e5c0;color:#335e10;}
+
+.o-filed,.o-pending,.o-not-fulfilled,.r-match-unavailable
+{background-color:#eee;color:#000}
+
+.o-abandoned,.o-voided,.o-refunded,.o-restocked
+{background-color:#af9c7e;color:#fff}
 
 h5 {
 	margin-top: 9px;

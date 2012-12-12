@@ -54,7 +54,7 @@
 				{{first_name}} {{last_name}}<br />
 				{{address1}} {{address2}}<br />
 				{{city}} {{province_code}} {{zip}}<br />
-				{{country}}
+				{{country}}<br /><br />
 			{{/with}}
 		</p>
 
@@ -64,7 +64,7 @@
 				{{first_name}} {{last_name}}<br />
 				{{address1}} {{address2}}<br />
 				{{city}} {{province_code}} {{zip}}<br />
-				{{country}}
+				{{country}}<br /><br />
 			{{/with}}
 		</p>
 

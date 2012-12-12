@@ -15,10 +15,16 @@
 			"message"   				: "Please try the previous action again.",
 			"customerNotFound" 	: "Customer could not be found.",
 			"data"     					: "Ticket data could not be read.",
-			"notes"							: "No notes have been added yet."
+			"notes"							: "No notes have been added yet.",
+			"wrongOrder"				: "Order e-mail does not match requester e-mail"
 		},
 		"loading"     : "Loading customer data...",
 		"requesting"  : "Requesting customer data from Shopify..."
+	},
+
+	"orders": {
+		"id"        : "RECENT ORDERS",
+		"status"    : "FULFILLMENT"
 	},
 
 	"customer" : {

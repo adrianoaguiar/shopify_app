@@ -15,15 +15,18 @@
 		resources: {
 			PROFILE_URI				: '/admin/customers/search.json?query=email:',
 			CUSTOMER_URI			: '%@/admin/customers/%@',
-			ORDER_URI					: '%@/admin/orders/%@'
+			ORDER_URI					: '%@/admin/orders%@'
 		},
 
 		requests: {
 			'getProfile' : function(email) {
 				return this.getRequest(this.storeUrl + this.resources.PROFILE_URI + email);
 			},
+			'getOrders' : function(param) {
+				return this.getRequest(helpers.fmt(this.resources.ORDER_URI, this.storeUrl, ".json"));
+			},
 			'getOrder' : function(order_id) {
-				return this.getRequest(helpers.fmt(this.resources.ORDER_URI, this.storeUrl, order_id + ".json"));
+				return this.getRequest(helpers.fmt(this.resources.ORDER_URI, this.storeUrl, "/" + order_id + ".json"));
 			}
 		},
 
@@ -31,6 +34,7 @@
 			'app.activated'             : 'init',
 			'requiredProperties.ready'  : 'queryShopify',
 			'getProfile.done'						: 'handleGetProfile',
+			'getOrders.done'						: 'handleGetOrders',
 			'getOrder.done'							: 'handleGetOrder',
 			'click .toggle-address'     : 'toggleAddress',
 
@@ -80,7 +84,7 @@
 			if (this.currAttempt < this.MAX_ATTEMPTS) {
 				this.trigger('requiredProperties.ready');
 			} else {
-				this.showError(this.I18n.t('global.error.title'), this.I18n.t('global.error.data'));
+				this.showError(null, this.I18n.t('global.error.data'));
 			}
 		},
 
@@ -145,40 +149,87 @@
 
 			this.profileData = data.customers[0];
 
+
 			if (this.profileData.note === "" || this.profileData.note === null) { 
 				this.profileData.note = this.I18n.t('global.error.notes');
 			}
 
 			this.profileData.customer_uri = helpers.fmt(this.resources.CUSTOMER_URI,this.storeUrl,this.profileData.id);
 
+			// Get shop's 50 most recent orders, currently we can't filter by customer_id/email
+			this.ajax('getOrders');
+		},
+
+		handleGetOrders: function(data) {
+			var orders = [];
+
+			// Find this customer's orders from shop's most recent orders
+			_.each(data.orders, function(order) {
+				if (order.email === this.profileData.email) {
+					orders.push(this.fmtOrder(order));
+				}
+			}, this);
+
+			// Get 3 most recent orders from requester
+			this.profileData.recentOrders = orders.slice(0,3);
+
 			if (this.settings.order_id_field_id) {
 				var orderId;
+
+				// Get custom field order ID
 				customFieldName = 'custom_field_' + this.settings.order_id_field_id;
 				orderId = this.ticket().customField(customFieldName);
 
 				if (orderId) {
-					this.ajax('getOrder', orderId);
+
+					// Check if custom field order is in the array
+					this.profileData.ticketOrder = _.find(orders, function(order){
+						return (order.id == orderId);
+					});
+
+					if (!this.profileData.ticketOrder) {
+						// Order not found, have to make a request
+						this.ajax('getOrder', orderId);
+					} else {
+						// Yay, order was in the list
+						this.trigger('shopifyData.ready');
+					}
+
 				} else {
 					this.trigger('shopifyData.ready');
 				}
+
 			} else {
 				this.trigger('shopifyData.ready');
 			}
 		},
 
 		handleGetOrder: function(data) {
-			this.profileData.ticketOrder = data.order;
-			this.profileData.ticketOrder.uri = helpers.fmt(this.resources.ORDER_URI, this.storeUrl, data.order.id);
-
-			if (!data.order.fulfillment_status) {
-				this.profileData.ticketOrder.fulfillment_status = "not-fulfilled";
+			// Check if order email matches requester email
+			if (data.order.email !== this.profileData.email) {
+					this.showError(null, this.I18n.t('global.error.wrongOrder'));
+					return;
 			}
 
-			if (data.order.note === "" || data.order.note === null) { 
-				this.profileData.ticketOrder.note = this.I18n.t('global.error.notes');
-			}
+			this.profileData.ticketOrder = this.fmtOrder(data.order);
 
 			this.trigger('shopifyData.ready');
+		},
+
+		fmtOrder: function(order) {
+			var newOrder = order;
+
+			newOrder.uri = helpers.fmt(this.resources.ORDER_URI, this.storeUrl, "/" + order.id);
+
+			if (!order.fulfillment_status) {
+				newOrder.fulfillment_status = "not-fulfilled";
+			}
+
+			if (order.note === "" || order.note === null) { 
+				newOrder.note = this.I18n.t('global.error.notes');
+			}
+
+			return newOrder;
 		},
 
 		toggleAddress: function (e) {

@@ -1,6 +1,6 @@
 <div>
 	<p>
-		{{first_name}} {{last_name}} <a href="{{customer_uri}}" target="_blank">(#{{id}})</a>
+		<h4>{{first_name}} {{last_name}} <a href="{{customer_uri}}" target="_blank">(#{{id}})</a></h4>
 	</p>
 
 	{{#if recentOrders}}
@@ -22,11 +22,14 @@
 	</table>
 	{{/if}}
 
-	<h5>{{t "order.count"}}</h5>
-	<p>{{ordersCount}}</p>
+	<h5>{{t "customer.orders_count"}}</h5>
+	<p>{{orders_count}}</p>
+
+	<h5>{{t "customer.total_spent"}}</h5>
+	<p>{{total_spent}}</p>
 
 	<h5>{{t "customer.notes"}}</h5>
-	<p>{{notes}}</p>
+	<p>{{note}}</p>
 
 	{{#if ticketOrder}}
 
@@ -34,22 +37,42 @@
 
 		<h4>{{t "order.ticket"}} <a href="{{ticketOrder.uri}}" target="_blank">#{{ticketOrder.id}}</a></h4>
 
-		<h5>{{t "order.status"}}</h5>
-		<p><span class="badge badge-{{ticketOrder.status_id}}">{{ticketOrder.status}}</span></p>
+		<h5>{{t "order.payment_status"}}</h5>
+		<p><span class="badge">{{ticketOrder.financial_status}}</span></p>
 
-		<h5>{{t "order.subtotal_inc_tax"}}</h5>
-		<p>{{ticketOrder.subtotal_inc_tax}} {{ticketOrder.currency_code}}</p>
+		<h5>{{t "order.fulfillment_status"}}</h5>
+		<p><span class="badge">{{ticketOrder.fulfillment_status}}</span></p>
 
-		<h5>{{t "order.total_inc_tax"}}</h5>
-		<p>{{ticketOrder.total_inc_tax}} {{ticketOrder.currency_code}}</p>
+		<h5>{{t "order.addresses"}}</h5>
+
+		<h6><a href="#" class="toggle-address">{{t "order.billing"}}</a></h6>
+		<p class="hide">
+			{{#with ticketOrder.billing_address}}
+				{{first_name}} {{last_name}}<br />
+				{{address1}} {{address2}}<br />
+				{{city}} {{province_code}} {{zip}}<br />
+				{{country}}
+			{{/with}}
+		</p>
+
+		<h6><a href="#" class="toggle-address">{{t "order.shipping"}}</a></h6>
+		<p class="hide">
+			{{#with ticketOrder.shipping_address}}
+				{{first_name}} {{last_name}}<br />
+				{{address1}} {{address2}}<br />
+				{{city}} {{province_code}} {{zip}}<br />
+				{{country}}
+			{{/with}}
+		</p>
+
+		<h5>{{t "order.subtotal"}}</h5>
+		<p>{{ticketOrder.subtotal_price}} {{ticketOrder.currency}}</p>
+
+		<h5>{{t "order.total_price"}}</h5>
+		<p>{{ticketOrder.total_price}} {{ticketOrder.currency}}</p>
 
 		<h5>{{t "order.date_created"}}</h5>
-		<p>{{ticketOrder.date_created}}</p>
-
-		{{#if ticketOrder.date_shipped}}
-			<h5>{{t "order.date_shipped"}}</h5>
-			<p>{{ticketOrder.date_shipped}}</p>
-		{{/if}}
+		<p>{{ticketOrder.created_at}}</p>
 
 	{{/if}}
 

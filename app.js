@@ -2,8 +2,6 @@
 
 	return {
 
-		errorCodes: _.range(400,416),
-
 		currAttempt : 0,
 
 		MAX_ATTEMPTS : 20,
@@ -15,30 +13,29 @@
 		storeUrl: '',
 
 		resources: {
-			PROFILE_URI				: '/api/v2/customers.json?email=',
-			RECENT_ORDERS_URI	: '/api/v2/orders.json?customer_id=',
-			CUSTOMER_URI			: '%@/admin/index.php?ToDo=searchCustomersRedirect&idFrom=%@&idTo=%@',
-			ORDER_URI					: '%@/admin/index.php?ToDo=searchOrdersRedirect&orderFrom=%@&orderTo=%@'
+			PROFILE_URI				: '/admin/customers/search.json?query=email:',
+			CUSTOMER_URI			: '%@/admin/customers/%@',
+			ORDER_URI					: '%@/admin/orders/%@'
 		},
 
 		requests: {
 			'getProfile' : function(email) {
 				return this.getRequest(this.storeUrl + this.resources.PROFILE_URI + email);
 			},
-			'getOrders' : function(customer_id) {
-				return this.getRequest(this.storeUrl + this.resources.RECENT_ORDERS_URI + customer_id);
+			'getOrder' : function(order_id) {
+				return this.getRequest(helpers.fmt(this.resources.ORDER_URI, this.storeUrl, order_id + ".json"));
 			}
 		},
 
 		events: {
 			'app.activated'             : 'init',
-			'requiredProperties.ready'  : 'queryBigCommerce',
-			'getProfile.fail'						: 'handleGetProfileError',
+			'requiredProperties.ready'  : 'queryShopify',
 			'getProfile.done'						: 'handleGetProfile',
-			'getOrders.done'						: 'handleGetOrders',
+			'getOrder.done'							: 'handleGetOrder',
+			'click .toggle-address'     : 'toggleAddress',
 
-			'getOrders.always'					: function() {
-				this.switchTo('profile',this.profileData);
+			'shopifyData.ready': function() {
+				this.switchTo('profile', this.profileData);
 			}
 		},
 
@@ -56,7 +53,7 @@
 			this.allRequiredPropertiesExist();
 		},
 
-		queryBigCommerce: function(){
+		queryShopify: function(){
 			this.switchTo('requesting');
 			this.ajax('getProfile', this.ticket().requester().email());
 		},
@@ -114,7 +111,7 @@
 		getRequest: function(resource) {
 			return {
 				headers  : {
-					'Authorization': 'Basic ' + Base64.encode(this.settings.username + ':' + this.settings.api_token)
+					'Authorization': 'Basic ' + Base64.encode(this.settings.api_key + ':' + this.settings.password)
 				},
 				url      : resource,
 				method   : 'GET',
@@ -136,67 +133,49 @@
 		},
 
 		handleGetProfile: function(data) {
-			if (_.isUndefined(data[0])) return;
-
-			// checks if status returned a HTTP error instead of order status (proxy bug)
-			if (_.indexOf(this.errorCodes, data[0].status) !== -1 && !_.isUndefined(data[0].message)) {
-				this.showError(this.I18n.t('global.error.title'),data[0].message);
+			if (data.errors) {
+				this.showError(null, data.errors);
 				return;
 			}
 
-			this.profileData = data[0];
-
-			if (data[0].notes === "") { 
-				this.profileData.notes = "No notes yet.";
-			} else {
-				this.profileData.notes = data[0].notes;
+			if (data.customers.length === 0) {
+				this.showError(this.I18n.t('global.error.customerNotFound'), " ");
+				return;
 			}
 
-			this.profileData.customer_uri = helpers.fmt(this.resources.CUSTOMER_URI,this.storeUrl,this.profileData.id,this.profileData.id);
-			this.profileData.ordersCount = 0;
-			this.ajax('getOrders', this.profileData.id);
-		},
+			this.profileData = data.customers[0];
 
-		handleGetOrders: function(data) {
-			if (_.isUndefined(data[0])) return;
-			this.profileData.recentOrders = data;
-			this.profileData.ordersCount = data.length;
-
-			if (data.length > 3) {
-				this.profileData.recentOrders = data.slice(data.length-3, data.length).reverse();
-			} else {
-				this.profileData.recentOrders = data.reverse();
+			if (this.profileData.note === "" || this.profileData.note === null) { 
+				this.profileData.note = this.I18n.t('global.error.notes');
 			}
 
-			_.each(this.profileData.recentOrders, function(order) {
-				order.uri = helpers.fmt(this.resources.ORDER_URI,this.storeUrl,order.id,order.id);
-			}, this);
-
-			this.checkTicketOrder(data);
-		},
-
-		checkTicketOrder : function(data) {
-			var customFieldName, orderId;
+			this.profileData.customer_uri = helpers.fmt(this.resources.CUSTOMER_URI,this.storeUrl,this.profileData.id);
 
 			if (this.settings.order_id_field_id) {
+				var orderId;
 				customFieldName = 'custom_field_' + this.settings.order_id_field_id;
 				orderId = this.ticket().customField(customFieldName);
 
 				if (orderId) {
-					this.profileData.ticketOrder = _.find(data, function(order){
-						return (order.id == orderId);
-					});
-
-					if (!_.isUndefined(this.profileData.ticketOrder)) {
-						// formatting of numbers and dates
-						var date_length = this.profileData.ticketOrder.date_created.length;
-						this.profileData.ticketOrder.subtotal_inc_tax = parseFloat(this.profileData.ticketOrder.subtotal_inc_tax).toFixed(2);
-						this.profileData.ticketOrder.total_inc_tax = parseFloat(this.profileData.ticketOrder.total_inc_tax).toFixed(2);
-						this.profileData.ticketOrder.date_created = this.profileData.ticketOrder.date_created.substr(0,date_length - 6);
-						this.profileData.ticketOrder.date_shipped = this.profileData.ticketOrder.date_shipped.substr(0,date_length - 6);
-					}
+					this.ajax('getOrder', orderId);
+				} else {
+					this.trigger('shopifyData.ready');
 				}
+			} else {
+				this.trigger('shopifyData.ready');
 			}
+		},
+
+		handleGetOrder: function(data) {
+			this.profileData.ticketOrder = data.order;
+			this.profileData.ticketOrder.uri = helpers.fmt(this.resources.ORDER_URI, this.storeUrl, data.order.id);
+
+			this.trigger('shopifyData.ready');
+		},
+
+		toggleAddress: function (e) {
+			this.$(e.target).parent().next('p').toggleClass('hide');
+			return false;
 		},
 
 		showError: function(title, msg) {
@@ -204,11 +183,6 @@
 				title: title || this.I18n.t('global.error.title'),
 				message: msg || this.I18n.t('global.error.message')
 			});
-		},
-
-		handleGetProfileError: function() {
-			// Show fail message
-			this.showError(this.I18n.t('global.error.customerNotFound'), " ");
 		},
 
 		handleFail: function() {

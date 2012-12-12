@@ -1,27 +1,30 @@
 {
 	"app": {
-		"description": "Displays customer and order details from BigCommerce.",
+		"description": "Displays customer and order details from Shopify.",
 		"parameters": {
 			"url"               : { "label": "Store URL" },
-			"username"      	: { "label": "Username" },
-			"api_token"      	: { "label": "API Token" },
+			"api_key"      			: { "label": "Api Key" },
+			"password"      		: { "label": "Password" },
 			"order_id_field_id" : { "label": "Order ID Field ID" }
     	}
     },
 
     "global": {
 		"error": {
-			"title"     : "An error occurred",
-			"message"   : "Please try the previous action again.",
-			"customerNotFound" : "Customer could not be found.",
-			"data"      : "Ticket data could not be read."
+			"title"     				: "An error occurred",
+			"message"   				: "Please try the previous action again.",
+			"customerNotFound" 	: "Customer could not be found.",
+			"data"     					: "Ticket data could not be read.",
+			"notes"							: "No notes have been added yet."
 		},
 		"loading"     : "Loading customer data...",
-		"requesting"  : "Requesting customer data from BigCommerce..."
+		"requesting"  : "Requesting customer data from Shopify..."
 	},
 
 	"customer" : {
-		"notes"		: "Notes"
+		"orders_count"	: "Orders count",
+		"total_spent"		: "Total Spent",
+		"notes"					: "Notes"
 	},
 
 	"orders": {
@@ -30,12 +33,14 @@
 	},
 
 	"order": {
-		"status"   			: "Status",
-		"count"				: "Orders count",
-		"ticket"			: "Order details for",
-		"subtotal_inc_tax"	: "Subtotal (inc. tax)",
-		"total_inc_tax"		: "Total (inc. tax)",
-		"date_created"		: "Date Created",
-		"date_shipped"		: "Date Shipped"
+		"payment_status"   	: "Payment Status",
+		"fulfillment_status": "Fulfillment Status",
+		"addresses"     	 	: "Addresses",
+		"billing"        		: "Billing",
+		"shipping"       		: "Shipping",
+		"ticket"						: "Order details for",
+		"subtotal"					: "Subtotal Price",
+		"total_price"				: "Total Price",
+		"date_created"			: "Date Created"
 	}
 }

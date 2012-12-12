@@ -17,12 +17,12 @@
 		  "required": true
 		},
 		{
-		  "name": "username",
+		  "name": "api_key",
 		  "type": "text",
 		  "required": true
 		},
 		{
-		  "name": "api_token",
+		  "name": "password",
 		  "type": "text",
 		  "required": true
 		},

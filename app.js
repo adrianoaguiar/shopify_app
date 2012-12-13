@@ -151,7 +151,7 @@
 
 
 			if (this.profileData.note === "" || this.profileData.note === null) { 
-				this.profileData.note = this.I18n.t('global.error.notes');
+				this.profileData.note = this.I18n.t('customer.no_notes');
 			}
 
 			this.profileData.customer_uri = helpers.fmt(this.resources.CUSTOMER_URI,this.storeUrl,this.profileData.id);

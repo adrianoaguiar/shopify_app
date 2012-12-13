@@ -151,7 +151,7 @@
 
 
 			if (this.profileData.note === "" || this.profileData.note === null) { 
-				this.profileData.note = this.I18n.t('global.error.notes');
+				this.profileData.note = this.I18n.t('customer.no_notes');
 			}
 
 			this.profileData.customer_uri = helpers.fmt(this.resources.CUSTOMER_URI,this.storeUrl,this.profileData.id);
@@ -174,7 +174,8 @@
 			this.profileData.recentOrders = orders.slice(0,3);
 
 			if (this.settings.order_id_field_id) {
-				var orderId;
+				var orderId,
+						customFieldName;
 
 				// Get custom field order ID
 				customFieldName = 'custom_field_' + this.settings.order_id_field_id;
@@ -190,18 +191,13 @@
 					if (!this.profileData.ticketOrder) {
 						// Order not found, have to make a request
 						this.ajax('getOrder', orderId);
-					} else {
-						// Yay, order was in the list
-						this.trigger('shopifyData.ready');
+						return;
 					}
-
-				} else {
-					this.trigger('shopifyData.ready');
 				}
-
-			} else {
-				this.trigger('shopifyData.ready');
 			}
+
+			this.trigger('shopifyData.ready');
+
 		},
 
 		handleGetOrder: function(data) {
@@ -226,7 +222,7 @@
 			}
 
 			if (order.note === "" || order.note === null) { 
-				newOrder.note = this.I18n.t('global.error.notes');
+				newOrder.note = this.I18n.t('customer.no_notes');
 			}
 
 			return newOrder;

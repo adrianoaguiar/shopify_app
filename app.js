@@ -190,18 +190,13 @@
 					if (!this.profileData.ticketOrder) {
 						// Order not found, have to make a request
 						this.ajax('getOrder', orderId);
-					} else {
-						// Yay, order was in the list
-						this.trigger('shopifyData.ready');
+						return;
 					}
-
-				} else {
-					this.trigger('shopifyData.ready');
 				}
-
-			} else {
-				this.trigger('shopifyData.ready');
 			}
+
+			this.trigger('shopifyData.ready');
+
 		},
 
 		handleGetOrder: function(data) {

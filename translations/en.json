@@ -9,13 +9,12 @@
     	}
     },
 
-    "global": {
+  "global": {
 		"error": {
 			"title"     				: "An error occurred",
 			"message"   				: "Please try the previous action again.",
 			"customerNotFound" 	: "Customer could not be found.",
 			"data"     					: "Ticket data could not be read.",
-			"notes"							: "No notes have been added yet.",
 			"wrongOrder"				: "Order e-mail does not match requester e-mail"
 		},
 		"loading"     : "Loading customer data...",
@@ -30,7 +29,8 @@
 	"customer" : {
 		"orders_count"	: "Orders count",
 		"total_spent"		: "Total Spent",
-		"notes"					: "Notes"
+		"notes"					: "Notes",
+		"no_notes"			: "No notes have been added yet.",
 	},
 
 	"order": {

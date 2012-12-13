@@ -174,7 +174,8 @@
 			this.profileData.recentOrders = orders.slice(0,3);
 
 			if (this.settings.order_id_field_id) {
-				var orderId;
+				var orderId,
+						customFieldName;
 
 				// Get custom field order ID
 				customFieldName = 'custom_field_' + this.settings.order_id_field_id;
@@ -221,7 +222,7 @@
 			}
 
 			if (order.note === "" || order.note === null) { 
-				newOrder.note = this.I18n.t('global.error.notes');
+				newOrder.note = this.I18n.t('customer.no_notes');
 			}
 
 			return newOrder;

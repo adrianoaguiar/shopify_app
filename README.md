@@ -50,7 +50,7 @@ A new Zendesk App for Shopify
 
   **Password:** The Password for your app.  
 
-  See [Private applications](http://wiki.shopify.com/Private_apps) for instructions on obtaining an API Key and Password.
+  See [Private applications](http://wiki.shopify.com/Private_apps#Setup) for instructions on obtaining an API Key and Password.
 
   **Order ID Field ID:** If you would like to have specific order information displayed in the app, you can supply the Zendesk ticket field ID. If you don't have this information yet you can leave it blank and update the app settings later.
 
@@ -78,4 +78,4 @@ Now that you have installed the Shopify app, when you navigate to a support tick
 
 ## Known Issues
 
-- Test orders created from test shops in a partner's account are not counted or summed to the total spent value
+- Test orders created from test shops in a partner's account are not counted or summed to the total spent value  

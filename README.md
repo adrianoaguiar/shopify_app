@@ -75,3 +75,7 @@ Now that you have installed the Shopify app, when you navigate to a support tick
 ## Download the Shopify App
 
 [Click here to download](https://github.com/zendesk/shopify_app/archive/master.zip)  
+
+## Known Issues
+
+- Test orders created from test shops in a partner's account are not counted or summed to the total spent value

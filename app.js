@@ -161,6 +161,11 @@
 		},
 
 		handleGetOrders: function(data) {
+			if (data.errors) {
+				this.showError(this.I18n.t('global.error.orders'), data.errors);
+				return;
+			}
+
 			var orders = [];
 
 			// Find this customer's orders from shop's most recent orders
@@ -201,6 +206,11 @@
 		},
 
 		handleGetOrder: function(data) {
+			if (data.errors) {
+				this.showError(this.I18n.t('global.error.order'), data.errors);
+				return;
+			}
+
 			// Check if order email matches requester email
 			if (data.order.email !== this.profileData.email) {
 					this.showError(null, this.I18n.t('global.error.wrongOrder'));

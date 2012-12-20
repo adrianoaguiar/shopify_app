@@ -6,6 +6,10 @@
 
 		MAX_ATTEMPTS : 20,
 
+		currPage: 1,
+
+		limitPerPage: 1,
+
 		defaultState: 'loading',
 
 		profileData: {},
@@ -15,7 +19,8 @@
 		resources: {
 			PROFILE_URI				: '/admin/customers/search.json?query=email:',
 			CUSTOMER_URI			: '%@/admin/customers/%@',
-			ORDER_URI					: '%@/admin/orders%@'
+			ORDERS_URI				: '%@/admin/orders.json?limit=%@&page=%@',
+			ORDER_URI					: '%@/admin/orders/%@'
 		},
 
 		requests: {
@@ -23,10 +28,7 @@
 				return this.getRequest(this.storeUrl + this.resources.PROFILE_URI + email);
 			},
 			'getOrders' : function(param) {
-				return this.getRequest(helpers.fmt(this.resources.ORDER_URI, this.storeUrl, ".json"));
-			},
-			'getOrder' : function(order_id) {
-				return this.getRequest(helpers.fmt(this.resources.ORDER_URI, this.storeUrl, "/" + order_id + ".json"));
+				return this.getRequest(helpers.fmt(this.resources.ORDERS_URI, this.storeUrl, this.limitPerPage, this.currPage));
 			}
 		},
 
@@ -35,10 +37,12 @@
 			'requiredProperties.ready'  : 'queryShopify',
 			'getProfile.done'						: 'handleGetProfile',
 			'getOrders.done'						: 'handleGetOrders',
-			'getOrder.done'							: 'handleGetOrder',
 			'click .toggle-address'     : 'toggleAddress',
 
 			'shopifyData.ready': function() {
+				// Get 3 most recent orders from requester
+				this.profileData.recentOrders = this.profileData.allOrders.slice(0,3);
+
 				this.switchTo('profile', this.profileData);
 			}
 		},
@@ -148,7 +152,7 @@
 			}
 
 			this.profileData = data.customers[0];
-
+			this.profileData.allOrders = [];
 
 			if (this.profileData.note === "" || this.profileData.note === null) { 
 				this.profileData.note = this.I18n.t('customer.no_notes');
@@ -156,7 +160,7 @@
 
 			this.profileData.customer_uri = helpers.fmt(this.resources.CUSTOMER_URI,this.storeUrl,this.profileData.id);
 
-			// Get shop's 50 most recent orders, currently we can't filter by customer_id/email
+			// Get the shop's orders, currently we can't filter by customer_id/email
 			this.ajax('getOrders');
 		},
 
@@ -166,17 +170,18 @@
 				return;
 			}
 
-			var orders = [];
+			if (!data.orders.length) {
+				// we have probably reached the last page
+				this.trigger('shopifyData.ready');
+				return;
+			}
 
-			// Find this customer's orders from shop's most recent orders
+			// Find this customer's orders from this page's orders
 			_.each(data.orders, function(order) {
 				if (order.email === this.profileData.email) {
-					orders.push(this.fmtOrder(order));
+					this.profileData.allOrders.push(this.fmtOrder(order));
 				}
 			}, this);
-
-			// Get 3 most recent orders from requester
-			this.profileData.recentOrders = orders.slice(0,3);
 
 			if (this.settings.order_id_field_id) {
 				var orderId,
@@ -188,36 +193,19 @@
 
 				if (orderId) {
 
-					// Check if custom field order is in the array
-					this.profileData.ticketOrder = _.find(orders, function(order){
-						return (order.id == orderId);
+					// Check if custom field order is in the response
+					this.profileData.ticketOrder = _.find(data.orders, function(order){
+						return (order.order_number == orderId);
 					});
 
-					if (!this.profileData.ticketOrder) {
-						// Order not found, have to make a request
-						this.ajax('getOrder', orderId);
+					if (!this.profileData.ticketOrder || this.profileData.allOrders.length < 3) {
+						// We haven't got enough data yet, let try another request
+						this.currPage++;
+						this.ajax('getOrders', orderId);
 						return;
 					}
 				}
 			}
-
-			this.trigger('shopifyData.ready');
-
-		},
-
-		handleGetOrder: function(data) {
-			if (data.errors) {
-				this.showError(this.I18n.t('global.error.order'), data.errors);
-				return;
-			}
-
-			// Check if order email matches requester email
-			if (data.order.email !== this.profileData.email) {
-					this.showError(null, this.I18n.t('global.error.wrongOrder'));
-					return;
-			}
-
-			this.profileData.ticketOrder = this.fmtOrder(data.order);
 
 			this.trigger('shopifyData.ready');
 		},
@@ -225,7 +213,7 @@
 		fmtOrder: function(order) {
 			var newOrder = order;
 
-			newOrder.uri = helpers.fmt(this.resources.ORDER_URI, this.storeUrl, "/" + order.id);
+			newOrder.uri = helpers.fmt(this.resources.ORDER_URI, this.storeUrl, order.id);
 
 			if (!order.fulfillment_status) {
 				newOrder.fulfillment_status = "not-fulfilled";

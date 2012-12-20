@@ -8,7 +8,7 @@
 
 		currPage: 1,
 
-		limitPerPage: 1,
+		limitPerPage: 250,
 
 		defaultState: 'loading',
 

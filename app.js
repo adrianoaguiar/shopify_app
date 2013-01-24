@@ -15,18 +15,19 @@
 		resources: {
 			PROFILE_URI				: '/admin/customers/search.json?query=email:',
 			CUSTOMER_URI			: '%@/admin/customers/%@',
-			ORDER_URI					: '%@/admin/orders%@'
+			ORDERS_URI				: '%@/admin/orders.json?customer_id=%@&status=any',
+			ORDER_URI					: '%@/admin/orders/%@'
 		},
 
 		requests: {
 			'getProfile' : function(email) {
 				return this.getRequest(this.storeUrl + this.resources.PROFILE_URI + email);
 			},
-			'getOrders' : function(param) {
-				return this.getRequest(helpers.fmt(this.resources.ORDER_URI, this.storeUrl, ".json"));
+			'getOrders' : function(customer_id) {
+				return this.getRequest(helpers.fmt(this.resources.ORDERS_URI, this.storeUrl, customer_id));
 			},
 			'getOrder' : function(order_id) {
-				return this.getRequest(helpers.fmt(this.resources.ORDER_URI, this.storeUrl, "/" + order_id + ".json"));
+				return this.getRequest(helpers.fmt(this.resources.ORDER_URI, this.storeUrl, order_id + ".json"));
 			}
 		},
 
@@ -156,8 +157,8 @@
 
 			this.profileData.customer_uri = helpers.fmt(this.resources.CUSTOMER_URI,this.storeUrl,this.profileData.id);
 
-			// Get shop's 50 most recent orders, currently we can't filter by customer_id/email
-			this.ajax('getOrders');
+			// Get customers's 50 most recent orders
+			this.ajax('getOrders', this.profileData.id);
 		},
 
 		handleGetOrders: function(data) {
@@ -166,13 +167,9 @@
 				return;
 			}
 
-			var orders = [];
-
-			// Find this customer's orders from shop's most recent orders
-			_.each(data.orders, function(order) {
-				if (order.email === this.profileData.email) {
-					orders.push(this.fmtOrder(order));
-				}
+			// Format order data
+			var orders = _.map(data.orders, function(order) {
+				return this.fmtOrder(order);
 			}, this);
 
 			// Get 3 most recent orders from requester
@@ -225,7 +222,7 @@
 		fmtOrder: function(order) {
 			var newOrder = order;
 
-			newOrder.uri = helpers.fmt(this.resources.ORDER_URI, this.storeUrl, "/" + order.id);
+			newOrder.uri = helpers.fmt(this.resources.ORDER_URI, this.storeUrl, order.id);
 
 			if (!order.fulfillment_status) {
 				newOrder.fulfillment_status = "not-fulfilled";

@@ -38,13 +38,13 @@
 		<h4>{{t "order.ticket"}} ID <a href="{{ticketOrder.uri}}" target="_blank">{{ticketOrder.id}} ({{ticketOrder.name}})</a></h4>
 
 		{{#if ticketOrder.cancelled_at}}
-			<h5 class="red">{{t "order.cancelled"}}</h5>
+			<h5 class="cancelled">{{t "order.cancelled"}}</h5>
 			<p>{{t "order.date"}} {{ticketOrder.cancelled_at}}</p>
 			<p>{{t "order.cancel_reason"}} {{ticketOrder.cancel_reason}}</p>
 		{{/if}}
 
 		{{#if ticketOrder.closed_at}}
-			<h5 class="red">{{t "order.closed"}}</h5>
+			<h5 class="closed">{{t "order.closed"}}</h5>
 			<p>{{t "order.date"}} {{ticketOrder.closed_at}}</p>
 		{{/if}}
 

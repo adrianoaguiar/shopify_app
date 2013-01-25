@@ -27,6 +27,6 @@ h5 {
 	margin-top: 9px;
 }
 
-.red {
+.closed, .cancelled {
   color: red;
 }

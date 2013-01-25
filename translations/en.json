@@ -37,6 +37,10 @@
 
 	"order": {
 		"ticket"						: "Order details for",
+		"closed"						: "This order was closed",
+		"cancelled"					: "This order was cancelled",
+		"cancel_reason"			: "Cancel reason: ",
+		"date"							: "Date: ",
 		"payment_status"   	: "Payment Status",
 		"fulfillment_status": "Fulfillment Status",
 		"notes"							: "Order Notes",

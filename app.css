@@ -26,3 +26,7 @@ table {
 h5 {
 	margin-top: 9px;
 }
+
+.closed, .cancelled {
+  color: red;
+}

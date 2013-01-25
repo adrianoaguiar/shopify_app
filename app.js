@@ -16,7 +16,8 @@
       PROFILE_URI       : '/admin/customers/search.json?query=email:',
       CUSTOMER_URI      : '%@/admin/customers/%@',
       ORDERS_URI        : '%@/admin/orders.json?customer_id=%@&status=any',
-      ORDER_URI         : '%@/admin/orders/%@'
+      ORDER_URI         : '%@/admin/orders/%@.json',
+      ORDER_PATH         : '%@/admin/orders/%@'
     },
 
     requests: {
@@ -27,7 +28,7 @@
         return this.getRequest(helpers.fmt(this.resources.ORDERS_URI, this.storeUrl, customer_id));
       },
       'getOrder' : function(order_id) {
-        return this.getRequest(helpers.fmt(this.resources.ORDER_URI, this.storeUrl, order_id + ".json"));
+        return this.getRequest(helpers.fmt(this.resources.ORDER_URI, this.storeUrl, order_id));
       }
     },
 
@@ -222,7 +223,7 @@
     fmtOrder: function(order) {
       var newOrder = order;
 
-      newOrder.uri = helpers.fmt(this.resources.ORDER_URI, this.storeUrl, order.id);
+      newOrder.uri = helpers.fmt(this.resources.ORDER_PATH, this.storeUrl, order.id);
 
       if (!order.fulfillment_status) {
         newOrder.fulfillment_status = "not-fulfilled";

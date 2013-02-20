@@ -1,6 +1,6 @@
 <div>
 	<p>
-		<h4>{{first_name}} {{last_name}} <a href="{{customer_uri}}" target="_blank">(#{{id}})</a></h4>
+		<h4><a href="{{customer_uri}}" target="_blank">{{first_name}} {{last_name}}</a></h4>
 	</p>
 
 	{{#if recentOrders}}
@@ -14,7 +14,7 @@
 			<tbody>
 				{{#recentOrders}}
 					<tr class="_tooltip" data-placement="top">
-						<td><a href="{{uri}}" target="_blank">{{id}} ({{name}})</a></td>
+						<td><a href="{{uri}}" target="_blank">{{name}}</a></td>
 						<td><span class="badge o-{{fulfillment_status}}">{{fulfillment_status}}</span></td>
 					</tr>
 				{{/recentOrders}}
@@ -35,7 +35,7 @@
 
 		<hr/>
 
-		<h4>{{t "order.ticket"}} ID <a href="{{ticketOrder.uri}}" target="_blank">{{ticketOrder.id}} ({{ticketOrder.name}})</a></h4>
+		<h4>{{t "order.ticket"}} ID <a href="{{ticketOrder.uri}}" target="_blank">{{ticketOrder.name}}</a></h4>
 
 		{{#if ticketOrder.cancelled_at}}
 			<h5 class="cancelled">{{t "order.cancelled"}}</h5>

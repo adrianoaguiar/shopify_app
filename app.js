@@ -188,7 +188,6 @@
           });
 
           if (!this.profileData.ticketOrder) {
-            // Order not found, have to make a request
             this.showError(this.I18n.t('global.error.orderNotFound'), " ");
             return;
           }

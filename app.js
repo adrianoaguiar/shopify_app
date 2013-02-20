@@ -26,9 +26,6 @@
       },
       'getOrders' : function(customer_id) {
         return this.getRequest(helpers.fmt(this.resources.ORDERS_URI, this.storeUrl, customer_id));
-      },
-      'getOrder' : function(order_id) {
-        return this.getRequest(helpers.fmt(this.resources.ORDER_URI, this.storeUrl, order_id));
       }
     },
 

@@ -26,9 +26,6 @@
       },
       'getOrders' : function(customer_id) {
         return this.getRequest(helpers.fmt(this.resources.ORDERS_URI, this.storeUrl, customer_id));
-      },
-      'getOrder' : function(order_id) {
-        return this.getRequest(helpers.fmt(this.resources.ORDER_URI, this.storeUrl, order_id));
       }
     },
 
@@ -152,7 +149,7 @@
       this.profileData = data.customers[0];
 
 
-      if (this.profileData.note === "" || this.profileData.note === null) { 
+      if (this.profileData.note === "" || this.profileData.note === null) {
         this.profileData.note = this.I18n.t('customer.no_notes');
       }
 
@@ -185,37 +182,17 @@
         orderId = this.ticket().customField(customFieldName);
 
         if (orderId) {
-
           // Check if custom field order is in the array
           this.profileData.ticketOrder = _.find(orders, function(order){
-            return (order.id == orderId);
+            return (order.order_number == orderId);
           });
 
           if (!this.profileData.ticketOrder) {
-            // Order not found, have to make a request
-            this.ajax('getOrder', orderId);
+            this.showError(this.I18n.t('global.error.orderNotFound'), " ");
             return;
           }
         }
       }
-
-      this.trigger('shopifyData.ready');
-
-    },
-
-    handleGetOrder: function(data) {
-      if (data.errors) {
-        this.showError(this.I18n.t('global.error.order'), data.errors);
-        return;
-      }
-
-      // Check if order email matches requester email
-      if (data.order.email !== this.profileData.email) {
-          this.showError(null, this.I18n.t('global.error.wrongOrder'));
-          return;
-      }
-
-      this.profileData.ticketOrder = this.fmtOrder(data.order);
 
       this.trigger('shopifyData.ready');
     },
@@ -229,7 +206,7 @@
         newOrder.fulfillment_status = "not-fulfilled";
       }
 
-      if (order.note === "" || order.note === null) { 
+      if (order.note === "" || order.note === null) {
         newOrder.note = this.I18n.t('customer.no_notes');
       }
 

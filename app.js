@@ -210,6 +210,16 @@
         newOrder.note = this.I18n.t('customer.no_notes');
       }
 
+      if (order.cancelled_at) {
+        newOrder.cancelled_at = new Date(order.cancelled_at).toLocaleString();
+      }
+
+      if (order.closed_at) {
+        newOrder.cancelled_at = new Date(order.closed_at).toLocaleString();
+      }
+
+      newOrder.created_at = new Date(order.created_at).toLocaleString();
+
       return newOrder;
     },
 

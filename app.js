@@ -215,7 +215,7 @@
       }
 
       if (order.closed_at) {
-        newOrder.cancelled_at = new Date(order.closed_at).toLocaleString();
+        newOrder.closed_at = new Date(order.closed_at).toLocaleString();
       }
 
       newOrder.created_at = new Date(order.created_at).toLocaleString();

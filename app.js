@@ -42,14 +42,14 @@
       }
     },
 
-    requiredProperties : [
-      'ticket.requester.email'
-    ],
-
     init: function(data){
       if(!data.firstLoad){
         return;
       }
+
+      this.requiredProperties = [
+        'ticket.requester.email'
+      ];
 
       this.storeUrl = this.checkStoreUrl(this.settings.url);
 
@@ -87,28 +87,18 @@
       }
     },
 
-    validateRequiredProperty: function(property) {
-      var parts = property.split('.');
-      var part = '', obj = this;
+    safeGetPath: function(propertyPath) {
+      return _.inject( propertyPath.split('.'), function(context, segment) {
+        if (context == null) { return context; }
+        var obj = context[segment];
+        if ( _.isFunction(obj) ) { obj = obj.call(context); }
+        return obj;
+      }, this);
+    },
 
-      while (parts.length) {
-        part = parts.shift();
-        try {
-          obj = obj[part]();
-        } catch (e) {
-          return false;
-        }
-        // check if property is invalid
-        if (parts.length > 0 && !_.isObject(obj)) {
-          return false;
-        }
-        // check if value returned from property is invalid
-        if (parts.length === 0 && (_.isNull(obj) || _.isUndefined(obj) || obj === '' || obj === 'no')) {
-          return false;
-        }
-      }
-
-      return true;
+    validateRequiredProperty: function(propertyPath) {
+      var value = this.safeGetPath(propertyPath);
+      return value != null && value !== '' && value !== 'no';
     },
 
     getRequest: function(resource) {

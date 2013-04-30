@@ -20,7 +20,7 @@
       "order"             : "An error occurred when querying this order",
       "wrongOrder"        : "Order e-mail does not match requester e-mail"
     },
-    "loading"     : "Loading customer data...",
+    "loading"     : "Waiting for customer data...",
     "requesting"  : "Requesting customer data from Shopify..."
   },
 

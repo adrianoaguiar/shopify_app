@@ -1,0 +1,60 @@
+{
+  "app": {
+    "description": "Exibe detalhes do cliente e do pedido do Shopify.",
+    "parameters": {
+      "url": {
+        "label": "URL da loja"
+      },
+      "api_key": {
+        "label": "Chave da API"
+      },
+      "password": {
+        "label": "Senha"
+      },
+      "order_id_field_id": {
+        "label": "ID do campo da ID do pedido"
+      }
+    }
+  },
+  "global": {
+    "error": {
+      "title": "Ocorreu um erro",
+      "message": "Repita a ação anterior.",
+      "customerNotFound": "O cliente não foi encontrado.",
+      "orderNotFound": "O pedido não foi encontrado.",
+      "data": "Não foi possível ler os dados do ticket.",
+      "orders": "Ocorreu um erro ao pesquisar os pedidos",
+      "order": "Ocorreu um erro ao pesquisar esse pedido",
+      "wrongOrder": "O email do pedido não corresponde ao email do solicitante"
+    },
+    "loading": "Aguardando os dados do cliente...",
+    "requesting": "Solicitando os dados do cliente do Shopify..."
+  },
+  "orders": {
+    "id": "PEDIDOS RECENTES",
+    "status": "CUMPRIMENTO"
+  },
+  "customer": {
+    "orders_count": "Contagem de pedidos",
+    "total_spent": "Total gasto",
+    "notes": "Observações",
+    "no_notes": "Nenhuma observação foi adicionada."
+  },
+  "order": {
+    "ticket": "Detalhes do pedido de",
+    "closed": "Esse pedido foi fechado",
+    "cancelled": "Esse pedido foi cancelado",
+    "cancel_reason": "Motivo do cancelamento: ",
+    "date": "Data: ",
+    "payment_status": "Status do pagamento",
+    "fulfillment_status": "Status do cumprimento",
+    "notes": "Observações do pedido",
+    "addresses": "Endereços",
+    "billing": "Faturamento",
+    "shipping": "Remessa",
+    "subtotal": "Preço do subtotal",
+    "shipping_lines": "Remessa",
+    "total_price": "Preço total",
+    "date_created": "Data da criação"
+  }
+}

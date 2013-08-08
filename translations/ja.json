@@ -1,0 +1,60 @@
+{
+  "app": {
+    "description": "Shopifyからの顧客および注文の詳細を表示します。",
+    "parameters": {
+      "url": {
+        "label": "ストアのURL"
+      },
+      "api_key": {
+        "label": "Apiキー"
+      },
+      "password": {
+        "label": "パスワード"
+      },
+      "order_id_field_id": {
+        "label": "注文IDフィールドID"
+      }
+    }
+  },
+  "global": {
+    "error": {
+      "title": "エラーが発生しました",
+      "message": "前のアクションをもう一度実行してください。",
+      "customerNotFound": "カスタマーが見つかりませんでした。",
+      "orderNotFound": "注文が見つかりませんでした。",
+      "data": "チケットデータを読み取ることができませんでした。",
+      "orders": "注文の問合わせ時にエラーが発生しました",
+      "order": "この注文の問合わせ時にエラーが発生しました",
+      "wrongOrder": "注文メールがリクエスタのメールと一致しません"
+    },
+    "loading": "カスタマーデータを待機中...",
+    "requesting": "Shopifyから顧客データを要求しています..."
+  },
+  "orders": {
+    "id": "最近のご注文",
+    "status": "処理状況"
+  },
+  "customer": {
+    "orders_count": "注文数",
+    "total_spent": "合計使用数",
+    "notes": "メモ",
+    "no_notes": "メモが追加されていません。"
+  },
+  "order": {
+    "ticket": "注文の詳細",
+    "closed": "この注文は締め切られました",
+    "cancelled": "この注文はキャンセルされました",
+    "cancel_reason": "キャンセル理由: ",
+    "date": "日付: ",
+    "payment_status": "支払いステータス",
+    "fulfillment_status": "処理ステータス",
+    "notes": "注文メモ",
+    "addresses": "住所",
+    "billing": "請求先",
+    "shipping": "出荷先",
+    "subtotal": "小計価格",
+    "shipping_lines": "出荷費用",
+    "total_price": "合計価格",
+    "date_created": "作成日"
+  }
+}

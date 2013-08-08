@@ -1,0 +1,60 @@
+{
+  "app": {
+    "description": "Visualizza informazioni dettagliate su cliente e ordine da Shopify.",
+    "parameters": {
+      "url": {
+        "label": "URL negozio"
+      },
+      "api_key": {
+        "label": "Chiave API"
+      },
+      "password": {
+        "label": "Password"
+      },
+      "order_id_field_id": {
+        "label": "ID campo ID ordine"
+      }
+    }
+  },
+  "global": {
+    "error": {
+      "title": "Si è verificato un errore",
+      "message": "Riprova l’azione precedente.",
+      "customerNotFound": "Cliente non trovato.",
+      "orderNotFound": "L’ordine non è stato trovato.",
+      "data": "Impossibile leggere i dati del ticket.",
+      "orders": "Si è verificato un errore durante la ricerca degli ordini.",
+      "order": "Si è verificato un errore durante la ricerca di questo ordine",
+      "wrongOrder": "L’e-mail dell’ordine non corrisponde a quella del richiedente"
+    },
+    "loading": "Attesa per dati cliente...",
+    "requesting": "Richiesta dati cliente da Shopify in corso..."
+  },
+  "orders": {
+    "id": "ORDINI RECENTI",
+    "status": "ESECUZIONE"
+  },
+  "customer": {
+    "orders_count": "Numero di ordini",
+    "total_spent": "Totale speso",
+    "notes": "Note",
+    "no_notes": "Nessuna nota aggiunta."
+  },
+  "order": {
+    "ticket": "Dettagli ordine per",
+    "closed": "Questo ordine è stato chiuso",
+    "cancelled": "Questo ordine è stato cancellato",
+    "cancel_reason": "Motivo cancellazione: ",
+    "date": "Data: ",
+    "payment_status": "Stato pagamento",
+    "fulfillment_status": "Stato esecuzione",
+    "notes": "Note ordine",
+    "addresses": "Indirizzi",
+    "billing": "Fatturazione",
+    "shipping": "Spedizione",
+    "subtotal": "Prezzo subtotale",
+    "shipping_lines": "Spedizione",
+    "total_price": "Prezzo totale",
+    "date_created": "Data di creazione"
+  }
+}

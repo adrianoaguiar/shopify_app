@@ -1,0 +1,60 @@
+{
+  "app": {
+    "description": "Zeigt Kunden- und Bestelldetails von Shopify an.",
+    "parameters": {
+      "url": {
+        "label": "Shop-URL"
+      },
+      "api_key": {
+        "label": "API-Schlüssel"
+      },
+      "password": {
+        "label": "Kennwort"
+      },
+      "order_id_field_id": {
+        "label": "ID des Bestellnummerfelds"
+      }
+    }
+  },
+  "global": {
+    "error": {
+      "title": "Fehler aufgetreten",
+      "message": "Versuchen Sie die vorherige Aktion noch einmal.",
+      "customerNotFound": "Kunde nicht gefunden.",
+      "orderNotFound": "Bestellung nicht gefunden.",
+      "data": "Ticketdaten konnten nicht gelesen werden.",
+      "orders": "Beim Abfragen von Bestellungen ist ein Fehler aufgetreten.",
+      "order": "Beim Abfragen dieser Bestellung ist ein Fehler aufgetreten.",
+      "wrongOrder": "E-Mail-Adresse der Bestellung stimmt nicht mit der E-Mail-Adresse des Anfragenden überein"
+    },
+    "loading": "Warten auf Kundendaten...",
+    "requesting": "Kundendaten von Shopify anfordern..."
+  },
+  "orders": {
+    "id": "JÜNGSTE BESTELLUNGEN",
+    "status": "ERFÜLLUNG"
+  },
+  "customer": {
+    "orders_count": "Anzahl von Bestellungen",
+    "total_spent": "Gesamtsumme",
+    "notes": "Notizen",
+    "no_notes": "Noch keine Notizen hinzugefügt."
+  },
+  "order": {
+    "ticket": "Bestelldetails für",
+    "closed": "Diese Bestellung wurde abgeschlossen",
+    "cancelled": "Diese Bestellung wurde storniert",
+    "cancel_reason": "Grund für Stornierung: ",
+    "date": "Datum: ",
+    "payment_status": "Zahlungsstatus",
+    "fulfillment_status": "Abwicklungsstatus",
+    "notes": "Notizen zur Bestellung",
+    "addresses": "Adressen",
+    "billing": "Rechnung",
+    "shipping": "Versand",
+    "subtotal": "Zwischensumme",
+    "shipping_lines": "Versand",
+    "total_price": "Gesamtpreis",
+    "date_created": "Erstellungsdatum"
+  }
+}

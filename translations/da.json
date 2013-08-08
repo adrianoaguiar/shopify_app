@@ -1,0 +1,60 @@
+{
+  "app": {
+    "description": "Viser kunde- og ordredetaljer fra Shopify.",
+    "parameters": {
+      "url": {
+        "label": "Forretnings-URL"
+      },
+      "api_key": {
+        "label": "Api-nøgle"
+      },
+      "password": {
+        "label": "Adgangskode"
+      },
+      "order_id_field_id": {
+        "label": "Id til feltet Ordre-id"
+      }
+    }
+  },
+  "global": {
+    "error": {
+      "title": "Der forekom en fejl",
+      "message": "Prøv forrige handling igen.",
+      "customerNotFound": "Kunden blev ikke fundet.",
+      "orderNotFound": "Ordren blev ikke fundet.",
+      "data": "Ticket-dataene kunne ikke læses.",
+      "orders": "Der forekom en fejl under forespørgsel af ordrer",
+      "order": "Der forekom en fejl under forespørgsel af denne ordre",
+      "wrongOrder": "Ordre-e-mailen stemmer ikke overens med anmoder-e-mailen"
+    },
+    "loading": "Venter på kundedata...",
+    "requesting": "Anmoder om kundedata fra Shopify..."
+  },
+  "orders": {
+    "id": "SENESTE ORDRER",
+    "status": "OPFYLDELSE"
+  },
+  "customer": {
+    "orders_count": "Ordreantal",
+    "total_spent": "Samlet forbrug",
+    "notes": "Notater",
+    "no_notes": "Der er ikke blevet tilføjet notater endnu."
+  },
+  "order": {
+    "ticket": "Ordredetaljer for",
+    "closed": "Denne ordre blev lukket",
+    "cancelled": "Denne ordre blev annulleret",
+    "cancel_reason": "Årsag til annullering: ",
+    "date": "Dato: ",
+    "payment_status": "Betalingsstatus",
+    "fulfillment_status": "Opfyldelsesstatus",
+    "notes": "Ordrenoter",
+    "addresses": "Adresser",
+    "billing": "Fakturering",
+    "shipping": "Forsendelse",
+    "subtotal": "Subtotal, pris",
+    "shipping_lines": "Forsendelse",
+    "total_price": "Totalpris",
+    "date_created": "Oprettelsesdato"
+  }
+}

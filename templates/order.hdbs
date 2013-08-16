@@ -45,7 +45,7 @@
 </p>
 
 <h5>{{t "order.subtotal"}}</h5>
-<p>{{subtotal_price}} {{currency}}</p>
+<p>{{subtotal_price}} {{currency_code}}</p>
 
 {{#if shipping_lines}}
   <h5>{{t "order.shipping"}}</h5>
@@ -55,7 +55,7 @@
 {{/if}}
 
 <h5>{{t "order.total_price"}}</h5>
-<p>{{total_price}} {{currency}}</p>
+<p>{{total_price}} {{currency_code}}</p>
 
 <h5>{{t "order.date_created"}}</h5>
 <p>{{created_at}}</p>

@@ -182,6 +182,10 @@
         newOrder.closed_at = new Date(order.closed_at).toLocaleString();
       }
 
+      if (order.currency) {
+        newOrder.currency_code = order.currency;
+      }
+
       newOrder.created_at = new Date(order.created_at).toLocaleString();
 
       return newOrder;

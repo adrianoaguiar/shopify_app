@@ -48,7 +48,7 @@
 <p>{{subtotal_price}} {{currency_code}}</p>
 
 {{#if shipping_lines}}
-  <h5>{{t "order.shipping"}}</h5>
+  <h5>{{t "order.shipping_lines"}}</h5>
   {{#each shipping_lines}}}
     <p>{{price}} ({{code}})</p>
   {{/each}}

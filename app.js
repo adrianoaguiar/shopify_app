@@ -5,6 +5,7 @@
     MAX_ATTEMPTS : 20,
 
     defaultState: 'loading',
+    locale: undefined,
 
     storeUrl: '',
 
@@ -16,6 +17,11 @@
     },
 
     requests: {
+      'getZendeskUser': {
+        url: '/api/v2/users/me.json',
+        proxy_v2: true
+      },
+
       'getProfile' : function(email) {
         return this.getRequest(this.storeUrl + this.resources.PROFILE_URI + email);
       },
@@ -32,6 +38,7 @@
       'getProfile.done'                : 'handleProfile',
       'getOrders.done'                 : 'handleOrders',
       'getOrder.done'                  : 'handleOrder',
+      'getZendeskUser.done'            : 'handleZendeskUser',
       'click .toggle-address'          : 'toggleAddress'
     },
 
@@ -39,20 +46,21 @@
       if(!data.firstLoad){
         return;
       }
+      this.ajax('getZendeskUser').done((function() {
+        this.hasActivated = true;
+        this.currAttempt = 0;
+        this.storeUrl = this.storeUrl || this.checkStoreUrl(this.settings.url);
+        this.requiredProperties = [
+          'ticket.requester.email'
+        ];
 
-      this.hasActivated = true;
-      this.currAttempt = 0;
-      this.storeUrl = this.storeUrl || this.checkStoreUrl(this.settings.url);
-      this.requiredProperties = [
-        'ticket.requester.email'
-      ];
-
-      if (this.currentLocation() === 'ticket_sidebar') {
-        this.allRequiredPropertiesExist();
-      } else if (this.ticket().requester()) {
-        // user may have selected a requester and reloaded the app
-        this.queryCustomer();
-      }
+        if (this.currentLocation() === 'ticket_sidebar') {
+          this.allRequiredPropertiesExist();
+        } else if (this.ticket().requester()) {
+          // user may have selected a requester and reloaded the app
+          this.queryCustomer();
+        }
+      }).bind(this));
     },
 
     queryCustomer: function() {
@@ -84,6 +92,10 @@
       }
       url = url.replace(/\/index.php/g, '');
       return url;
+    },
+
+    handleZendeskUser: function(data) {
+      this.locale = data.user.locale;
     },
 
     handleChanged: _.debounce(function(e) {
@@ -175,20 +187,24 @@
       }
 
       if (order.cancelled_at) {
-        newOrder.cancelled_at = new Date(order.cancelled_at).toLocaleString();
+        newOrder.cancelled_at = this.localeDate(order.cancelled_at);
       }
 
       if (order.closed_at) {
-        newOrder.closed_at = new Date(order.closed_at).toLocaleString();
+        newOrder.closed_at = this.localeDate(order.closed_at);
       }
 
       if (order.currency) {
         newOrder.currency_code = order.currency;
       }
 
-      newOrder.created_at = new Date(order.created_at).toLocaleString();
+      newOrder.created_at = this.localeDate(order.created_at);
 
       return newOrder;
+    },
+
+    localeDate: function(date) {
+      return new Date(date).toLocaleString(this.locale);
     },
 
     toggleAddress: function (e) {

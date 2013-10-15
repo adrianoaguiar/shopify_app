@@ -65,7 +65,8 @@
     "fulfillment_status_locale": {
       "null": "Null",
       "fulfilled": "Fulfilled",
-      "partial": "Partial"
+      "partial": "Partial",
+      "not_fulfilled": "Not Fulfilled"
     },
     "financial_status_locale": {
       "authorized": "Authorized",

@@ -179,7 +179,7 @@
       newOrder.uri = helpers.fmt(this.resources.ORDER_PATH, this.storeUrl, order.id);
 
       if (!order.fulfillment_status) {
-        newOrder.fulfillment_status = "not-fulfilled";
+        newOrder.fulfillment_status = "not_fulfilled";
       }
 
       if (order.note === "" || order.note === null) {

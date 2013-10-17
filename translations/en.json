@@ -55,28 +55,6 @@
     "subtotal": "Subtotal Price",
     "shipping_lines": "Shipping",
     "total_price": "Total Price",
-    "date_created": "Date Created",
-    "status_locale": {
-      "open": "Open",
-      "closed": "Closed",
-      "cancelled": "Cancelled",
-      "any": "Any"
-    },
-    "fulfillment_status_locale": {
-      "null": "Null",
-      "fulfilled": "Fulfilled",
-      "partial": "Partial",
-      "not_fulfilled": "Not Fulfilled"
-    },
-    "financial_status_locale": {
-      "authorized": "Authorized",
-      "pending": "Pending",
-      "paid": "Paid",
-      "partially_paid": "Partially Paid",
-      "abandoned": "Abandoned",
-      "refunded": "Refunded",
-      "voided": "Voided",
-      "any": "Any"
-    }
+    "date_created": "Date Created"
   }
 }

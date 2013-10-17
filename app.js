@@ -200,10 +200,6 @@
 
       newOrder.created_at = this.localeDate(order.created_at);
 
-      _.each(['fulfillment_status', 'financial_status'], (function(name) {
-        newOrder["%@_locale".fmt(name)] = this.I18n.t("order.%@_locale.%@".fmt(name, order[name]));
-      }).bind(this));
-
       return newOrder;
     },
 

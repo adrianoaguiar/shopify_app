@@ -14,10 +14,10 @@
 {{/if}}
 
 <h5>{{t "order.payment_status"}}</h5>
-<p><span class="badge o-{{financial_status}}">{{financial_status_locale}}</span></p>
+<p><span class="badge o-{{financial_status}}">{{financial_status}}</span></p>
 
 <h5>{{t "order.fulfillment_status"}}</h5>
-<p><span class="badge o-{{fulfillment_status}}">{{fulfillment_status_locale}}</span></p>
+<p><span class="badge o-{{fulfillment_status}}">{{fulfillment_status}}</span></p>
 
 <h5>{{t "order.notes"}}</h5>
 <p>{{note}}</p>

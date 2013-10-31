@@ -1,0 +1,60 @@
+{
+  "app": {
+    "description": "Affiche les détails du client et de la commande de Shopify.",
+    "parameters": {
+      "url": {
+        "label": "URL du magasin"
+      },
+      "api_key": {
+        "label": "Clé API"
+      },
+      "password": {
+        "label": "Mot de passe"
+      },
+      "order_id_field_id": {
+        "label": "ID de champ de l’ID de commande"
+      }
+    }
+  },
+  "global": {
+    "error": {
+      "title": "Une erreur est survenue.",
+      "message": "Veuillez réessayer l’action précédente.",
+      "customerNotFound": "Client introuvable.",
+      "orderNotFound": "Commande introuvable.",
+      "data": "Impossible de lire les données du billet.",
+      "orders": "Une erreur est survenue lors de la recherche de commandes.",
+      "order": "Une erreur est survenue lors de la recherche de cette commande.",
+      "wrongOrder": "Le courriel de la commande ne correspond pas à le courriel du demandeur."
+    },
+    "loading": "En attente des données client…",
+    "requesting": "Demande des données client à Shopify en cours…"
+  },
+  "orders": {
+    "id": "COMMANDES RÉCENTES",
+    "status": "EXÉCUTION"
+  },
+  "customer": {
+    "orders_count": "Nombre de commandes",
+    "total_spent": "Total dépensé",
+    "notes": "Remarques",
+    "no_notes": "Aucune note ajoutée à ce jour."
+  },
+  "order": {
+    "ticket": "Détails de la commande pour",
+    "closed": "Cette commande a été close.",
+    "cancelled": "Cette commande a été annulée.",
+    "cancel_reason": "Motif de l’annulation : ",
+    "date": "Date : ",
+    "payment_status": "Statut du paiement",
+    "fulfillment_status": "Statut d’exécution",
+    "notes": "Notes de la commande",
+    "addresses": "Adresses",
+    "billing": "Facturation",
+    "shipping": "Livraison",
+    "subtotal": "Montant du sous-total",
+    "shipping_lines": "Livraison",
+    "total_price": "Montant du total",
+    "date_created": "Date de création"
+  }
+}

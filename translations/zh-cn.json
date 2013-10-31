@@ -1,0 +1,60 @@
+{
+  "app": {
+    "description": "显示来自 Shopify 的客户和订单详情。",
+    "parameters": {
+      "url": {
+        "label": "商店 URL"
+      },
+      "api_key": {
+        "label": "API 密钥"
+      },
+      "password": {
+        "label": "密码"
+      },
+      "order_id_field_id": {
+        "label": "订单 ID 字段 ID"
+      }
+    }
+  },
+  "global": {
+    "error": {
+      "title": "发生错误",
+      "message": "请重试先前的操作。",
+      "customerNotFound": "无法找到客户。",
+      "orderNotFound": "无法找到订单。",
+      "data": "无法读取工单数据。",
+      "orders": "查询订单时出现错误",
+      "order": "查询此订单时出现错误",
+      "wrongOrder": "订单电邮和请求者电邮不匹配"
+    },
+    "loading": "正在等待客户数据……",
+    "requesting": "正在从 Shopify 请求客户数据……"
+  },
+  "orders": {
+    "id": "最近的订单",
+    "status": "履行状态"
+  },
+  "customer": {
+    "orders_count": "订单数",
+    "total_spent": "总消费额",
+    "notes": "注释",
+    "no_notes": "尚未添加注释。"
+  },
+  "order": {
+    "ticket": "订单详情",
+    "closed": "此订单已关闭",
+    "cancelled": "此订单已取消",
+    "cancel_reason": "取消原因：",
+    "date": "日期：",
+    "payment_status": "付款状态",
+    "fulfillment_status": "履行状态",
+    "notes": "订单注释",
+    "addresses": "地址",
+    "billing": "帐单地址",
+    "shipping": "送货地址",
+    "subtotal": "价格小计",
+    "shipping_lines": "送货地址",
+    "total_price": "价格共计",
+    "date_created": "创建日期"
+  }
+}

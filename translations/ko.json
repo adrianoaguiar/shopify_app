@@ -1,0 +1,60 @@
+{
+  "app": {
+    "description": "Shopify에서 얻은 고객 및 주문 정보를 표시합니다.",
+    "parameters": {
+      "url": {
+        "label": "스토어 URL"
+      },
+      "api_key": {
+        "label": "API 키"
+      },
+      "password": {
+        "label": "비밀번호"
+      },
+      "order_id_field_id": {
+        "label": "주문 ID 필드 ID"
+      }
+    }
+  },
+  "global": {
+    "error": {
+      "title": "오류가 발생했습니다",
+      "message": "다시 이전 작업을 시도하십시오.",
+      "customerNotFound": "고객을 찾을 수 없습니다.",
+      "orderNotFound": "주문을 찾을 수 없습니다.",
+      "data": "티켓 데이터를 읽을 수 없습니다.",
+      "orders": "주문을 쿼리하는 동안 오류가 발생했습니다",
+      "order": "이 주문을 쿼리하는 동안 오류가 발생했습니다",
+      "wrongOrder": "주문 이메일과 요청자 이메일이 일치하지 않습니다"
+    },
+    "loading": "고객 데이터를 기다리는 중…",
+    "requesting": "Shopify에서 고객 데이터 요청…"
+  },
+  "orders": {
+    "id": "최근 주문",
+    "status": "처리"
+  },
+  "customer": {
+    "orders_count": "주문 개수",
+    "total_spent": "총 소요 금액",
+    "notes": "메모",
+    "no_notes": "아직 추가된 메모가 없습니다."
+  },
+  "order": {
+    "ticket": "주문 정보:",
+    "closed": "이 주문이 종료되었습니다",
+    "cancelled": "이 주문을 취소했습니다",
+    "cancel_reason": "취소 이유: ",
+    "date": "날짜: ",
+    "payment_status": "결제 상태",
+    "fulfillment_status": "처리 상태",
+    "notes": "주문 메모",
+    "addresses": "주소",
+    "billing": "청구",
+    "shipping": "배송",
+    "subtotal": "소계 가격",
+    "shipping_lines": "배송",
+    "total_price": "총계 가격",
+    "date_created": "만든 날짜"
+  }
+}

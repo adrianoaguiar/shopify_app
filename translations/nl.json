@@ -1,0 +1,60 @@
+{
+  "app": {
+    "description": "Geeft info over klant en order van Shopify weer.",
+    "parameters": {
+      "url": {
+        "label": "Webadres van winkel"
+      },
+      "api_key": {
+        "label": "API-sleutel"
+      },
+      "password": {
+        "label": "Wachtwoord"
+      },
+      "order_id_field_id": {
+        "label": "Order-id Veld-id"
+      }
+    }
+  },
+  "global": {
+    "error": {
+      "title": "Fout opgetreden",
+      "message": "Probeer de vorige actie nog een keer.",
+      "customerNotFound": "Kan klant niet vinden.",
+      "orderNotFound": "Kan order niet vinden.",
+      "data": "Kan ticketgegevens niet lezen.",
+      "orders": "Fout opgetreden tijdens opvragen van deze orders",
+      "order": "Fout opgetreden tijdens opvragen van deze order",
+      "wrongOrder": "E-mail van order komt niet overeen met e-mail van aanvrager"
+    },
+    "loading": "Wachten op klantgegevens...",
+    "requesting": "Klantgegevens opvragen bij Shopify..."
+  },
+  "orders": {
+    "id": "RECENTE ORDERS",
+    "status": "VOLTOOIING"
+  },
+  "customer": {
+    "orders_count": "Aantal orders",
+    "total_spent": "Totaal uitgegeven",
+    "notes": "Notities",
+    "no_notes": "Er zijn nog geen notities toegevoegd."
+  },
+  "order": {
+    "ticket": "Orderdetails voor",
+    "closed": "Deze order is gesloten",
+    "cancelled": "Deze order is geannuleerd",
+    "cancel_reason": "Reden van annulering: ",
+    "date": "Datum: ",
+    "payment_status": "Status van betaling",
+    "fulfillment_status": "Status van voltooiing",
+    "notes": "Ordernotities",
+    "addresses": "Adressen",
+    "billing": "Facturering",
+    "shipping": "Verzending",
+    "subtotal": "Subtotaalprijs",
+    "shipping_lines": "Verzending",
+    "total_price": "Totaalprijs",
+    "date_created": "Datum gemaakt"
+  }
+}

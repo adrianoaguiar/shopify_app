@@ -25,7 +25,7 @@
       "data": "Impossibile leggere i dati del ticket.",
       "orders": "Si è verificato un errore durante la ricerca degli ordini.",
       "order": "Si è verificato un errore durante la ricerca di questo ordine",
-      "wrongOrder": "L’e-mail dell’ordine non corrisponde a quella del richiedente"
+      "wrongOrder": "L’indirizzo e-mail dell’ordine non corrisponde a quello del richiedente"
     },
     "loading": "Attesa per dati cliente...",
     "requesting": "Richiesta dati cliente da Shopify in corso..."

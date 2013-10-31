@@ -1,0 +1,60 @@
+{
+  "app": {
+    "description": "顯示來自 Shopify 的客戶和訂單詳情。",
+    "parameters": {
+      "url": {
+        "label": "商店 URL"
+      },
+      "api_key": {
+        "label": "API 金鑰"
+      },
+      "password": {
+        "label": "密碼"
+      },
+      "order_id_field_id": {
+        "label": "訂單 ID 欄位 ID"
+      }
+    }
+  },
+  "global": {
+    "error": {
+      "title": "發生錯誤",
+      "message": "請再試一次之前的操作。",
+      "customerNotFound": "找不到客戶。",
+      "orderNotFound": "找不到訂單。",
+      "data": "不能讀取工單資料。",
+      "orders": "查詢訂單時出現錯誤",
+      "order": "查詢此訂單時出現錯誤",
+      "wrongOrder": "訂單電郵與請求者電郵不符"
+    },
+    "loading": "正在等待客戶資料……",
+    "requesting": "正在從 Shopify 請求客戶資料……"
+  },
+  "orders": {
+    "id": "最近的訂單",
+    "status": "完成"
+  },
+  "customer": {
+    "orders_count": "訂單數",
+    "total_spent": "花費合計",
+    "notes": "備註",
+    "no_notes": "尚未新增備註。"
+  },
+  "order": {
+    "ticket": "訂單詳情",
+    "closed": "已關閉此訂單",
+    "cancelled": "已取消此訂單",
+    "cancel_reason": "取消理由：",
+    "date": "日期：",
+    "payment_status": "支付狀態",
+    "fulfillment_status": "完成狀態",
+    "notes": "訂單備註",
+    "addresses": "地址",
+    "billing": "帳單地址",
+    "shipping": "送貨地址",
+    "subtotal": "價格小計",
+    "shipping_lines": "送貨地址",
+    "total_price": "價格合計",
+    "date_created": "建立日期"
+  }
+}

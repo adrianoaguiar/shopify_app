@@ -2,6 +2,7 @@ title: "Shopify App"
 packages:
   - default
   - app_shopify_app
+  - classic
 
 parts:
   - translation:

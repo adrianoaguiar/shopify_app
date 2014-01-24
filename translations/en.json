@@ -1,60 +1,169 @@
 {
   "app": {
-    "description": "Displays customer and order details from Shopify.",
+    "description": {
+      "title": "Description text of the App",
+      "value": "Displays customer and order details from Shopify."
+    },
     "parameters": {
       "url": {
-        "label": "Store URL"
+        "label": {
+          "title": "URL of the Shopify store created by the customer",
+          "value": "Store URL"
+        }
       },
       "api_key": {
-        "label": "Api Key"
+        "label": {
+          "title": "Token from the user",
+          "value": "Api Key"
+        }
       },
       "password": {
-        "label": "Password"
+        "label": {
+          "title": "Password from the user",
+          "value": "Password"
+        }
       },
       "order_id_field_id": {
-        "label": "Order ID Field ID"
+        "label": {
+          "title": "Field necessary for the app to get the order ID",
+          "value": "Order ID Field ID"
+        }
       }
-    }
+    },
+    "package": "shopify_app"
   },
   "global": {
     "error": {
-      "title": "An error occurred",
-      "message": "Please try the previous action again.",
-      "customerNotFound": "Customer could not be found.",
-      "orderNotFound": "Order could not be found.",
-      "data": "Ticket data could not be read.",
-      "orders": "An error occurred when querying orders",
-      "order": "An error occurred when querying this order",
-      "wrongOrder": "Order e-mail does not match requester e-mail"
+      "title": {
+        "title": "Error message",
+        "value": "An error occurred"
+      },
+      "message": {
+        "title": "Help text of the error message",
+        "value": "Please try the previous action again."
+      },
+      "customerNotFound": {
+        "title": "Error message",
+        "value": "Customer could not be found."
+      },
+      "orderNotFound": {
+        "title": "Error message",
+        "value": "Order could not be found."
+      },
+      "data": {
+        "title": "Error message",
+        "value": "Ticket data could not be read."
+      },
+      "orders": {
+        "title": "Error message",
+        "value": "An error occurred when querying orders"
+      },
+      "order": {
+        "title": "Error message",
+        "value": "An error occurred when querying this order"
+      },
+      "wrongOrder": {
+        "title": "Error message",
+        "value": "Order e-mail does not match requester e-mail"
+      }
     },
-    "loading": "Waiting for customer data...",
-    "requesting": "Requesting customer data from Shopify..."
+    "loading": {
+      "title": "Wait message when the app loads",
+      "value": "Waiting for customer data..."
+    },
+    "requesting": {
+      "title": "Wait message when the app loads",
+      "value": "Requesting customer data from Shopify..."
+    }
   },
   "orders": {
-    "id": "RECENT ORDERS",
-    "status": "FULFILLMENT"
+    "id": {
+      "title": "Title inside the app to show the recent orders for that specific user",
+      "value": "RECENT ORDERS"
+    },
+    "status": {
+      "title": "Title inside the app to show the fulfillment status of the order",
+      "value": "FULFILLMENT"
+    }
   },
   "customer": {
-    "orders_count": "Orders count",
-    "total_spent": "Total Spent",
-    "notes": "Notes",
-    "no_notes": "No notes have been added yet."
+    "orders_count": {
+      "title": "Number of orders",
+      "value": "Orders count"
+    },
+    "total_spent": {
+      "title": "Total amount spent",
+      "value": "Total Spent"
+    },
+    "notes": {
+      "title": "Random notes about the user",
+      "value": "Notes"
+    },
+    "no_notes": {
+      "title": "Message when there are no notes",
+      "value": "No notes have been added yet."
+    }
   },
   "order": {
-    "ticket": "Order details for",
-    "closed": "This order was closed",
-    "cancelled": "This order was cancelled",
-    "cancel_reason": "Cancel reason: ",
-    "date": "Date: ",
-    "payment_status": "Payment Status",
-    "fulfillment_status": "Fulfillment Status",
-    "notes": "Order Notes",
-    "addresses": "Addresses",
-    "billing": "Billing",
-    "shipping": "Shipping",
-    "subtotal": "Subtotal Price",
-    "shipping_lines": "Shipping",
-    "total_price": "Total Price",
-    "date_created": "Date Created"
+    "ticket": {
+      "title": "Details of the order",
+      "value": "Order details for"
+    },
+    "closed": {
+      "title": "Message to be displayed in the app when the order has been closed",
+      "value": "This order was closed"
+    },
+    "cancelled": {
+      "title": "Message to be displayed in the app when the order has been cancelled",
+      "value": "This order was cancelled"
+    },
+    "cancel_reason": {
+      "title": "Reason of cancellation title",
+      "value": "Cancel reason: "
+    },
+    "date": {
+      "title": "Date",
+      "value": "Date: "
+    },
+    "payment_status": {
+      "title": "Status of the payment",
+      "value": "Payment Status"
+    },
+    "fulfillment_status": {
+      "title": "Status of fulfillment",
+      "value": "Fulfillment Status"
+    },
+    "notes": {
+      "title": "Notes about the order",
+      "value": "Order Notes"
+    },
+    "addresses": {
+      "title": "Adresses of the user",
+      "value": "Addresses"
+    },
+    "billing": {
+      "title": "Billing adress of the order",
+      "value": "Billing"
+    },
+    "shipping": {
+      "title": "Shipping adress of the order",
+      "value": "Shipping"
+    },
+    "subtotal": {
+      "title": "Subtotal price of the order",
+      "value": "Subtotal Price"
+    },
+    "shipping_lines": {
+      "title": "Shipping costs",
+      "value": "Shipping"
+    },
+    "total_price": {
+      "title": "Total price",
+      "value": "Total Price"
+    },
+    "date_created": {
+      "title": "Date created",
+      "value": "Date Created"
+    }
   }
 }

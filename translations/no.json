@@ -1,60 +1,60 @@
 {
   "app": {
-    "description": "Viser kunde- og ordredetaljer fra Shopify.",
+    "description": "Viser kunde- og bestillingsopplysninger fra Shopify.",
     "parameters": {
       "url": {
-        "label": "Forretnings-URL"
+        "label": "Butikk-URL"
       },
       "api_key": {
-        "label": "Api-nøgle"
+        "label": "Api-nøkkel"
       },
       "password": {
-        "label": "Adgangskode"
+        "label": "Passord"
       },
       "order_id_field_id": {
-        "label": "Id til feltet Ordre-id"
+        "label": "Bestillings-ID Felt-ID"
       }
     }
   },
   "global": {
     "error": {
-      "title": "Der forekom en fejl",
-      "message": "Prøv forrige handling igen.",
-      "customerNotFound": "Kunden blev ikke fundet.",
-      "orderNotFound": "Ordren blev ikke fundet.",
-      "data": "Ticket-dataene kunne ikke læses.",
-      "orders": "Der forekom en fejl under forespørgsel af ordrer",
-      "order": "Der forekom en fejl under forespørgsel af denne ordre",
-      "wrongOrder": "Ordre-e-mailen stemmer ikke overens med anmoder-e-mailen"
+      "title": "Det oppstod en feil",
+      "message": "Prøv forrige handling på nytt.",
+      "customerNotFound": "Kan ikke finne kunden.",
+      "orderNotFound": "Kan ikke finne bestillingen.",
+      "data": "Kan ikke lese saksdata.",
+      "orders": "Det oppstod en feil under spørring av bestillinger",
+      "order": "Det oppstod en feil under spørring av denne bestillingen",
+      "wrongOrder": "Bestillingse-posten stemmer ikke overens med anmoders e-post"
     },
     "loading": "Venter på kundedata...",
-    "requesting": "Anmoder om kundedata fra Shopify..."
+    "requesting": "Ber om kundedata fra Shopify..."
   },
   "orders": {
-    "id": "SENESTE ORDRER",
-    "status": "OPFYLDELSE"
+    "id": "NYE BESTILLINGER",
+    "status": "FULLFØRING"
   },
   "customer": {
-    "orders_count": "Ordreantal",
-    "total_spent": "Samlet forbrug",
-    "notes": "Notater",
-    "no_notes": "Der er ikke blevet tilføjet notater endnu."
+    "orders_count": "Antall bestillinger",
+    "total_spent": "Totalt",
+    "notes": "Merknader",
+    "no_notes": "Det er ikke lagt til noen merknader ennå."
   },
   "order": {
-    "ticket": "Ordredetaljer for",
-    "closed": "Denne ordre blev lukket",
-    "cancelled": "Denne ordre blev annulleret",
-    "cancel_reason": "Årsag til annullering: ",
+    "ticket": "Bestillingsopplysninger for",
+    "closed": "Denne bestillingen ble avsluttet",
+    "cancelled": "Denne bestillingen ble avbrutt",
+    "cancel_reason": "Grunn til avbrudd: ",
     "date": "Dato: ",
     "payment_status": "Betalingsstatus",
-    "fulfillment_status": "Opfyldelsesstatus",
-    "notes": "Ordrenoter",
+    "fulfillment_status": "Fullføringsstatus",
+    "notes": "Bestillingsmerknader",
     "addresses": "Adresser",
     "billing": "Fakturering",
     "shipping": "Forsendelse",
-    "subtotal": "Subtotal, pris",
+    "subtotal": "Pris på delsum:",
     "shipping_lines": "Forsendelse",
     "total_price": "Totalpris",
-    "date_created": "Oprettelsesdato"
+    "date_created": "Opprettelsesdato"
   }
 }

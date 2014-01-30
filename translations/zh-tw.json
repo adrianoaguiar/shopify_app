@@ -32,7 +32,7 @@
   },
   "orders": {
     "id": "最近的訂單",
-    "status": "完成"
+    "status": "完成狀態"
   },
   "customer": {
     "orders_count": "訂單數",

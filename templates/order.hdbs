@@ -49,7 +49,7 @@
 
 {{#if shipping_lines}}
   <h5>{{t "order.shipping_lines"}}</h5>
-  {{#each shipping_lines}}}
+  {{#each shipping_lines}}
     <p>{{price}} ({{code}})</p>
   {{/each}}
 {{/if}}

@@ -1,0 +1,60 @@
+{
+  "app": {
+    "description": "Wyświetla szczegóły klienta i zamówienia z Shopify.",
+    "parameters": {
+      "url": {
+        "label": "Adres URL sklepu"
+      },
+      "api_key": {
+        "label": "Klucz interfejsu API"
+      },
+      "password": {
+        "label": "Hasło"
+      },
+      "order_id_field_id": {
+        "label": "Identyfikator pola identyfikatora zamówienia"
+      }
+    }
+  },
+  "global": {
+    "error": {
+      "title": "Wystąpił błąd",
+      "message": "Spróbuj ponowić poprzednią czynność.",
+      "customerNotFound": "Nie można znaleźć klienta.",
+      "orderNotFound": "Nie można znaleźć zamówienia.",
+      "data": "Nie można odczytać danych zgłoszenia.",
+      "orders": "Wystąpił błąd zapytania dotyczącego zamówień",
+      "order": "Wystąpił błąd zapytania dotyczącego tego zamówienia",
+      "wrongOrder": "Adres e-mail z zamówienia jest niezgodny z adresem e-mail osoby zlecającej"
+    },
+    "loading": "Oczekiwanie na dane klienta...",
+    "requesting": "Żądanie danych klienta z Shopify..."
+  },
+  "orders": {
+    "id": "OSTATNIE ZAMÓWIENIA",
+    "status": "REALIZACJA"
+  },
+  "customer": {
+    "orders_count": "Liczba zamówień",
+    "total_spent": "Łącznie wydano",
+    "notes": "Notatki",
+    "no_notes": "Nie dodano jeszcze notatek."
+  },
+  "order": {
+    "ticket": "Szczegóły zamówienia dotyczące",
+    "closed": "To zamówienie zostało zamknięte",
+    "cancelled": "To zamówienie zostało anulowane",
+    "cancel_reason": "Powód anulowania: ",
+    "date": "Data: ",
+    "payment_status": "Status płatności",
+    "fulfillment_status": "Status realizacji",
+    "notes": "Notatki dotyczące zamówienia",
+    "addresses": "Adresy",
+    "billing": "Adres do rozliczeń",
+    "shipping": "Adres wysyłki",
+    "subtotal": "Cena częściowa",
+    "shipping_lines": "Adres wysyłki",
+    "total_price": "Cena łączna",
+    "date_created": "Data utworzenia"
+  }
+}

@@ -1,60 +1,60 @@
 {
   "app": {
-    "description": "Displays customer and order details from Shopify.",
+    "description": "Visar kund- och beställningsuppgifter från Shopify.",
     "parameters": {
       "url": {
-        "label": "Store URL"
+        "label": "Butikens webbadress"
       },
       "api_key": {
-        "label": "Api Key"
+        "label": "API-nyckel"
       },
       "password": {
-        "label": "Password"
+        "label": "Lösenord"
       },
       "order_id_field_id": {
-        "label": "Order ID Field ID"
+        "label": "Fält-ID för order-ID"
       }
     }
   },
   "global": {
     "error": {
-      "title": "An error occurred",
-      "message": "Please try the previous action again.",
-      "customerNotFound": "Customer could not be found.",
-      "orderNotFound": "Order could not be found.",
-      "data": "Ticket data could not be read.",
-      "orders": "An error occurred when querying orders",
-      "order": "An error occurred when querying this order",
-      "wrongOrder": "Order e-mail does not match requester e-mail"
+      "title": "Ett fel inträffade",
+      "message": "Prova den föregående åtgärden igen.",
+      "customerNotFound": "Det gick inte att hitta kunden.",
+      "orderNotFound": "Det gick inte att hitta beställningen",
+      "data": "Det gick inte att läsa ärendedata.",
+      "orders": "Ett fel inträffade vid beställningssökningen",
+      "order": "Ett fel inträffade vid beställningssökningen",
+      "wrongOrder": "E-postadressen i beställningen matchar inte frågeställarens e-postadress"
     },
-    "loading": "Waiting for customer data...",
-    "requesting": "Requesting customer data from Shopify..."
+    "loading": "Väntar på kunduppgifter...",
+    "requesting": "Begär kunduppgifter från Shopify..."
   },
   "orders": {
-    "id": "RECENT ORDERS",
-    "status": "FULFILLMENT"
+    "id": "SENASTE BESTÄLLNINGAR",
+    "status": "LEVERANS"
   },
   "customer": {
-    "orders_count": "Orders count",
-    "total_spent": "Total Spent",
-    "notes": "Notes",
-    "no_notes": "No notes have been added yet."
+    "orders_count": "Antal beställningar",
+    "total_spent": "Spenderat belopp",
+    "notes": "Anteckningar",
+    "no_notes": "Inga anteckningar har lagts till."
   },
   "order": {
-    "ticket": "Order details for",
-    "closed": "This order was closed",
-    "cancelled": "This order was cancelled",
-    "cancel_reason": "Cancel reason: ",
-    "date": "Date: ",
-    "payment_status": "Payment Status",
-    "fulfillment_status": "Fulfillment Status",
-    "notes": "Order Notes",
-    "addresses": "Addresses",
-    "billing": "Billing",
-    "shipping": "Shipping",
-    "subtotal": "Subtotal Price",
-    "shipping_lines": "Shipping",
-    "total_price": "Total Price",
-    "date_created": "Date Created"
+    "ticket": "Beställningsuppgifter för",
+    "closed": "Beställningen stängdes",
+    "cancelled": "Beställningen upphävdes",
+    "cancel_reason": "Orsak till avbeställning: ",
+    "date": "Datum: ",
+    "payment_status": "Betalningsstatus",
+    "fulfillment_status": "Leveransstatus",
+    "notes": "Beställningsanteckningar",
+    "addresses": "Adresser",
+    "billing": "Fakturering",
+    "shipping": "Frakt",
+    "subtotal": "Delsumma",
+    "shipping_lines": "Frakt",
+    "total_price": "Sammanlagt pris",
+    "date_created": "Skapad"
   }
 }

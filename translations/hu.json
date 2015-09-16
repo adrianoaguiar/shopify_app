@@ -1,0 +1,60 @@
+{
+  "app": {
+    "description": "Ügyfél adatok és rendelések részleteinek megjelenítése a Shopify-ból.",
+    "parameters": {
+      "url": {
+        "label": "URL tárolása"
+      },
+      "api_key": {
+        "label": "Alkalmazás kulcs"
+      },
+      "password": {
+        "label": "Jelszó"
+      },
+      "order_id_field_id": {
+        "label": "Rendelés azonosító Mező azonosító"
+      }
+    }
+  },
+  "global": {
+    "error": {
+      "title": "Hiba történt",
+      "message": "Kérem próbálja újra az előző műveletet.",
+      "customerNotFound": "Ügyfél nem található.",
+      "orderNotFound": "Megrendelés nem található.",
+      "data": "A jegy adatai nem olvashatók.",
+      "orders": "Hiba történt a lekérdezés közben.",
+      "order": "Hiba történt a lekérdezés közben.",
+      "wrongOrder": "A rendelési e-mail cím nem egyezik az igénylő e-mail címmel"
+    },
+    "loading": "Várakozás ügyfél adatra...",
+    "requesting": "Ügyfél adatok kérelmezése a Shopify-ból..."
+  },
+  "orders": {
+    "id": "LEGÚJABB RENDELÉSEK",
+    "status": "Kitöltöttség"
+  },
+  "customer": {
+    "orders_count": "Megrendelések száma",
+    "total_spent": "Összes Költség",
+    "notes": "Megyjegyzések",
+    "no_notes": "Nem lettek még jegyzetek hozzáadva."
+  },
+  "order": {
+    "ticket": "Rendelés adatok",
+    "closed": "Ez a rendelés be lett zárva.",
+    "cancelled": "Ez a rendelés vissza lett vonva.",
+    "cancel_reason": "Törlés oka:",
+    "date": "Dátum:",
+    "payment_status": "Fizetési állapot",
+    "fulfillment_status": "Kitöltöttségi státusz",
+    "notes": "Rendelés megjegyzések",
+    "addresses": "Címek",
+    "billing": "Számlázás",
+    "shipping": "Szállítás",
+    "subtotal": "Ár részösszeg",
+    "shipping_lines": "Szállítás",
+    "total_price": "Teljes Összeg",
+    "date_created": "Időpont létrehozva"
+  }
+}

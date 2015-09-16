@@ -32,7 +32,7 @@
   },
   "orders": {
     "id": "RECENT ORDERS",
-    "status": "FULFILLMENT"
+    "status": "FULFILMENT"
   },
   "customer": {
     "orders_count": "Orders count",
@@ -47,7 +47,7 @@
     "cancel_reason": "Cancel reason: ",
     "date": "Date: ",
     "payment_status": "Payment Status",
-    "fulfillment_status": "Fulfillment Status",
+    "fulfillment_status": "Fulfilment Status",
     "notes": "Order Notes",
     "addresses": "Addresses",
     "billing": "Billing",

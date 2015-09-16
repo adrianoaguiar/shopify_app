@@ -1,0 +1,60 @@
+{
+  "app": {
+    "description": "Afişează detaliile clientului şi comenzii din Shopify.",
+    "parameters": {
+      "url": {
+        "label": "Adresă URL magazin"
+      },
+      "api_key": {
+        "label": "Cheie API"
+      },
+      "password": {
+        "label": "Parolă"
+      },
+      "order_id_field_id": {
+        "label": "Identificator câmp Identificator comandă"
+      }
+    }
+  },
+  "global": {
+    "error": {
+      "title": "A apărut o eroare",
+      "message": "Vă rugăm să repetaţi acţiunea anterioară.",
+      "customerNotFound": "Clientul nu a putut fi găsit.",
+      "orderNotFound": "Comanda nu a putut fi găsită.",
+      "data": "Datele tichetului nu au putut fi citite.",
+      "orders": "A apărut o eroare la interogarea comenzilor",
+      "order": "A apărut o eroare la interogarea acestei comenzi",
+      "wrongOrder": "E-mailul comenzii nu corespunde cu e-mailul solicitantului"
+    },
+    "loading": "Se aşteaptă datele clientului...",
+    "requesting": "Se solicită datele clientului de la Shopify..."
+  },
+  "orders": {
+    "id": "COMENZI RECENTE",
+    "status": "ÎNDEPLINIRE"
+  },
+  "customer": {
+    "orders_count": "Număr de comenzi",
+    "total_spent": "Total cheltuit",
+    "notes": "Note",
+    "no_notes": "Încă nu au fost adăugate note."
+  },
+  "order": {
+    "ticket": "Detaliile comenzii pentru",
+    "closed": "Această comandă a fost închisă",
+    "cancelled": "Această comandă a fost anulată",
+    "cancel_reason": "Motivul anulării: ",
+    "date": "Data: ",
+    "payment_status": "Stare plată",
+    "fulfillment_status": "Stare de îndeplinire",
+    "notes": "Note comandă",
+    "addresses": "Adrese",
+    "billing": "Facturare",
+    "shipping": "Livrare",
+    "subtotal": "Preţ subtotal",
+    "shipping_lines": "Livrare",
+    "total_price": "Preţ total",
+    "date_created": "Data creării"
+  }
+}

@@ -162,7 +162,7 @@
       if (orderId) {
         // Check if custom field order is in the array
         var ticketOrder = _.find(this.orders, function(order){
-          return (order.order_number == orderId);
+          return (order.name == "#" + orderId);
         });
 
         if (ticketOrder) {

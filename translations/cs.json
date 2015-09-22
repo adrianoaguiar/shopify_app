@@ -1,0 +1,60 @@
+{
+  "app": {
+    "description": "Zobrazí detaily zákazníka a objednávky ze Shopify.",
+    "parameters": {
+      "url": {
+        "label": "URL obchodu"
+      },
+      "api_key": {
+        "label": "Klíč API "
+      },
+      "password": {
+        "label": "Heslo"
+      },
+      "order_id_field_id": {
+        "label": "ID pole ID objednávky"
+      }
+    }
+  },
+  "global": {
+    "error": {
+      "title": "Došlo k chybě",
+      "message": "Zkuste prosím provést předchozí akci znovu.",
+      "customerNotFound": "Zákazníka nelze najít.",
+      "orderNotFound": "Objednávku nelze najít.",
+      "data": "Nelze přečíst data tiketu.",
+      "orders": "Došlo k chybě při dotazování na objednávky",
+      "order": "Došlo k chybě při dotazování na tuto objednávku",
+      "wrongOrder": "E-mail s objednávkou se neshoduje s e-mailem klienta"
+    },
+    "loading": "Čekání na data zákazníka...",
+    "requesting": "Požadavek na data zákazníka ze Shopify..."
+  },
+  "orders": {
+    "id": "POSLEDNÍ OBJEDNÁVKY",
+    "status": "PLNĚNÍ"
+  },
+  "customer": {
+    "orders_count": "Počet objednávek",
+    "total_spent": "Utraceno celkem",
+    "notes": "Poznámky",
+    "no_notes": "Zatím nebyly přidány žádné poznámky."
+  },
+  "order": {
+    "ticket": "Detaily objednávky na",
+    "closed": "Tato objednávka byla uzavřena",
+    "cancelled": "Tato objednávka byla zrušena",
+    "cancel_reason": "Důvod zrušení: ",
+    "date": "Datum: ",
+    "payment_status": "Stav platby",
+    "fulfillment_status": "Stav plnění",
+    "notes": "Poznámky k objednávce",
+    "addresses": "Adresy",
+    "billing": "Fakturace",
+    "shipping": "Dodací adresa",
+    "subtotal": "Mezisoučet ceny",
+    "shipping_lines": "Cena přepravy",
+    "total_price": "Celková cena",
+    "date_created": "Datum vytvoření"
+  }
+}

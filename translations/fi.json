@@ -1,0 +1,60 @@
+{
+  "app": {
+    "description": "Näyttää asiakkaan ja tilauksen tiedot Shopifysta.",
+    "parameters": {
+      "url": {
+        "label": "Säilytä URL-osoite"
+      },
+      "api_key": {
+        "label": "Api-avain"
+      },
+      "password": {
+        "label": "Salasana"
+      },
+      "order_id_field_id": {
+        "label": "Tilaustunnuksen kenttätunnus"
+      }
+    }
+  },
+  "global": {
+    "error": {
+      "title": "Esiintyi virhe",
+      "message": "Yritä edellistä toimintoa uudelleen.",
+      "customerNotFound": "Asiakas ei löytynyt.",
+      "orderNotFound": "Tilausta ei löytynyt.",
+      "data": "Tiketin tietoja ei voitu lukea.",
+      "orders": "Virhe suoritettaessa tilauskyselyä",
+      "order": "Virhe suoritettaessa tämän tilauksen kyselyä",
+      "wrongOrder": "Tilauksen sähköposti ei vastaa lähettäjän sähköpostia"
+    },
+    "loading": "Odottaa asiakkaan tietoja...",
+    "requesting": "Pyytää asiakastietoja Shopifysta..."
+  },
+  "orders": {
+    "id": "VIIMEISIMMÄT TILAUKSET",
+    "status": "TÄYTTÖ"
+  },
+  "customer": {
+    "orders_count": "Tilausten lukumäärä",
+    "total_spent": "Käytetty kokonaissumma",
+    "notes": "Huomautukset",
+    "no_notes": "Huomautuksia ei ole vielä lisätty."
+  },
+  "order": {
+    "ticket": "Tilaustiedot kohteelle",
+    "closed": "Tämä tilaus suljettiin",
+    "cancelled": "Tämä tilaus peruutettiin",
+    "cancel_reason": "Peruutuksen syy: ",
+    "date": "Päivämäärä: ",
+    "payment_status": "Maksun tila",
+    "fulfillment_status": "Täyttämistila",
+    "notes": "Tilauksen huomautukset",
+    "addresses": "Osoitteet",
+    "billing": "Laskutus",
+    "shipping": "Toimitus",
+    "subtotal": "Välihinta",
+    "shipping_lines": "Toimitus",
+    "total_price": "Kokonaishinta",
+    "date_created": "Luontipäivämäärä"
+  }
+}

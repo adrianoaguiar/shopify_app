@@ -23,9 +23,9 @@
       "customerNotFound": "Cliente non trovato.",
       "orderNotFound": "L’ordine non è stato trovato.",
       "data": "Impossibile leggere i dati del ticket.",
-      "orders": "Si è verificato un errore durante la ricerca degli ordini.",
-      "order": "Si è verificato un errore durante la ricerca di questo ordine",
-      "wrongOrder": "L’indirizzo e-mail dell’ordine non corrisponde a quello del richiedente"
+      "orders": "Si è verificato un errore con la ricerca degli ordini.",
+      "order": "Si è verificato un errore con la ricerca di questo ordine",
+      "wrongOrder": "L’indirizzo email dell’ordine non corrisponde a quello del richiedente"
     },
     "loading": "Attesa per dati cliente...",
     "requesting": "Richiesta dati cliente da Shopify in corso..."

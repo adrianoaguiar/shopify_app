@@ -161,9 +161,7 @@
     showTicketOrder: function(orderId) {
       if (orderId) {
         // Check if custom field order is in the array
-        var ticketOrder = _.find(this.orders, function(order){
-          return (order.order_number == orderId);
-        });
+        var ticketOrder = this.findOrder(orderId);
 
         if (ticketOrder) {
           this.updateTemplate('order', ticketOrder);
@@ -171,6 +169,12 @@
           this.showError(this.I18n.t('global.error.orderNotFound'), " ", 'order');
         }
       }
+    },
+
+    findOrder: function(orderId) {
+      return _.find(this.orders, function(order){
+        return ((order.order_number == orderId) || (order.name == orderId) || (order.name == '#' + orderId));
+      });
     },
 
     fmtOrder: function(order) {

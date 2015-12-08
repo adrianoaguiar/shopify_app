@@ -28,7 +28,6 @@
       'app.activated'                  : 'init',
       'ticket.requester.email.changed' : 'queryCustomer',
       '*.changed'                      : 'handleChanged',
-      'requiredProperties.ready'       : 'queryCustomer',
       'getProfile.done'                : 'handleProfile',
       'getOrders.done'                 : 'handleOrders',
       'getOrder.done'                  : 'handleOrder',
@@ -42,14 +41,8 @@
       this.hasActivated = true;
       this.currAttempt = 0;
       this.storeUrl = this.storeUrl || this.checkStoreUrl(this.settings.url);
-      this.requiredProperties = [
-        'ticket.requester.email'
-      ];
 
       if (this.currentLocation() === 'ticket_sidebar') {
-        this.allRequiredPropertiesExist();
-      } else if (this.ticket().requester()) {
-        // user may have selected a requester and reloaded the app
         this.queryCustomer();
       }
     },
@@ -223,46 +216,6 @@
       } else {
         this.switchTo('error', data);
       }
-    },
-
-    allRequiredPropertiesExist: function() {
-      if (this.requiredProperties.length > 0) {
-        var valid = this.validateRequiredProperty(this.requiredProperties[0]);
-
-        // prop is valid, remove from array
-        if (valid) {
-          this.requiredProperties.shift();
-        }
-
-        if (this.requiredProperties.length > 0 && this.currAttempt < this.MAX_ATTEMPTS) {
-          if (!valid) {
-            ++this.currAttempt;
-          }
-
-          _.delay(_.bind(this.allRequiredPropertiesExist, this), 100);
-          return;
-        }
-      }
-
-      if (this.currAttempt < this.MAX_ATTEMPTS) {
-        this.trigger('requiredProperties.ready');
-      } else {
-        this.showError(null, this.I18n.t('global.error.data'));
-      }
-    },
-
-    safeGetPath: function(propertyPath) {
-      return _.inject( propertyPath.split('.'), function(context, segment) {
-        if (context == null) { return context; }
-        var obj = context[segment];
-        if ( _.isFunction(obj) ) { obj = obj.call(context); }
-        return obj;
-      }, this);
-    },
-
-    validateRequiredProperty: function(propertyPath) {
-      var value = this.safeGetPath(propertyPath);
-      return value != null && value !== '' && value !== 'no';
     },
 
     handleFail: function() {

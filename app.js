@@ -5,7 +5,6 @@
     MAX_ATTEMPTS : 20,
 
     defaultState: 'loading',
-    locale: undefined,
 
     storeUrl: '',
 
@@ -17,11 +16,6 @@
     },
 
     requests: {
-      'getZendeskUser': {
-        url: '/api/v2/users/me.json',
-        proxy_v2: true
-      },
-
       'getProfile' : function(email) {
         return this.getRequest(this.storeUrl + this.resources.PROFILE_URI + email);
       },
@@ -38,7 +32,6 @@
       'getProfile.done'                : 'handleProfile',
       'getOrders.done'                 : 'handleOrders',
       'getOrder.done'                  : 'handleOrder',
-      'getZendeskUser.done'            : 'handleZendeskUser',
       'click .toggle-address'          : 'toggleAddress'
     },
 
@@ -46,21 +39,19 @@
       if(!data.firstLoad){
         return;
       }
-      this.ajax('getZendeskUser').done((function() {
-        this.hasActivated = true;
-        this.currAttempt = 0;
-        this.storeUrl = this.storeUrl || this.checkStoreUrl(this.settings.url);
-        this.requiredProperties = [
-          'ticket.requester.email'
-        ];
+      this.hasActivated = true;
+      this.currAttempt = 0;
+      this.storeUrl = this.storeUrl || this.checkStoreUrl(this.settings.url);
+      this.requiredProperties = [
+        'ticket.requester.email'
+      ];
 
-        if (this.currentLocation() === 'ticket_sidebar') {
-          this.allRequiredPropertiesExist();
-        } else if (this.ticket().requester()) {
-          // user may have selected a requester and reloaded the app
-          this.queryCustomer();
-        }
-      }).bind(this));
+      if (this.currentLocation() === 'ticket_sidebar') {
+        this.allRequiredPropertiesExist();
+      } else if (this.ticket().requester()) {
+        // user may have selected a requester and reloaded the app
+        this.queryCustomer();
+      }
     },
 
     queryCustomer: function() {
@@ -92,10 +83,6 @@
       }
       url = url.replace(/\/index.php/g, '');
       return url;
-    },
-
-    handleZendeskUser: function(data) {
-      this.locale = data.user.locale;
     },
 
     handleChanged: _.debounce(function(e) {
@@ -208,7 +195,7 @@
     },
 
     localeDate: function(date) {
-      return new Date(date).toLocaleString(this.locale);
+      return new Date(date).toLocaleString(this.currentUser().locale());
     },
 
     toggleAddress: function (e) {

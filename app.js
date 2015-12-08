@@ -1,11 +1,7 @@
 (function() {
 
   return {
-
-    MAX_ATTEMPTS : 20,
-
     defaultState: 'loading',
-    locale: undefined,
 
     storeUrl: '',
 
@@ -17,11 +13,6 @@
     },
 
     requests: {
-      'getZendeskUser': {
-        url: '/api/v2/users/me.json',
-        proxy_v2: true
-      },
-
       'getProfile' : function(email) {
         return this.getRequest(this.storeUrl + this.resources.PROFILE_URI + email);
       },
@@ -31,43 +22,26 @@
     },
 
     events: {
-      'app.activated'                  : 'init',
+      'app.created'                    : 'init',
       'ticket.requester.email.changed' : 'queryCustomer',
       '*.changed'                      : 'handleChanged',
-      'requiredProperties.ready'       : 'queryCustomer',
       'getProfile.done'                : 'handleProfile',
       'getOrders.done'                 : 'handleOrders',
       'getOrder.done'                  : 'handleOrder',
-      'getZendeskUser.done'            : 'handleZendeskUser',
       'click .toggle-address'          : 'toggleAddress'
     },
 
     init: function(data){
-      if(!data.firstLoad){
-        return;
-      }
-      this.ajax('getZendeskUser').done((function() {
-        this.hasActivated = true;
-        this.currAttempt = 0;
-        this.storeUrl = this.storeUrl || this.checkStoreUrl(this.settings.url);
-        this.requiredProperties = [
-          'ticket.requester.email'
-        ];
+      this.storeUrl = this.storeUrl || this.checkStoreUrl(this.settings.url);
 
-        if (this.currentLocation() === 'ticket_sidebar') {
-          this.allRequiredPropertiesExist();
-        } else if (this.ticket().requester()) {
-          // user may have selected a requester and reloaded the app
-          this.queryCustomer();
-        }
-      }).bind(this));
+      if (this.currentLocation() === 'ticket_sidebar') {
+        this.queryCustomer();
+      }
     },
 
     queryCustomer: function() {
-      if (this.hasActivated) {
-        this.switchTo('requesting');
-        this.ajax('getProfile', this.ticket().requester().email());
-      }
+      this.switchTo('requesting');
+      this.ajax('getProfile', this.ticket().requester().email());
     },
 
     getRequest: function(resource) {
@@ -90,20 +64,11 @@
         // Nothing to do, the front-controller isn't in the url, pass it back unaltered.
         return url;
       }
-      url = url.replace(/\/index.php/g, '');
+      url = url.replace(/\/index\.php/g, '');
       return url;
     },
 
-    handleZendeskUser: function(data) {
-      this.locale = data.user.locale;
-    },
-
     handleChanged: _.debounce(function(e) {
-      // test if change event fired before app.activated
-      if (!this.hasActivated) {
-        return;
-      }
-
       if (e.propertyName === helpers.fmt("ticket.custom_field_%@", this.settings.order_id_field_id)) {
         this.showTicketOrder(e.newValue);
       }
@@ -208,7 +173,7 @@
     },
 
     localeDate: function(date) {
-      return new Date(date).toLocaleString(this.locale);
+      return new Date(date).toLocaleString(this.currentUser().locale());
     },
 
     toggleAddress: function (e) {
@@ -236,46 +201,6 @@
       } else {
         this.switchTo('error', data);
       }
-    },
-
-    allRequiredPropertiesExist: function() {
-      if (this.requiredProperties.length > 0) {
-        var valid = this.validateRequiredProperty(this.requiredProperties[0]);
-
-        // prop is valid, remove from array
-        if (valid) {
-          this.requiredProperties.shift();
-        }
-
-        if (this.requiredProperties.length > 0 && this.currAttempt < this.MAX_ATTEMPTS) {
-          if (!valid) {
-            ++this.currAttempt;
-          }
-
-          _.delay(_.bind(this.allRequiredPropertiesExist, this), 100);
-          return;
-        }
-      }
-
-      if (this.currAttempt < this.MAX_ATTEMPTS) {
-        this.trigger('requiredProperties.ready');
-      } else {
-        this.showError(null, this.I18n.t('global.error.data'));
-      }
-    },
-
-    safeGetPath: function(propertyPath) {
-      return _.inject( propertyPath.split('.'), function(context, segment) {
-        if (context == null) { return context; }
-        var obj = context[segment];
-        if ( _.isFunction(obj) ) { obj = obj.call(context); }
-        return obj;
-      }, this);
-    },
-
-    validateRequiredProperty: function(propertyPath) {
-      var value = this.safeGetPath(propertyPath);
-      return value != null && value !== '' && value !== 'no';
     },
 
     handleFail: function() {

@@ -44,6 +44,7 @@ parts:
       key: "txt.apps.shopify_app.global.error.data"
       title: "Error message"
       value: "Ticket data could not be read."
+      obsolete: "2015-12-10"
   - translation:
       key: "txt.apps.shopify_app.global.error.orders"
       title: "Error message"
@@ -148,4 +149,3 @@ parts:
       key: "txt.apps.shopify_app.order.date_created"
       title: "Date created"
       value: "Date Created"
-

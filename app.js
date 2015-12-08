@@ -1,9 +1,6 @@
 (function() {
 
   return {
-
-    MAX_ATTEMPTS : 20,
-
     defaultState: 'loading',
 
     storeUrl: '',
@@ -25,7 +22,7 @@
     },
 
     events: {
-      'app.activated'                  : 'init',
+      'app.created'                    : 'init',
       'ticket.requester.email.changed' : 'queryCustomer',
       '*.changed'                      : 'handleChanged',
       'getProfile.done'                : 'handleProfile',
@@ -35,11 +32,6 @@
     },
 
     init: function(data){
-      if(!data.firstLoad){
-        return;
-      }
-      this.hasActivated = true;
-      this.currAttempt = 0;
       this.storeUrl = this.storeUrl || this.checkStoreUrl(this.settings.url);
 
       if (this.currentLocation() === 'ticket_sidebar') {
@@ -48,10 +40,8 @@
     },
 
     queryCustomer: function() {
-      if (this.hasActivated) {
-        this.switchTo('requesting');
-        this.ajax('getProfile', this.ticket().requester().email());
-      }
+      this.switchTo('requesting');
+      this.ajax('getProfile', this.ticket().requester().email());
     },
 
     getRequest: function(resource) {
@@ -74,16 +64,11 @@
         // Nothing to do, the front-controller isn't in the url, pass it back unaltered.
         return url;
       }
-      url = url.replace(/\/index.php/g, '');
+      url = url.replace(/\/index\.php/g, '');
       return url;
     },
 
     handleChanged: _.debounce(function(e) {
-      // test if change event fired before app.activated
-      if (!this.hasActivated) {
-        return;
-      }
-
       if (e.propertyName === helpers.fmt("ticket.custom_field_%@", this.settings.order_id_field_id)) {
         this.showTicketOrder(e.newValue);
       }

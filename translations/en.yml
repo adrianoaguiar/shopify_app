@@ -149,3 +149,63 @@ parts:
       key: "txt.apps.shopify_app.order.date_created"
       title: "Date created"
       value: "Date Created"
+  - translation:
+      key: "txt.apps.shopify_app.order.date_created"
+      title: "Date created"
+      value: "Date Created"
+  - translation:
+      key: "txt.apps.shopify_app.app.parameters.access_token.label"
+      title: "The access token used to make API calls"
+      value: "Access Token"
+  - translation:
+      key: "txt.apps.shopify_app.app.parameters.items_purchased.label"
+      title: "Checkbox label if items purchased should be displayed"
+      value: "Items Purchased"
+  - translation:
+      key: "txt.apps.shopify_app.app.parameters.item_quantity.label"
+      title: "Checkbox label if item quantity should be displayed"
+      value: "Item Quantity"
+  - translation:
+      key: "txt.apps.shopify_app.app.parameters.item_price.label"
+      title: "Checkbox label if item price should be displayed"
+      value: "Items Price"
+  - translation:
+      key: "txt.apps.shopify_app.app.parameters.items_purchased.label"
+      title: "Checkbox label if items purchased should be displayed"
+      value: "Items Purchased"
+  - translation:
+      key: "txt.apps.shopify_app.app.parameters.storefront_name.label"
+      title: "Checkbox label if storefront name should be displayed"
+      value: "Storefront Name"
+  - translation:
+      key: "txt.apps.shopify_app.app.parameters.purchase_total.label"
+      title: "Checkbox label if purchase total should be displayed"
+      value: "Purchase Total"
+  - translation:
+      key: "txt.apps.shopify_app.app.parameters.order_status.label"
+      title: "Checkbox label if order status should be displayed"
+      value: "Order Status"
+  - translation:
+      key: "txt.apps.shopify_app.app.parameters.date_ordered.label"
+      title: "Checkbox label if date ordered should be displayed"
+      value: "Date Ordered"
+  - translation:
+      key: "txt.apps.shopify_app.app.parameters.shipping_address.label"
+      title: "Checkbox label if shipping address should be displayed"
+      value: "Shipping Address"
+  - translation:
+      key: "txt.apps.shopify_app.app.parameters.shipping_method.label"
+      title: "Checkbox label if shipping method should be displayed"
+      value: "Shipping Method"
+  - translation:
+      key: "txt.apps.shopify_app.app.parameters.billing_address.label"
+      title: "Checkbox label if billing address should be displayed"
+      value: "Billing Address"
+  - translation:
+      key: "txt.apps.shopify_app.app.parameters.customer_notes.label"
+      title: "Checkbox label if customer notes should be displayed"
+      value: "Customer Notes"
+  - translation:
+      key: "txt.apps.shopify_app.app.parameters.order_notes.label"
+      title: "Checkbox label if order notes should be displayed"
+      value: "Order Notes"

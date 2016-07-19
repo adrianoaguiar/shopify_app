@@ -18,14 +18,56 @@
       "required": true
     },
     {
-      "name": "api_key",
-      "type": "text",
-      "required": true
+      "name": "access_token",
+      "type": "hidden"
     },
     {
-      "name": "password",
-      "type": "text",
-      "required": true
+      "name": "items_purchased",
+      "type": "checkbox"
+    },
+    {
+      "name": "item_quantity",
+      "type": "checkbox"
+    },
+    {
+      "name": "items_price",
+      "type": "checkbox"
+    },
+    {
+      "name": "storefront_name",
+      "type": "checkbox"
+    },
+    {
+      "name": "purchase_total",
+      "type": "checkbox"
+    },
+    {
+      "name": "order_status",
+      "type": "checkbox"
+    },
+    {
+      "name": "date_ordered",
+      "type": "checkbox"
+    },
+    {
+      "name": "shipping_address",
+      "type": "checkbox"
+    },
+    {
+      "name": "shipping_method",
+      "type": "checkbox"
+    },
+    {
+      "name": "billing_address",
+      "type": "checkbox"
+    },
+    {
+      "name": "customer_notes",
+      "type": "checkbox"
+    },
+    {
+      "name": "order_notes",
+      "type": "checkbox"
     },
     {
       "name": "order_id_field_id",

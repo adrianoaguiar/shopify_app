@@ -5,11 +5,83 @@
       "url": {
         "label": "Store URL"
       },
-      "api_key": {
-        "label": "Api Key"
+      "access_token" : {
+        "label": {
+          "title": "access_token",
+          "value": "Access Token"
+        }
       },
-      "password": {
-        "label": "Password"
+      "items_purchased" : {
+        "label": {
+          "title": "items_purchased",
+          "value": "Items Purchased"
+        }
+      },
+      "item_quantity" : {
+        "label": {
+          "title": "item_quantity",
+          "value": "Item Quantity"
+        }
+      },
+      "item_price" : {
+        "label": {
+          "title": "item_price",
+          "value": "Item Price"
+        }
+      },
+      "storefront_name" : {
+        "label": {
+          "title": "storefront_name",
+          "value": "Storefront Name"
+        }
+      },
+      "purchase_total" : {
+        "label": {
+          "title": "purchase_total",
+          "value": "Purchase Total"
+        }
+      },
+      "order_status" : {
+        "label": {
+          "title": "order_status",
+          "value": "Order Status"
+        }
+      },
+      "date_ordered" : {
+        "label": {
+          "title": "date_ordered",
+          "value": "Date Ordered"
+        }
+      },
+      "shipping_address" : {
+        "label": {
+          "title": "shipping_address",
+          "value": "Shipping Address"
+        }
+      },
+      "shipping_method" : {
+        "label": {
+          "title": "shipping_method",
+          "value": "Shipping Method"
+        }
+      },
+      "billing_address" : {
+        "label": {
+          "title": "billing_address",
+          "value": "Billing Address"
+        }
+      },
+      "customer_notes" : {
+        "label": {
+          "title": "customer_notes",
+          "value": "Customer Notes"
+        }
+      },
+      "order_notes" : {
+        "label": {
+          "title": "order_notes",
+          "value": "Order Notes"
+        }
       },
       "order_id_field_id": {
         "label": "Order ID Field ID"

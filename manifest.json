@@ -30,7 +30,7 @@
       "type": "checkbox"
     },
     {
-      "name": "items_price",
+      "name": "item_price",
       "type": "checkbox"
     },
     {

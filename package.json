@@ -39,6 +39,7 @@
     "style-loader": "^0.13.0",
     "webpack": "^1.12.13",
     "sprintf-js": "^1.0.3",
-    "zd-css-bedrock": "git+ssh://git@github.com/zendeskgarden/css-bedrock.git"
+    "zd-css-bedrock": "git+ssh://git@github.com/zendeskgarden/css-bedrock.git",
+    "gravatar": "^1.5.2"
   }
 }

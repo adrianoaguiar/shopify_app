@@ -4,31 +4,49 @@ body {
 	white-space: nowrap;
 }
 
-hr {
-	color: #dddddd;
-}
+[data-main] {
+	
+	hr {
+		color: #dddddd;
+	}
 
-.badge {
-	color: white;
-	font-size: 10px;
-	padding: 2px 9px;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-}
+	.o-label {
+		color: #333;
+	}
 
-.o-paid,.o-authorized,.o-fulfilled
-{background-color:#80bd4e;color:#fff}
+	.panel {
+		border-bottom: 1px solid #ddd;
+	}
 
-.o-authorized,.o-partial
-{background-color:#d1e5c0;color:#335e10;}
+	.l-media__figure {
+		border-radius: 4px 4px 4px 4px;
+		-moz-border-radius: 4px 4px 4px 4px;
+		-webkit-border-radius: 4px 4px 4px 4px;
+		border: 0px solid #000000;
+	}
 
-.o-filed,.o-pending,.o-not-fulfilled,.r-match-unavailable
-{background-color:#eee;color:#000}
+	.flat-dotted-list {
+		display: inline-block;
 
-.o-abandoned,.o-voided,.o-refunded,.o-restocked
-{background-color:#af9c7e;color:#fff}
+		li {
+			float: left;
+			&:not(:first-child) {
+				&:before {
+					margin: 0 5px;
+    				content: "• ";
+    				color: #333;
+				}
+			}
+		}
+	}
 
-.closed, .cancelled {
-  color: red;
+	li {
+		&.not_fulfilled {
+			@extend .u-fg-moon-yellow;
+		}
+
+		&.fulfilled {
+			@extend .u-fg-apple-green;
+		}
+	}
 }

@@ -1,12 +1,15 @@
-<div class="u-mb-sm">
-  <h4><a href="{{customer.uri}}" target="_blank">{{customer.first_name}} {{customer.last_name}}</a></h4>
+<div class="l-media u-mb-sm">
+  <img class="l-media__figure u-mr-xs" src="{{customer.image}}" alt=""/>
+  <div class="l-media__body">
+    <h4><a href="{{customer.uri}}" target="_blank">{{customer.first_name}} {{customer.last_name}}</a></h4>
+  </div>
 </div>
 
 <!---- Customer notes ---->
 {{#if customer.note}}
 <div class="u-mb-sm u-zeta">
   {{t "customer.notes"}}
-  <div class="u-thin">{{customer.note}}</div>
+  <div class="u-light">{{customer.note}}</div>
 </div>
 {{/if}}
 
@@ -25,85 +28,67 @@
 {{#if recentOrders}}
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
   {{#recentOrders}}
-  <div class="panel panel-default u-pv-sm">
+  <div class="panel panel-default u-pv-sm u-pv">
     <div class="panel-heading" role="tab" id="heading-{{id}}">
-      <h4 class="panel-title">
-        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#order-{{id}}" aria-expanded="false" aria-controls="order-{{id}}">
-          {{name}}
-        </a>
-      </h4>
+      <ul class="flat-dotted-list">
+        <li>
+          <h4 class="panel-title">
+            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#order-{{id}}" aria-expanded="false" aria-controls="order-{{id}}">
+              {{name}}
+            </a>
+          </h4>
+        </li>
+        {{#if fulfillment_status}}<li class="{{order_status}}">{{order_status}}</li>{{/if}}
+        {{#if storefront_name}}<li>{{storefront_name}}</li>{{/if}}
+      </ul>
     </div>
     <div id="order-{{id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-{{id}}">
-      <div class="panel-body">
-        {{created_at}}
+      <div class="panel-body u-light u-zeta">
+        {{#if created_at}}<div>{{created_at}}</div>{{/if}}
         {{#items_purchased}}
-          <div class="line-item">
-            <div>{{title}}</div>
-            <ul>
+          <div class="line-item u-mv-sm">
+            <div class="u-semibold o-label">{{title}}</div>
+            <ul class="flat-dotted-list">
               {{#if quantity}}<li>Qty: {{quantity}}</li>{{/if}}
               {{#if price}}<li>Each: {{price}} {{currency}}</li>{{/if}}
             </ul>
           </div>
         {{/items_purchased}}
         
-        {{#if total_price}}<div>Order total: {{currency}} {{total_price}}</div>{{/if}}
+        {{#if total_price}}
+          <div class="u-mv-sm">
+            <div class="u-semibold u-delta o-label">Order total: {{currency}} {{total_price}}</div>
+          </div>
+        {{/if}}
         {{#if shipping_lines}}
-        <div>
-          <div>{{t "app.parameters.shipping_method.label.value"}}</div>
+        <div class="u-mv-sm">
+          <div class="u-semibold o-label">{{t "app.parameters.shipping_method.label.value"}}</div>
           <div>{{title}}</div>
         </div>
         {{/if}}
         {{#if shipping_address}}
-        <div>
-          <div>{{t "app.parameters.shipping_address.label.value"}}</div>
+        <div class="u-mv-sm">
+          <div class="u-semibold o-label">{{t "app.parameters.shipping_address.label.value"}}</div>
           <div>{{shipping_address.address1}} {{shipping_address.address2}}</div>
           <div>{{shipping_address.city}}, {{shipping_address.province_code}} {{shipping_address.zip}}</div>
         </div>
         {{/if}}
         {{#if billing_address}}
-        <div>
-          <div>{{t "app.parameters.billing_address.label.value"}}</div>
+        <div class="u-mv-sm">
+          <div class="u-semibold o-label">{{t "app.parameters.billing_address.label.value"}}</div>
           <div>{{billing_address.address1}} {{billing_address.address2}}</div>
           <div>{{billing_address.city}}, {{billing_address.province_code}} {{billing_address.zip}}</div>
         </div>
         {{/if}}
         {{#if note}}
-        <div>
-          <div>{{t "app.parameters.order_notes.label.value"}}</div>
+        <div class="u-mv-sm">
+          <div class="u-semibold o-label">{{t "app.parameters.order_notes.label.value"}}</div>
           <div>{{note}}
         </div>
         {{/if}}
       </div>
     </div>
   </div>
-  <hr />
-  {{/recentOrders}}
-
-    {{#recentOrders}}
-  <div class="panel panel-default u-pv-sm">
-    <div class="panel-heading" role="tab" id="heading-{{id}}2">
-      <h4 class="panel-title">
-        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#order-{{id}}2" aria-expanded="false" aria-controls="order-{{id}}2">
-          {{name}}
-        </a>
-      </h4>
-    </div>
-    <div id="order-{{id}}2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-{{id}}2">
-      <div class="panel-body">
-        {{#items_purchased}}
-          <div class="line-item">
-            <div>{{title}}</div>
-            <ul>
-              {{#if quantity}}<li>Qty: {{quantity}}</li>{{/if}}
-              {{#if price}}<li>Each: {{currency}} {{price}}</li>{{/if}}
-            </ul>
-          </div>
-        {{/items_purchased}}
-        <div>Order total: {{currency}} {{total_price}}
-      </div>
-    </div>
-  </div>
-  <hr />
   {{/recentOrders}}
 </div>
 {{/if}}

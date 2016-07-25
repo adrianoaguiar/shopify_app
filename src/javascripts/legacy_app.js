@@ -1,6 +1,8 @@
 import BaseApp from 'base_app';
 
 var sprintf = require('sprintf-js').sprintf;
+var gravatar = require('gravatar');
+
 var App = {
 
   orderFieldsMap: {
@@ -23,7 +25,7 @@ var App = {
   resources: {
     PROFILE_URI       : '/admin/customers/search.json?query=email:',
     CUSTOMER_URI      : '%1$s/admin/customers/%2$d',
-    ORDERS_URI        : '%1$s/admin/orders.json?customer_id=%2$d&status=any&fields=name,id,created_at,currency%3$s',
+    ORDERS_URI        : '%1$s/admin/orders.json?customer_id=%2$d&status=any&fields=name,id,currency%3$s',
     ORDER_PATH        : '%1$s/admin/orders/%2$d'
   },
 
@@ -34,8 +36,8 @@ var App = {
     'getOrders' : function(customer_id) {
       var self = this;
       var additional_fields = '';
-      var fields = _.reject(this.orderFieldsMap, function(key) {
-        return self.setting(key);
+      var fields = _.reject(this.orderFieldsMap, function(value, key) {
+        return !self.setting(key);
       });
 
       if (_.size(fields) > 0) {
@@ -134,16 +136,12 @@ var App = {
       return this.fmtOrder(order);
     }.bind(this));
 
+    this.customer.image = gravatar.url(this.customer.email, {s: 20, d: 'mm'});
+
     this.switchTo('customer', {
       customer: this.customer,
       recentOrders: this.orders.slice(0,3),
       ordersUri: sprintf('%s/admin/orders', this.storeUrl)
-    });
-  },
-
-  findOrder: function(orderId) {
-    return _.find(this.orders, function(order){
-      return ((order.order_number == orderId) || (order.name == orderId) || (order.name == '#' + orderId));
     });
   },
 
@@ -174,18 +172,15 @@ var App = {
       newOrder.note = this.I18n.t('customer.no_notes');
     }
 
-    newOrder.created_at = this.localeDate(order.created_at);
+    if (order.created_at) {
+      newOrder.created_at = this.localeDate(order.created_at);
+    }
 
     return newOrder;
   },
 
   localeDate: function(date) {
     return new Date(date).toLocaleString(this.currentLocale);
-  },
-
-  toggleAddress: function (e) {
-    this.$(e.target).parent().next('p').toggleClass('hide');
-    return false;
   },
 
   updateTemplate: function(name, data, klass) {
@@ -208,11 +203,6 @@ var App = {
     } else {
       this.switchTo('error', data);
     }
-  },
-
-  handleFail: function() {
-    // Show fail message
-    this.showError();
   },
 
   resizeApp: function() {

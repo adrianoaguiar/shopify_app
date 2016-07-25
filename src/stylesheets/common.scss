@@ -1,5 +1,11 @@
-table {
-	margin: 18px 0 9px;
+@import "node_modules/zd-css-bedrock/dist/index";
+
+body {
+	white-space: nowrap;
+}
+
+hr {
+	color: #dddddd;
 }
 
 .badge {
@@ -22,10 +28,6 @@ table {
 
 .o-abandoned,.o-voided,.o-refunded,.o-restocked
 {background-color:#af9c7e;color:#fff}
-
-h5 {
-	margin-top: 9px;
-}
 
 .closed, .cancelled {
   color: red;

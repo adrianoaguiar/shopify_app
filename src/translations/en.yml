@@ -69,6 +69,7 @@ parts:
       key: "txt.apps.shopify_app.orders.id"
       title: "Title inside the app to show the recent orders for that specific user"
       value: "RECENT ORDERS"
+      obsolete: "2016-07-22"
   - translation:
       key: "txt.apps.shopify_app.orders.status"
       title: "Title inside the app to show the fulfillment status of the order"
@@ -84,7 +85,7 @@ parts:
   - translation:
       key: "txt.apps.shopify_app.customer.notes"
       title: "Random notes about the user"
-      value: "Notes"
+      value: "Customer notes"
   - translation:
       key: "txt.apps.shopify_app.customer.no_notes"
       title: "Message when there are no notes"
@@ -209,3 +210,11 @@ parts:
       key: "txt.apps.shopify_app.app.parameters.order_notes.label"
       title: "Checkbox label if order notes should be displayed"
       value: "Order Notes"
+  - translation:
+      key: "txt.apps.shopify_app.orders.recent_orders"
+      title: "Title inside the app to show the recent orders for that specific user"
+      value: "Recent orders"
+  - translation:
+      key: "txt.apps.shopify_app.orders.view_all"
+      title: "Link text to show all orders of the customer"
+      value: "View all orders"

@@ -1,4 +1,4 @@
-import LegacyApp from './legacy_app';
+import LegacyApp from './shopify_app';
 import ZAFClient from 'zendesk_app_framework_sdk';
 
 var client = ZAFClient.init();

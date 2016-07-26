@@ -143,13 +143,17 @@
     }
   },
   "orders": {
-    "id": {
+    "recent_orders": {
       "title": "Title inside the app to show the recent orders for that specific user",
-      "value": "RECENT ORDERS"
+      "value": "Recent orders"
     },
     "status": {
       "title": "Title inside the app to show the fulfillment status of the order",
       "value": "FULFILLMENT"
+    },
+    "view_all": {
+      "title": "Link text to show all orders of the customer",
+      "value": "View all orders"
     }
   },
   "customer": {
@@ -163,7 +167,7 @@
     },
     "notes": {
       "title": "Random notes about the user",
-      "value": "Notes"
+      "value": "Customer notes"
     },
     "no_notes": {
       "title": "Message when there are no notes",

@@ -1,7 +1,22 @@
 import BaseApp from 'base_app';
 
 var sprintf = require('sprintf-js').sprintf;
+var gravatar = require('gravatar');
+
 var App = {
+
+  orderFieldsMap: {
+    "items_purchased": "line_items",
+    "item_quantity": "quantity",
+    "item_price": "price",
+    "purchase_total": "total_price",
+    "order_status": "fulfillment_status",
+    "date_ordered": "created_at",
+    "shipping_address": "shipping_address",
+    "shipping_method": "shipping_lines",
+    "billing_address": "billing_address",
+    "order_notes": "note"
+  },
 
   defaultState: 'loading',
 
@@ -10,7 +25,7 @@ var App = {
   resources: {
     PROFILE_URI       : '/admin/customers/search.json?query=email:',
     CUSTOMER_URI      : '%1$s/admin/customers/%2$d',
-    ORDERS_URI        : '%1$s/admin/orders.json?customer_id=%2$d&status=any',
+    ORDERS_URI        : '%1$s/admin/orders.json?customer_id=%2$d&status=any&fields=name,id,currency%3$s',
     ORDER_PATH        : '%1$s/admin/orders/%2$d'
   },
 
@@ -19,7 +34,17 @@ var App = {
       return this.getRequest(this.storeUrl + this.resources.PROFILE_URI + email);
     },
     'getOrders' : function(customer_id) {
-      return this.getRequest(sprintf(this.resources.ORDERS_URI, this.storeUrl, customer_id));
+      var self = this;
+      var additional_fields = '';
+      var fields = _.reject(this.orderFieldsMap, function(value, key) {
+        return !self.setting(key);
+      });
+
+      if (_.size(fields) > 0) {
+        additional_fields = ',' + fields.join();
+      }
+
+      return this.getRequest(sprintf(this.resources.ORDERS_URI, this.storeUrl, customer_id, additional_fields));
     }
   },
 
@@ -27,10 +52,12 @@ var App = {
     'app.created': 'init',
     'ticket.requester.email.changed' : 'queryCustomer',
     'getProfile.done' : 'handleProfile',
-    'getOrders.done' : 'handleOrders'
+    'getOrders.done' : 'handleOrders',
+    'shown.bs.collapse #accordion': 'resizeApp',
+    'hidden.bs.collapse #accordion': 'resizeApp'
   },
 
-  init: function(){
+  init: function() {
     this.storeUrl = this.storeUrl || this.checkStoreUrl(this.setting('url'));
 
     if (this.currentLocation() === 'ticket_sidebar') {
@@ -86,8 +113,10 @@ var App = {
 
     this.customer = data.customers[0];
 
-    if (this.customer.note === "" || this.customer.note === null) {
+    if (this.setting('customer_notes') && (this.customer.note === "" || this.customer.note === null)) {
       this.customer.note = this.I18n.t('customer.no_notes');
+    } else {
+      this.customer.note = null;
     }
 
     this.customer.uri = sprintf(this.resources.CUSTOMER_URI,this.storeUrl,this.customer.id);
@@ -101,34 +130,18 @@ var App = {
       this.showError(this.I18n.t('global.error.orders'), data.errors);
       return;
     }
-    var self = this;
+
     // Format order data
     this.orders = _.map(data.orders, function(order) {
-      return self.fmtOrder(order);
-    });
+      return this.fmtOrder(order);
+    }.bind(this));
+
+    this.customer.image = gravatar.url(this.customer.email, {s: 20, d: 'mm'});
 
     this.switchTo('customer', {
       customer: this.customer,
-      recentOrders: this.orders.slice(0,3)
-    });
-  },
-
-  showTicketOrder: function(orderId) {
-    if (orderId) {
-      // Check if custom field order is in the array
-      var ticketOrder = this.findOrder(orderId);
-
-      if (ticketOrder) {
-        this.updateTemplate('order', ticketOrder);
-      } else {
-        this.showError(this.I18n.t('global.error.orderNotFound'), " ", 'order');
-      }
-    }
-  },
-
-  findOrder: function(orderId) {
-    return _.find(this.orders, function(order){
-      return ((order.order_number == orderId) || (order.name == orderId) || (order.name == '#' + orderId));
+      recentOrders: this.orders.slice(0,3),
+      ordersUri: sprintf('%s/admin/orders', this.storeUrl)
     });
   },
 
@@ -137,40 +150,37 @@ var App = {
 
     newOrder.uri = sprintf(this.resources.ORDER_PATH, this.storeUrl, order.id);
 
-    if (!order.fulfillment_status) {
-      newOrder.fulfillment_status = "not_fulfilled";
+    if (true || this.setting('items_purchased')) {    
+      newOrder.items_purchased = _.map(order.line_items, function(line_item) {
+        var item = [];
+        item.title = line_item.title;
+
+        if (true || this.setting('item_price')) { item.price = line_item.price; }
+        if (true || this.setting('item_quantity')) { item.quantity = line_item.quantity; }
+
+        return item;
+      }.bind(this));
+    }
+
+    newOrder.order_status = "not_fulfilled";
+
+    if (order.fulfillment_status) {
+      newOrder.order_status = order.fulfillment_status
     }
 
     if (order.note === "" || order.note === null) {
       newOrder.note = this.I18n.t('customer.no_notes');
     }
 
-    if (order.cancelled_at) {
-      newOrder.cancelled_at = this.localeDate(order.cancelled_at);
+    if (order.created_at) {
+      newOrder.created_at = this.localeDate(order.created_at);
     }
-
-    if (order.closed_at) {
-      newOrder.closed_at = this.localeDate(order.closed_at);
-    }
-
-    if (order.currency) {
-      newOrder.currency_code = order.currency;
-    }
-
-    newOrder.created_at = this.localeDate(order.created_at);
 
     return newOrder;
   },
 
   localeDate: function(date) {
-    return this.zafClient.get('currentUser.locale').then(function(data) {
-        return new Date(date).toLocaleString(data['currentUser.locale']);
-      }, this);
-  },
-
-  toggleAddress: function (e) {
-    this.$(e.target).parent().next('p').toggleClass('hide');
-    return false;
+    return new Date(date).toLocaleString(this.currentLocale);
   },
 
   updateTemplate: function(name, data, klass) {
@@ -195,9 +205,9 @@ var App = {
     }
   },
 
-  handleFail: function() {
-    // Show fail message
-    this.showError();
+  resizeApp: function() {
+    let newHeight = Math.min($('body').height(), 600);
+    this.zafClient.invoke('resize', { height: newHeight, width: '100%' });
   }
 }
 

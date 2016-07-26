@@ -1,33 +1,94 @@
-<p>
-  <h4><a href="{{customer.uri}}" target="_blank">{{customer.first_name}} {{customer.last_name}}</a></h4>
-</p>
+<div class="l-media u-mb-sm">
+  <img class="l-media__figure u-mr-xs" src="{{customer.image}}" alt=""/>
+  <div class="l-media__body">
+    <h4><a href="{{customer.uri}}" target="_blank">{{customer.first_name}} {{customer.last_name}}</a></h4>
+  </div>
+</div>
 
-{{#if recentOrders}}
-  <table class="table table-condensed">
-    <thead>
-      <tr>
-        <th>{{t "orders.id"}}</th>
-        <th>{{t "orders.status"}}</th>
-      </tr>
-    </thead>
-    <tbody>
-      {{#recentOrders}}
-        <tr class="_tooltip" data-placement="top">
-          <td><a href="{{uri}}" target="_blank">{{name}}</a></td>
-          <td><span class="badge o-{{fulfillment_status}}">{{fulfillment_status}}</span></td>
-        </tr>
-      {{/recentOrders}}
-    </tbody>
-  </table>
+<!---- Customer notes ---->
+{{#if customer.note}}
+<div class="u-mb-sm u-zeta">
+  {{t "customer.notes"}}
+  <div class="u-light">{{customer.note}}</div>
+</div>
 {{/if}}
 
-{{#with customer}}
-  <h5>{{t "customer.orders_count"}}</h5>
-  <p>{{orders_count}}</p>
+<div class="l-grid l-grid--0 u-mb-xs">
+  <div class="l-grid__item u-1/2">
+    <span>{{t "orders.recent_orders"}}</span>
+  </div>
+  <div class="l-grid__item u-1/2 u-ta-right u-pr-sm">
+    <a href="{{ordersUri}}" target="_blank">{{t "orders.view_all"}}</a>
+  </div>
+</div>
 
-  <h5>{{t "customer.total_spent"}}</h5>
-  <p>{{total_spent}}</p>
+<hr/>
 
-  <h5>{{t "customer.notes"}}</h5>
-  <p>{{note}}</p>
-{{/with}}
+<!---- Order list ---->
+{{#if recentOrders}}
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  {{#recentOrders}}
+  <div class="panel panel-default u-pv-sm u-pv">
+    <div class="panel-heading" role="tab" id="heading-{{id}}">
+      <ul class="flat-dotted-list">
+        <li>
+          <h4 class="panel-title">
+            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#order-{{id}}" aria-expanded="false" aria-controls="order-{{id}}">
+              {{name}}
+            </a>
+          </h4>
+        </li>
+        {{#if fulfillment_status}}<li class="{{order_status}}">{{order_status}}</li>{{/if}}
+        {{#if storefront_name}}<li>{{storefront_name}}</li>{{/if}}
+      </ul>
+    </div>
+    <div id="order-{{id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-{{id}}">
+      <div class="panel-body u-light u-zeta">
+        {{#if created_at}}<div>{{created_at}}</div>{{/if}}
+        {{#items_purchased}}
+          <div class="line-item u-mv-sm">
+            <div class="u-semibold o-label">{{title}}</div>
+            <ul class="flat-dotted-list">
+              {{#if quantity}}<li>Qty: {{quantity}}</li>{{/if}}
+              {{#if price}}<li>Each: {{price}} {{currency}}</li>{{/if}}
+            </ul>
+          </div>
+        {{/items_purchased}}
+        
+        {{#if total_price}}
+          <div class="u-mv-sm">
+            <div class="u-semibold u-delta o-label">Order total: {{currency}} {{total_price}}</div>
+          </div>
+        {{/if}}
+        {{#if shipping_lines}}
+        <div class="u-mv-sm">
+          <div class="u-semibold o-label">{{t "app.parameters.shipping_method.label.value"}}</div>
+          <div>{{title}}</div>
+        </div>
+        {{/if}}
+        {{#if shipping_address}}
+        <div class="u-mv-sm">
+          <div class="u-semibold o-label">{{t "app.parameters.shipping_address.label.value"}}</div>
+          <div>{{shipping_address.address1}} {{shipping_address.address2}}</div>
+          <div>{{shipping_address.city}}, {{shipping_address.province_code}} {{shipping_address.zip}}</div>
+        </div>
+        {{/if}}
+        {{#if billing_address}}
+        <div class="u-mv-sm">
+          <div class="u-semibold o-label">{{t "app.parameters.billing_address.label.value"}}</div>
+          <div>{{billing_address.address1}} {{billing_address.address2}}</div>
+          <div>{{billing_address.city}}, {{billing_address.province_code}} {{billing_address.zip}}</div>
+        </div>
+        {{/if}}
+        {{#if note}}
+        <div class="u-mv-sm">
+          <div class="u-semibold o-label">{{t "app.parameters.order_notes.label.value"}}</div>
+          <div>{{note}}
+        </div>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+  {{/recentOrders}}
+</div>
+{{/if}}

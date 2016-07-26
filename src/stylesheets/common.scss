@@ -1,52 +1,52 @@
 @import "node_modules/zd-css-bedrock/dist/index";
 
 body {
-	white-space: nowrap;
+  white-space: nowrap;
 }
 
 [data-main] {
-	
-	hr {
-		color: #dddddd;
-	}
+  
+  hr {
+    color: #dddddd;
+  }
 
-	.o-label {
-		color: #333;
-	}
+  .o-label {
+    color: #333;
+  }
 
-	.panel {
-		border-bottom: 1px solid #ddd;
-	}
+  .panel {
+    border-bottom: 1px solid #ddd;
+  }
 
-	.l-media__figure {
-		border-radius: 4px 4px 4px 4px;
-		-moz-border-radius: 4px 4px 4px 4px;
-		-webkit-border-radius: 4px 4px 4px 4px;
-		border: 0px solid #000000;
-	}
+  .l-media__figure {
+    border-radius: 4px 4px 4px 4px;
+    -moz-border-radius: 4px 4px 4px 4px;
+    -webkit-border-radius: 4px 4px 4px 4px;
+    border: 0px solid #000000;
+  }
 
-	.flat-dotted-list {
-		display: inline-block;
+  .flat-dotted-list {
+    display: inline-block;
 
-		li {
-			float: left;
-			&:not(:first-child) {
-				&:before {
-					margin: 0 5px;
-    				content: "• ";
-    				color: #333;
-				}
-			}
-		}
-	}
+    li {
+      float: left;
+      &:not(:first-child) {
+        &:before {
+          margin: 0 5px;
+          content: "• ";
+          color: #333;
+        }
+      }
+    }
+  }
 
-	li {
-		&.not_fulfilled {
-			@extend .u-fg-moon-yellow;
-		}
+  li {
+    &.not_fulfilled {
+      @extend .u-fg-moon-yellow;
+    }
 
-		&.fulfilled {
-			@extend .u-fg-apple-green;
-		}
-	}
+    &.fulfilled {
+      @extend .u-fg-apple-green;
+    }
+  }
 }

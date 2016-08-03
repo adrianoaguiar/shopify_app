@@ -98,11 +98,6 @@
       "name": "access_token",
       "type": "hidden",
       "required": false
-    },
-    {
-      "name": "order_id_field_id",
-      "type": "number",
-      "required": false
     }
   ]
 }

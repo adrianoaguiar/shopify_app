@@ -23,56 +23,81 @@
       "required": true
     },
     {
-      "name": "access_token",
-      "type": "hidden"
-    },
-    {
       "name": "items_purchased",
-      "type": "checkbox"
+      "type": "checkbox",
+      "default": true,
+      "required": true
     },
     {
       "name": "item_quantity",
-      "type": "checkbox"
+      "type": "checkbox",
+      "default": true,
+      "required": true
     },
     {
       "name": "item_price",
-      "type": "checkbox"
+      "type": "checkbox",
+      "default": false,
+      "required": true
     },
     {
       "name": "storefront_name",
-      "type": "checkbox"
+      "type": "checkbox",
+      "default": false,
+      "required": true
     },
     {
       "name": "purchase_total",
-      "type": "checkbox"
+      "type": "checkbox",
+      "default": true,
+      "required": true
     },
     {
       "name": "order_status",
-      "type": "checkbox"
+      "type": "checkbox",
+      "default": true,
+      "required": true
     },
     {
       "name": "date_ordered",
-      "type": "checkbox"
+      "type": "checkbox",
+      "default": true,
+      "required": true
     },
     {
       "name": "shipping_address",
-      "type": "checkbox"
+      "type": "checkbox",
+      "default": true,
+      "required": true
     },
     {
       "name": "shipping_method",
-      "type": "checkbox"
+      "type": "checkbox",
+      "default": false,
+      "required": true
     },
     {
       "name": "billing_address",
-      "type": "checkbox"
+      "type": "checkbox",
+      "default": false,
+      "required": true
     },
     {
       "name": "customer_notes",
-      "type": "checkbox"
+      "type": "checkbox",
+      "default": false,
+      "required": true
     },
     {
       "name": "order_notes",
-      "type": "checkbox"
+      "type": "checkbox",
+      "default": false,
+      "required": true
+    },
+    {
+      "name": "access_token",
+      "type": "hidden",
+      "required": false
     },
     {
       "name": "order_id_field_id",

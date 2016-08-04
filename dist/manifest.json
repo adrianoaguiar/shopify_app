@@ -3,7 +3,6 @@
     "name": "Zendesk",
     "email": "support@zendesk.com"
   },
-
   "location": {
     "zendesk": {
       "ticket_sidebar": "assets/iframe.html",
@@ -15,7 +14,6 @@
   "singleInstall": false,
   "frameworkVersion": "2.0",
   "version": "2.0.0",
-
   "parameters": [
     {
       "name": "url",
@@ -37,14 +35,12 @@
     {
       "name": "item_price",
       "type": "checkbox",
-      "default": false,
-      "required": true
+      "default": false
     },
     {
       "name": "storefront_name",
       "type": "checkbox",
-      "default": false,
-      "required": true
+      "default": false
     },
     {
       "name": "purchase_total",
@@ -73,35 +69,26 @@
     {
       "name": "shipping_method",
       "type": "checkbox",
-      "default": false,
-      "required": true
+      "default": false
     },
     {
       "name": "billing_address",
       "type": "checkbox",
-      "default": false,
-      "required": true
+      "default": false
     },
     {
       "name": "customer_notes",
       "type": "checkbox",
-      "default": false,
-      "required": true
+      "default": false
     },
     {
       "name": "order_notes",
       "type": "checkbox",
-      "default": false,
-      "required": true
+      "default": false
     },
     {
       "name": "access_token",
       "type": "hidden",
-      "required": false
-    },
-    {
-      "name": "order_id_field_id",
-      "type": "number",
       "required": false
     }
   ]

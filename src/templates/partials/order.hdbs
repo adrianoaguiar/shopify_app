@@ -1,0 +1,65 @@
+<div class="panel panel-default u-pv-sm u-pv">
+  <div class="panel-heading" role="tab" id="heading-{{id}}">
+    <ul class="flat-dotted-list">
+      <li>
+        <h4 class="panel-title">
+          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#order-{{id}}" aria-expanded="false" aria-controls="order-{{id}}">
+            {{name}}
+          </a>
+        </h4>
+      </li>
+      {{#if fulfillment_status}}<li class="{{order_status}}">{{order_status}}</li>{{/if}}
+      {{#if storefront_name}}<li>{{storefront_name}}</li>{{/if}}
+    </ul>
+    <!-- /#heading-{{id}} -->
+  </div>
+  <div id="order-{{id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-{{id}}">
+    <div class="panel-body u-light u-zeta">
+      {{#if created_at}}<div>{{created_at}}</div>{{/if}}
+      {{#items_purchased}}
+        <div class="line-item u-mv-sm">
+          <div class="u-semibold o-label">{{title}}</div>
+          <ul class="flat-dotted-list">
+            {{#if quantity}}<li>Qty: {{quantity}}</li>{{/if}}
+            {{#if price}}<li>Each: {{price}} {{currency}}</li>{{/if}}
+          </ul>
+        </div>
+      {{/items_purchased}}
+      
+      {{#if total_price}}
+        <div class="u-mv-sm">
+          <div class="u-semibold u-delta o-label">Order total: {{currency}} {{total_price}}</div>
+        </div>
+      {{/if}}
+      {{#if shipping_lines}}
+      <div class="u-mv-sm">
+        <div class="u-semibold o-label">{{t "app.parameters.shipping_method.label.value"}}</div>
+        <div>{{title}}</div>
+      </div>
+      {{/if}}
+      {{#if shipping_address}}
+      <div class="u-mv-sm">
+        <div class="u-semibold o-label">{{t "app.parameters.shipping_address.label.value"}}</div>
+        <div>{{shipping_address.address1}} {{shipping_address.address2}}</div>
+        <div>{{shipping_address.city}}, {{shipping_address.province_code}} {{shipping_address.zip}}</div>
+      </div>
+      {{/if}}
+      {{#if billing_address}}
+      <div class="u-mv-sm">
+        <div class="u-semibold o-label">{{t "app.parameters.billing_address.label.value"}}</div>
+        <div>{{billing_address.address1}} {{billing_address.address2}}</div>
+        <div>{{billing_address.city}}, {{billing_address.province_code}} {{billing_address.zip}}</div>
+      </div>
+      {{/if}}
+      {{#if note}}
+      <div class="u-mv-sm">
+        <div class="u-semibold o-label">{{t "app.parameters.order_notes.label.value"}}</div>
+        <div>{{note}}</div>
+      </div>
+      {{/if}}
+    <!-- /#panel-body -->
+    </div>
+  <!-- /#order-{{id}} -->
+  </div>
+<!-- /panel -->
+</div>

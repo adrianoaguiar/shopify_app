@@ -151,6 +151,10 @@
       "title": "Title inside the app to show the fulfillment status of the order",
       "value": "FULFILLMENT"
     },
+    "view": {
+      "title": "Link text to show the order on Shopify",
+      "value": "View order"
+    },
     "view_all": {
       "title": "Link text to show all orders of the customer",
       "value": "View all orders"

@@ -48,8 +48,13 @@ module.exports = {
         test: /\.(handlebars|hd?bs)$/,
         loader: 'handlebars-loader',
         query: {
-          extensions: ['handlebars', 'hdbs', 'hbs'],
-          runtime: 'handlebars'
+          extensions: ['.handlebars', '.hdbs', '.hbs'],
+          runtime: 'handlebars',
+          partialDirs: [
+              path.join(__dirname, './src/templates', 'partials')
+          ],
+          knownHelpers: ['t', 'setting', 'store'],
+          ignorePartials: true
         }
       }
     ]

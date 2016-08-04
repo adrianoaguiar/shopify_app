@@ -1,6 +1,6 @@
 {
   "ticket_fields": {
-    "order_id": {
+    "shopify_order_id": {
       "type": "integer",
       "title": "Shopify order ID"
     }

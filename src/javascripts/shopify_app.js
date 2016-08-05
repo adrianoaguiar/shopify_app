@@ -1,9 +1,9 @@
 import BaseApp from 'base_app';
 
-var sprintf = require('sprintf-js').sprintf;
 var gravatar = require('gravatar');
 
 var App = {
+  orderLimit: 3,
 
   orderFieldsMap: {
     "items_purchased": "line_items",
@@ -23,28 +23,44 @@ var App = {
   storeUrl: '',
 
   resources: {
-    PROFILE_URI       : '/admin/customers/search.json?query=email:',
-    CUSTOMER_URI      : '%1$s/admin/customers/%2$d',
-    ORDERS_URI        : '%1$s/admin/orders.json?customer_id=%2$d&status=any&fields=name,id,currency%3$s',
-    ORDER_PATH        : '%1$s/admin/orders/%2$d'
+    PROFILE_URI       : '/admin/customers/search.json',
+    CUSTOMER_URI      : '/admin/customers/',
+    ORDERS_URI        : '/admin/orders.json',
+    ORDER_PATH        : '/admin/orders/'
   },
 
   requests: {
     'getProfile' : function(email) {
-      return this.getRequest(this.storeUrl + this.resources.PROFILE_URI + email);
+      var request = this.getRequest(this.resources.PROFILE_URI);
+
+      request.data = {query: 'email:' + email};
+
+      return request;
     },
     'getOrders' : function(customer_id) {
       var self = this;
-      var additional_fields = '';
+      var additional_fields = 'name,id,currency';
       var fields = _.reject(this.orderFieldsMap, function(value, key) {
         return !self.setting(key);
       });
 
       if (_.size(fields) > 0) {
-        additional_fields = ',' + fields.join();
+        additional_fields += ',' + fields.join();
       }
 
-      return this.getRequest(sprintf(this.resources.ORDERS_URI, this.storeUrl, customer_id, additional_fields));
+      var request = this.getRequest(this.resources.ORDERS_URI);
+
+      request.data = {
+        customer_id: customer_id,
+        fields: additional_fields,
+        status: 'any',
+        limit: this.orderLimit
+      };
+
+      return request;
+    },
+    'getOrder': function(order_id) {
+      return this.getRequest(this.resources.ORDER_PATH + order_id + '.json');
     }
   },
 
@@ -53,6 +69,7 @@ var App = {
     'ticket.requester.email.changed' : 'queryCustomer',
     'getProfile.done' : 'handleProfile',
     'getOrders.done' : 'handleOrders',
+    'getOrder.done' : 'handleOrder',
     'shown.bs.collapse #accordion': 'resizeApp',
     'hidden.bs.collapse #accordion': 'resizeApp'
   },
@@ -78,7 +95,7 @@ var App = {
       headers  : {
         'X-Shopify-Access-Token': this.setting('access_token')
       },
-      url      : resource,
+      url      : this.storeUrl + resource,
       method   : 'GET',
       dataType : 'json'
     };
@@ -103,11 +120,7 @@ var App = {
     }
 
     if (data.customers.length === 0) {
-      if (!_.isEmpty(this.orderId)) {
-        this.queryOrder();
-      } else {
-        this.showError(this.I18n.t('global.error.customerNotFound'), " ");
-      }
+      this.showError(this.I18n.t('global.error.customerNotFound'), " ");
       return;
     }
 
@@ -119,10 +132,46 @@ var App = {
       this.customer.note = null;
     }
 
-    this.customer.uri = sprintf(this.resources.CUSTOMER_URI,this.storeUrl,this.customer.id);
+    this.customer.uri = this.storeUrl + this.resources.CUSTOMER_URI + this.customer.id;
+    this.customer.image = gravatar.url(this.customer.email, {s: 20, d: 'mm'});
 
-    // Get customers's 50 most recent orders
-    this.ajax('getOrders', this.customer.id);
+    this.switchTo('customer', {
+      customer: this.customer
+    });
+
+    this.displayOrder();
+  },
+
+  displayOrder: function() {
+    var _self = this;
+
+    this.zafClient.get('requirement:shopify_order_id').then(function(data) {
+      var fieldId = data['requirement:shopify_order_id'].requirement_id;
+      var fieldName = 'ticket.customField:custom_field_' + fieldId;
+
+      _self.zafClient.get(fieldName).then(function(customField) {
+        if (!_.isEmpty(customField[fieldName])) {
+          _self.ajax('getOrder', customField[fieldName]);
+        } else {
+          _self.ajax('getOrders', _self.customer.id);
+        }
+      });
+    });
+  },
+
+  handleOrder: function(data) {
+    if (data.errors) {
+      this.showError(this.I18n.t('global.error.orders'), data.errors);
+      return;
+    }
+
+    this.$('section[data-orders]').html(
+      this.renderTemplate('order/single', this.fmtOrder(data.order))
+    );
+
+    this.$('#order-' + data.order.id).addClass('in');
+
+    this.resizeApp();
   },
 
   handleOrders: function(data) {
@@ -136,19 +185,20 @@ var App = {
       return this.fmtOrder(order);
     }.bind(this));
 
-    this.customer.image = gravatar.url(this.customer.email, {s: 20, d: 'mm'});
+    this.$('section[data-orders]').html(
+      this.renderTemplate('order/list', {
+        orders: this.orders.slice(0,3),
+        ordersUri: this.storeUrl + this.resources.ORDER_PATH
+      })
+    );
 
-    this.switchTo('customer', {
-      customer: this.customer,
-      recentOrders: this.orders.slice(0,3),
-      ordersUri: sprintf('%s/admin/orders', this.storeUrl)
-    });
+    this.resizeApp();
   },
 
   fmtOrder: function(order) {
     var newOrder = order;
 
-    newOrder.uri = sprintf(this.resources.ORDER_PATH, this.storeUrl, order.id);
+    newOrder.uri = this.storeUrl + this.resources.ORDER_PATH + order.id;
 
     if (true || this.setting('items_purchased')) {    
       newOrder.items_purchased = _.map(order.line_items, function(line_item) {
@@ -164,8 +214,11 @@ var App = {
 
     newOrder.order_status = "not_fulfilled";
 
-    if (order.fulfillment_status) {
-      newOrder.order_status = order.fulfillment_status
+    if (!_.isUndefined(order.fulfillment_status)) {
+      if (order.fulfillment_status != null) {
+        newOrder.order_status = order.fulfillment_status;
+      }
+      newOrder.fulfillment_status = true;
     }
 
     if (order.note === "" || order.note === null) {

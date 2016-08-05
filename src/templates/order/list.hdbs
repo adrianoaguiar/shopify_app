@@ -1,0 +1,16 @@
+<div class="l-grid l-grid--0 u-mb-xs">
+  <div class="l-grid__item u-1/2">
+    <span>{{t "orders.recent_orders"}}</span>
+  </div>
+  <div class="l-grid__item u-1/2 u-ta-right u-pr-sm">
+    <a href="{{ordersUri}}" target="_blank">{{t "orders.view_all"}}</a>
+  </div>
+</div>
+
+<hr/>
+<!---- Order list ---->
+{{#each orders}}
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  {{> order}}
+</div>
+{{/each}}

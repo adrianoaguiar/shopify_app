@@ -105,6 +105,7 @@
   "orders": {
     "recent_orders": "Recent orders",
     "status": "FULFILLMENT",
+    "view": "View order",
     "view_all": "View all orders"
   },
   "customer": {

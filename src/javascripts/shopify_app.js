@@ -4,6 +4,7 @@ var sprintf = require('sprintf-js').sprintf;
 var gravatar = require('gravatar');
 
 var App = {
+  orderLimit: 3,
 
   orderFieldsMap: {
     "items_purchased": "line_items",
@@ -25,7 +26,7 @@ var App = {
   resources: {
     PROFILE_URI       : '/admin/customers/search.json?query=email:',
     CUSTOMER_URI      : '%1$s/admin/customers/%2$d',
-    ORDERS_URI        : '%1$s/admin/orders.json?limit=3,customer_id=%2$d&status=any&fields=name,id,currency%3$s',
+    ORDERS_URI        : '%1$s/admin/orders.json',
     ORDER_PATH        : '%1$s/admin/orders/%2$d'
   },
 
@@ -35,16 +36,25 @@ var App = {
     },
     'getOrders' : function(customer_id) {
       var self = this;
-      var additional_fields = '';
+      var additional_fields = 'name,id,currency';
       var fields = _.reject(this.orderFieldsMap, function(value, key) {
         return !self.setting(key);
       });
 
       if (_.size(fields) > 0) {
-        additional_fields = ',' + fields.join();
+        additional_fields += ',' + fields.join();
       }
 
-      return this.getRequest(sprintf(this.resources.ORDERS_URI, this.storeUrl, customer_id, additional_fields));
+      var request = this.getRequest(sprintf(this.resources.ORDERS_URI, this.storeUrl));
+
+      request.data = {
+        customer_id: customer_id,
+        fields: additional_fields,
+        status: 'any',
+        limit: this.orderLimit
+      };
+
+      return request;
     },
     'getOrder': function(order_id) {
       return this.getRequest(sprintf(this.resources.ORDER_PATH + '.json', this.storeUrl, order_id));
@@ -140,7 +150,6 @@ var App = {
         if (!_.isEmpty(customField[fieldName])) {
           _self.ajax('getOrder', customField[fieldName]);
         } else {
-          // Get customers's 50 most recent orders
           _self.ajax('getOrders', _self.customer.id);
         }
       });

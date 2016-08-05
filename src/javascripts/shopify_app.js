@@ -1,6 +1,5 @@
 import BaseApp from 'base_app';
 
-var sprintf = require('sprintf-js').sprintf;
 var gravatar = require('gravatar');
 
 var App = {
@@ -24,15 +23,19 @@ var App = {
   storeUrl: '',
 
   resources: {
-    PROFILE_URI       : '/admin/customers/search.json?query=email:',
-    CUSTOMER_URI      : '%1$s/admin/customers/%2$d',
-    ORDERS_URI        : '%1$s/admin/orders.json',
-    ORDER_PATH        : '%1$s/admin/orders/%2$d'
+    PROFILE_URI       : '/admin/customers/search.json',
+    CUSTOMER_URI      : '/admin/customers/',
+    ORDERS_URI        : '/admin/orders.json',
+    ORDER_PATH        : '/admin/orders/'
   },
 
   requests: {
     'getProfile' : function(email) {
-      return this.getRequest(this.storeUrl + this.resources.PROFILE_URI + email);
+      var request = this.getRequest(this.resources.PROFILE_URI);
+
+      request.data = {query: 'email:' + email};
+
+      return request;
     },
     'getOrders' : function(customer_id) {
       var self = this;
@@ -45,7 +48,7 @@ var App = {
         additional_fields += ',' + fields.join();
       }
 
-      var request = this.getRequest(sprintf(this.resources.ORDERS_URI, this.storeUrl));
+      var request = this.getRequest(this.resources.ORDERS_URI);
 
       request.data = {
         customer_id: customer_id,
@@ -57,7 +60,7 @@ var App = {
       return request;
     },
     'getOrder': function(order_id) {
-      return this.getRequest(sprintf(this.resources.ORDER_PATH + '.json', this.storeUrl, order_id));
+      return this.getRequest(this.resources.ORDER_PATH + order_id + '.json');
     }
   },
 
@@ -92,7 +95,7 @@ var App = {
       headers  : {
         'X-Shopify-Access-Token': this.setting('access_token')
       },
-      url      : resource,
+      url      : this.storeUrl + resource,
       method   : 'GET',
       dataType : 'json'
     };
@@ -129,7 +132,7 @@ var App = {
       this.customer.note = null;
     }
 
-    this.customer.uri = sprintf(this.resources.CUSTOMER_URI,this.storeUrl,this.customer.id);
+    this.customer.uri = this.storeUrl + this.resources.CUSTOMER_URI + this.customer.id;
     this.customer.image = gravatar.url(this.customer.email, {s: 20, d: 'mm'});
 
     this.switchTo('customer', {
@@ -185,7 +188,7 @@ var App = {
     this.$('section[data-orders]').html(
       this.renderTemplate('order/list', {
         orders: this.orders.slice(0,3),
-        ordersUri: sprintf('%s/admin/orders', this.storeUrl)
+        ordersUri: this.storeUrl + this.resources.ORDER_PATH
       })
     );
 
@@ -195,7 +198,7 @@ var App = {
   fmtOrder: function(order) {
     var newOrder = order;
 
-    newOrder.uri = sprintf(this.resources.ORDER_PATH, this.storeUrl, order.id);
+    newOrder.uri = this.storeUrl + this.resources.ORDER_PATH + order.id;
 
     if (true || this.setting('items_purchased')) {    
       newOrder.items_purchased = _.map(order.line_items, function(line_item) {

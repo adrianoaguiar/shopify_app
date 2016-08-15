@@ -1,11 +1,11 @@
 @import "node_modules/zd-css-bedrock/dist/index";
-
-body {
-  white-space: nowrap;
-}
+@import "node_modules/zd-css-buttons/dist/index";
 
 [data-main] {
-  
+  [data-orders] {
+    white-space: nowrap;
+  }
+
   hr {
     color: #dddddd;
   }
@@ -49,4 +49,15 @@ body {
       @extend .u-fg-apple-green;
     }
   }
+}
+
+.c-btn--accent {
+  border-color: transparent;
+  background-color: #333;
+  color: #aaa;
+}
+
+.c-btn--accent:hover {
+  background-color: #444;
+  color: #fff;
 }

@@ -1,0 +1,17 @@
+url: https://zendesk-demo.myshopify.com
+api_key: fabab4d80728ef9dcfedee35e49c390b
+password: 35a114ac46b3634881127c347122c026
+order_id_field_id: 28330538
+items_purchased: true
+item_quantity: true
+item_price: true
+storefront_name: true
+purchase_total: true
+order_status: true
+date_ordered: true
+shipping_address: true
+shipping_method: true
+billing_address: true
+customer_notes: true
+order_notes: true
+access_token: 659df66810a4920b834be6d9fee46ff9

@@ -140,9 +140,21 @@
     "requesting": {
       "title": "Wait message when the app loads",
       "value": "Requesting customer data from Shopify..."
+    },
+    "setup": {
+      "title": "Setup notification",
+      "value": "This app needs to be configured in Shopify."
+    },
+    "setup_button": {
+      "title": "Setup button text",
+      "value": "Set up"
     }
   },
   "orders": {
+    "id": {
+      "title": "Title inside the app to show the recent orders for that specific user",
+      "value": "RECENT ORDERS"
+    },
     "recent_orders": {
       "title": "Title inside the app to show the recent orders for that specific user",
       "value": "Recent orders"

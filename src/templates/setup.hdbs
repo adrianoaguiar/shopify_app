@@ -1,0 +1,10 @@
+<div class="u-ta-center">
+	<div class="u-mb-sm u-light">
+		{{t "global.setup"}}
+	</div>
+	<div>
+		<a href="https://apps.shopify.com/zendesk/install" target="_blank" class="c-btn c-btn--accent">
+			{{t "global.setup_button"}}
+		</a>
+	</div>
+</div>

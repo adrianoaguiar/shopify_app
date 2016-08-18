@@ -2,7 +2,7 @@ import BaseApp from 'base_app';
 
 var gravatar = require('gravatar');
 
-var App = {
+var ShopifyApp = {
   orderLimit: 3,
 
   orderFieldsMap: {
@@ -68,8 +68,11 @@ var App = {
     'app.created': 'init',
     'ticket.requester.email.changed' : 'queryCustomer',
     'getProfile.done' : 'handleProfile',
+    'getProfile.fail' : 'handleProfileFail',
     'getOrders.done' : 'handleOrders',
+    'getOrders.fail' : 'handleOrdersFail',
     'getOrder.done' : 'handleOrder',
+    'getOrder.fail' : 'handleOrdersFail',
     'shown.bs.collapse #accordion': 'resizeApp',
     'hidden.bs.collapse #accordion': 'resizeApp'
   },
@@ -82,14 +85,6 @@ var App = {
     }
   },
 
-  queryCustomer: function() {
-    var self = this;
-    this.switchTo('requesting');
-    this.zafClient.get('ticket.requester.email').then(function(data) {
-      self.ajax('getProfile', data["ticket.requester.email"]);
-    });
-  },
-
   getRequest: function(resource) {
     return {
       headers  : {
@@ -99,18 +94,6 @@ var App = {
       method   : 'GET',
       dataType : 'json'
     };
-  },
-
-  checkStoreUrl: function(url) {
-    // First, lets make sure there is no trailing slash, we'll add one later.
-    if (url.slice(-1) === '/') { url = url.slice(0, -1); }
-    // Test whether we have a front-controller reference here.
-    if (url.indexOf('index.php') === -1) {
-      // Nothing to do, the front-controller isn't in the url, pass it back unaltered.
-      return url;
-    }
-    url = url.replace(/\/index\.php/g, '');
-    return url;
   },
 
   handleProfile: function(data) {
@@ -142,10 +125,23 @@ var App = {
     this.displayOrder();
   },
 
+  handleProfileFail: function(response) {
+    if (response.status == 401) {
+      this.switchTo('setup');
+    } else {
+      var error = JSON.parse(response.responseText);
+      this.showError(error.errors);
+    }
+  },
+
   displayOrder: function() {
     var _self = this;
 
     this.zafClient.get('requirement:shopify_order_id').then(function(data) {
+      if (_.isUndefined(data['requirement:shopify_order_id'])) {
+        _self.ajax('getOrders', _self.customer.id);
+      }
+
       var fieldId = data['requirement:shopify_order_id'].requirement_id;
       var fieldName = 'ticket.customField:custom_field_' + fieldId;
 
@@ -160,11 +156,6 @@ var App = {
   },
 
   handleOrder: function(data) {
-    if (data.errors) {
-      this.showError(this.I18n.t('global.error.orders'), data.errors);
-      return;
-    }
-
     this.$('section[data-orders]').html(
       this.renderTemplate('order/single', this.fmtOrder(data.order))
     );
@@ -175,11 +166,6 @@ var App = {
   },
 
   handleOrders: function(data) {
-    if (data.errors) {
-      this.showError(this.I18n.t('global.error.orders'), data.errors);
-      return;
-    }
-
     // Format order data
     this.orders = _.map(data.orders, function(order) {
       return this.fmtOrder(order);
@@ -193,6 +179,12 @@ var App = {
     );
 
     this.resizeApp();
+  },
+
+  handleOrdersFail: function(response) {
+    var error = JSON.parse(response.responseText);
+    this.showError(this.I18n.t('global.error.orders'), error.errors);
+    return;
   },
 
   fmtOrder: function(order) {
@@ -230,38 +222,7 @@ var App = {
     }
 
     return newOrder;
-  },
-
-  localeDate: function(date) {
-    return new Date(date).toLocaleString(this.currentLocale);
-  },
-
-  updateTemplate: function(name, data, klass) {
-    if (this.currentState !== 'profile') {
-      this.switchTo('profile');
-    }
-
-    var selector = '.' + (klass || name);
-    this.$(selector).html(this.renderTemplate(name, data));
-  },
-
-  showError: function(title, msg, klass) {
-    var data = {
-      title: title || this.I18n.t('global.error.title'),
-      message: msg || this.I18n.t('global.error.message')
-    };
-
-    if (klass) {
-      this.updateTemplate('error', data, klass);
-    } else {
-      this.switchTo('error', data);
-    }
-  },
-
-  resizeApp: function() {
-    let newHeight = Math.min($('body').height(), 600);
-    this.zafClient.invoke('resize', { height: newHeight, width: '100%' });
   }
 }
 
-export default BaseApp.extend(App);
+export default BaseApp.extend(ShopifyApp);

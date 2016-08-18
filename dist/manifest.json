@@ -23,14 +23,12 @@
     {
       "name": "items_purchased",
       "type": "checkbox",
-      "default": true,
-      "required": true
+      "default": true
     },
     {
       "name": "item_quantity",
       "type": "checkbox",
-      "default": true,
-      "required": true
+      "default": true
     },
     {
       "name": "item_price",
@@ -45,26 +43,22 @@
     {
       "name": "purchase_total",
       "type": "checkbox",
-      "default": true,
-      "required": true
+      "default": true
     },
     {
       "name": "order_status",
       "type": "checkbox",
-      "default": true,
-      "required": true
+      "default": true
     },
     {
       "name": "date_ordered",
       "type": "checkbox",
-      "default": true,
-      "required": true
+      "default": true
     },
     {
       "name": "shipping_address",
       "type": "checkbox",
-      "default": true,
-      "required": true
+      "default": true
     },
     {
       "name": "shipping_method",

@@ -73,8 +73,8 @@ var ShopifyApp = {
     'getOrders.fail' : 'handleOrdersFail',
     'getOrder.done' : 'handleOrder',
     'getOrder.fail' : 'handleOrdersFail',
-    'shown.bs.collapse #accordion': 'resizeApp',
-    'hidden.bs.collapse #accordion': 'resizeApp'
+    'shown.bs.collapse .panel-group': 'resizeApp',
+    'hidden.bs.collapse .panel-group': 'resizeApp'
   },
 
   init: function() {

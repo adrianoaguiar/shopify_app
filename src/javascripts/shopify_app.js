@@ -73,8 +73,8 @@ var ShopifyApp = {
     'getOrders.fail' : 'handleOrdersFail',
     'getOrder.done' : 'handleOrder',
     'getOrder.fail' : 'handleOrdersFail',
-    'shown.bs.collapse #accordion': 'resizeApp',
-    'hidden.bs.collapse #accordion': 'resizeApp'
+    'shown.bs.collapse .panel-group': 'resizeApp',
+    'hidden.bs.collapse .panel-group': 'resizeApp'
   },
 
   init: function() {
@@ -88,7 +88,8 @@ var ShopifyApp = {
   getRequest: function(resource) {
     return {
       headers  : {
-        'X-Shopify-Access-Token': this.setting('access_token')
+        'X-Shopify-Access-Token': this.setting('access_token'),
+        'X-Requested-With': 'XMLHttpRequest'
       },
       url      : this.storeUrl + resource,
       method   : 'GET',
@@ -137,22 +138,22 @@ var ShopifyApp = {
   displayOrder: function() {
     var _self = this;
 
-    this.zafClient.get('requirement:shopify_order_id').then(function(data) {
-      if (_.isUndefined(data['requirement:shopify_order_id'])) {
-        _self.ajax('getOrders', _self.customer.id);
-      }
+    if (! this.isZatEnabled()) {
+      this.zafClient.get('requirement:shopify_order_id').then(function(data) {
+        var fieldId = data['requirement:shopify_order_id'].requirement_id;
+        var fieldName = 'ticket.customField:custom_field_' + fieldId;
 
-      var fieldId = data['requirement:shopify_order_id'].requirement_id;
-      var fieldName = 'ticket.customField:custom_field_' + fieldId;
-
-      _self.zafClient.get(fieldName).then(function(customField) {
-        if (!_.isEmpty(customField[fieldName])) {
-          _self.ajax('getOrder', customField[fieldName]);
-        } else {
-          _self.ajax('getOrders', _self.customer.id);
-        }
+        _self.zafClient.get(fieldName).then(function(customField) {
+          if (!_.isEmpty(customField[fieldName])) {
+            _self.ajax('getOrder', customField[fieldName]);
+          } else {
+            _self.ajax('getOrders', _self.customer.id);
+          }
+        });
       });
-    });
+    } else {
+      _self.ajax('getOrders', _self.customer.id);
+    }
   },
 
   handleOrder: function(data) {

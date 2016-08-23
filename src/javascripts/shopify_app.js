@@ -193,13 +193,13 @@ var ShopifyApp = {
 
     newOrder.uri = this.storeUrl + this.resources.ORDER_PATH + order.id;
 
-    if (true || this.setting('items_purchased')) {    
+    if (this.setting('items_purchased')) {    
       newOrder.items_purchased = _.map(order.line_items, function(line_item) {
         var item = [];
         item.title = line_item.title;
 
-        if (true || this.setting('item_price')) { item.price = line_item.price; }
-        if (true || this.setting('item_quantity')) { item.quantity = line_item.quantity; }
+        if (this.setting('item_price')) { item.price = line_item.price; }
+        if (this.setting('item_quantity')) { item.quantity = line_item.quantity; }
 
         return item;
       }.bind(this));

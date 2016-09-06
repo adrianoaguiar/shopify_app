@@ -89,8 +89,10 @@ var ShopifyApp = {
   getRequest: function(resource) {
     return {
       headers  : {
-        'X-Shopify-Zendesk-Auth': Base64.encode(this.setting('username') + ':' + this.setting('password'))
+        'Authorization': 'Basic ' + Base64.encode(this.setting('username') + ':' + this.setting('password'))
       },
+      username: this.setting('username'),
+      password: this.setting('password'),
       url      : this.setting('api_url') + resource,
       method   : 'GET',
       dataType : 'json',

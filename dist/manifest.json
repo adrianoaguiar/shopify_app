@@ -16,6 +16,11 @@
   "version": "2.0.0",
   "parameters": [
     {
+      "name": "api_url",
+      "type": "url",
+      "required": true
+    },
+    {
       "name": "url",
       "type": "url",
       "required": true
@@ -81,9 +86,14 @@
       "default": false
     },
     {
-      "name": "access_token",
+      "name": "username",
       "type": "hidden",
-      "required": false
+      "required": true
+    },
+    {
+      "name": "password",
+      "type": "hidden",
+      "required": true
     }
   ]
 }

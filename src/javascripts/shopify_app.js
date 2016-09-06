@@ -1,6 +1,7 @@
 import BaseApp from 'base_app';
 
 var gravatar = require('gravatar');
+var Base64 = require('js-base64').Base64;
 
 var ShopifyApp = {
   orderLimit: 3,
@@ -23,7 +24,7 @@ var ShopifyApp = {
   storeUrl: '',
 
   resources: {
-    PROFILE_URI       : '/admin/customers/search.json',
+    PROFILE_URI       : '/customer',
     CUSTOMER_URI      : '/admin/customers/',
     ORDERS_URI        : '/admin/orders.json',
     ORDER_PATH        : '/admin/orders/'
@@ -88,12 +89,12 @@ var ShopifyApp = {
   getRequest: function(resource) {
     return {
       headers  : {
-        'X-Shopify-Access-Token': this.setting('access_token'),
-        'X-Requested-With': 'XMLHttpRequest'
+        'X-Shopify-Zendesk-Auth': Base64.encode(this.setting('username') + ':' + this.setting('password'))
       },
-      url      : this.storeUrl + resource,
+      url      : this.setting('api_url') + resource,
       method   : 'GET',
-      dataType : 'json'
+      dataType : 'json',
+      cors: true
     };
   },
 

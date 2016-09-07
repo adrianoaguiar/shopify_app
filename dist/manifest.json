@@ -26,6 +26,11 @@
       "required": true
     },
     {
+      "name": "store_name",
+      "type": "text",
+      "required": true
+    },
+    {
       "name": "items_purchased",
       "type": "checkbox",
       "default": true

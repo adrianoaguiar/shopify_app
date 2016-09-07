@@ -1,4 +1,5 @@
 import BaseApp from 'base_app';
+import $ from 'jquery';
 
 var gravatar = require('gravatar');
 var Base64 = require('js-base64').Base64;
@@ -26,15 +27,15 @@ var ShopifyApp = {
   resources: {
     PROFILE_URI       : '/customer',
     CUSTOMER_URI      : '/admin/customers/',
-    ORDERS_URI        : '/admin/orders.json',
-    ORDER_PATH        : '/admin/orders/'
+    ORDERS_URI        : '/orders',
+    ORDER_PATH        : '/orders/'
   },
 
   requests: {
     'getProfile' : function(email) {
       var request = this.getRequest(this.resources.PROFILE_URI);
 
-      request.data = {query: 'email:' + email};
+      $.extend(request.data, {email: email});
 
       return request;
     },
@@ -51,12 +52,12 @@ var ShopifyApp = {
 
       var request = this.getRequest(this.resources.ORDERS_URI);
 
-      request.data = {
+      $.extend(request.data, {
         customer_id: customer_id,
         fields: additional_fields,
         status: 'any',
         limit: this.orderLimit
-      };
+      });
 
       return request;
     },
@@ -91,12 +92,11 @@ var ShopifyApp = {
       headers  : {
         'Authorization': 'Basic ' + Base64.encode(this.setting('username') + ':' + this.setting('password'))
       },
-      username: this.setting('username'),
-      password: this.setting('password'),
       url      : this.setting('api_url') + resource,
       method   : 'GET',
       dataType : 'json',
-      cors: true
+      cors: true,
+      data: {store_name : this.setting('store_name')}
     };
   },
 
@@ -183,6 +183,14 @@ var ShopifyApp = {
     );
 
     this.resizeApp();
+  },
+
+  queryCustomer: function() {
+    var self = this;
+    this.switchTo('requesting');
+    this.zafClient.get('ticket.requester.email').then(function(data) {
+      self.ajax('getProfile', data["ticket.requester.email"]);
+    });
   },
 
   handleOrdersFail: function(response) {

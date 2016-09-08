@@ -56,6 +56,10 @@ module.exports = {
           knownHelpers: ['t', 'setting', 'store'],
           ignorePartials: true
         }
+      },
+      {
+        test: /\.svg$/,
+        loader: 'svg-inline'
       }
     ]
   },

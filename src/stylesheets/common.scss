@@ -6,6 +6,15 @@
     white-space: nowrap;
   }
 
+  svg {
+    vertical-align: top;
+  }
+
+  #orders-toggle {
+    cursor: pointer;
+    height: 15px;
+  }
+
   hr {
     color: #dddddd;
   }

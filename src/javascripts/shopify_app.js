@@ -1,8 +1,13 @@
 import BaseApp from 'base_app';
+import $ from 'jquery';
+
+import TweenMax from 'gsap';
 
 var gravatar = require('gravatar');
 
 var ShopifyApp = {
+  ordersShown: false,
+
   orderLimit: 3,
 
   noteCharacterLimit: 165,
@@ -79,11 +84,14 @@ var ShopifyApp = {
     'getOrder.done' : 'handleOrder',
     'getOrder.fail' : 'handleOrdersFail',
     'shown.bs.collapse .panel-group': 'resizeApp',
-    'hidden.bs.collapse .panel-group': 'resizeApp'
+    'hidden.bs.collapse .panel-group': 'resizeApp',
+    'click #orders-toggle': 'toggleOrders'
   },
 
   init: function() {
     this.storeUrl = this.storeUrl || this.checkStoreUrl(this.setting('url'));
+
+    this.loadSvg();
 
     if (this.currentLocation() === 'ticket_sidebar') {
       this.queryCustomer();
@@ -237,6 +245,29 @@ var ShopifyApp = {
       return text.substr(0, this.noteCharacterLimit) + '...';
     }
     return text;
+  },
+
+  loadSvg: function() {
+    var svg = require('svg-inline?classPrefix!zd-svg-icons/dist/index.svg');
+    var $svg = $('<object id="mySVG" type="image/svg+xml"/>').css('display', 'none').append(svg);
+    $('body').prepend($svg);
+  },
+
+  toggleOrders: function() {
+    var show = 'show';
+    var rotation = 180;
+
+    if (this.ordersShown) {
+      show = 'hide';
+      rotation = 360;
+
+      this.ordersShown = false;
+    } else {
+      this.ordersShown = true;
+    }
+
+    TweenMax.to("#orders-toggle", .5, {rotation: rotation});
+    $('section[data-orders] .panel-collapse').collapse(show);
   }
 }
 

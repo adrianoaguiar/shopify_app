@@ -5,6 +5,8 @@ var gravatar = require('gravatar');
 var ShopifyApp = {
   orderLimit: 3,
 
+  noteCharacterLimit: 165,
+
   orderFieldsMap: {
     "items_purchased": "line_items",
     "item_quantity": "quantity",
@@ -33,7 +35,10 @@ var ShopifyApp = {
     'getProfile' : function(email) {
       var request = this.getRequest(this.resources.PROFILE_URI);
 
-      request.data = {query: 'email:' + email};
+      request.data = {
+        query: 'email:' + email,
+        fields: 'id,note,email,first_name,last_name'
+      };
 
       return request;
     },
@@ -113,7 +118,7 @@ var ShopifyApp = {
     if (this.setting('customer_notes') && (this.customer.note === "" || this.customer.note === null)) {
       this.customer.note = this.I18n.t('customer.no_notes');
     } else {
-      this.customer.note = null;
+      this.customer.note = this.truncateTextToLimit(this.customer.note);
     }
 
     this.customer.uri = this.storeUrl + this.resources.CUSTOMER_URI + this.customer.id;
@@ -216,6 +221,8 @@ var ShopifyApp = {
 
     if (order.note === "" || order.note === null) {
       newOrder.note = this.I18n.t('customer.no_notes');
+    } else {
+      newOrder.note = this.truncateTextToLimit(order.note);
     }
 
     if (order.created_at) {
@@ -223,6 +230,13 @@ var ShopifyApp = {
     }
 
     return newOrder;
+  },
+  
+  truncateTextToLimit: function (text) {
+    if (text.length > this.noteCharacterLimit) {
+      return text.substr(0, this.noteCharacterLimit) + '...';
+    }
+    return text;
   }
 }
 

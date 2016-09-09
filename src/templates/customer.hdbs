@@ -9,7 +9,7 @@
 {{#if customer.note}}
 <div class="u-mb-sm u-zeta">
   {{t "customer.notes"}}
-  <div class="u-light">{{customer.note}}</div>
+  <div class="u-light"><p>{{customer.note}}</p></div>
 </div>
 {{/if}}
 

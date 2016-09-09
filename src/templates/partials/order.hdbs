@@ -54,7 +54,7 @@
       {{#if note}}
       <div class="u-mv-sm">
         <div class="u-semibold o-label">{{t "app.parameters.order_notes.label.value"}}</div>
-        <div>{{note}}</div>
+        <div class="order-note">{{note}}</div>
       </div>
       {{/if}}
     <!-- /#panel-body -->

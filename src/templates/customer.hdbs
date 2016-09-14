@@ -16,3 +16,8 @@
 {{/if}}
 
 <section data-orders></section>
+<div class="u-mt-sm">
+  <svg id="orders-toggle">
+    <use xlink:href="#zd-svg-icon-14-chevron">
+  </svg>
+</div>

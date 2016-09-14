@@ -41,6 +41,9 @@
     "zd-css-bedrock": "git+ssh://git@github.com/zendeskgarden/css-bedrock.git",
     "gravatar": "^1.5.2",
     "js-base64": "^2.1.9",
-    "zd-css-buttons": "git+ssh://git@github.com/zendeskgarden/css-buttons.git"
+    "zd-css-buttons": "git+ssh://git@github.com/zendeskgarden/css-buttons.git",
+    "gsap": "^1.19.0",
+    "svg-inline-loader": "git+ssh://git@github.com/sairion/svg-inline-loader.git",
+    "zd-svg-icons": "git+ssh://git@github.com/zendeskgarden/svg-icons.git"
   }
 }

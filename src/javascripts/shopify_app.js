@@ -91,7 +91,7 @@ var ShopifyApp = {
   init: function() {
     this.storeUrl = this.storeUrl || this.checkStoreUrl(this.setting('url'));
 
-    this.loadSvg();
+    this.loadSprites();
 
     if (this.currentLocation() === 'ticket_sidebar') {
       this.queryCustomer();
@@ -247,7 +247,7 @@ var ShopifyApp = {
     return text;
   },
 
-  loadSvg: function() {
+  loadSprites: function() {
     var svg = require('svg-inline?classPrefix!zd-svg-icons/dist/index.svg');
     var $svg = $('<object id="mySVG" type="image/svg+xml"/>').css('display', 'none').append(svg);
     $('body').prepend($svg);

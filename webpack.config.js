@@ -54,12 +54,12 @@ module.exports = {
               path.join(__dirname, './src/templates', 'partials')
           ],
           knownHelpers: ['t', 'setting', 'store'],
-          ignorePartials: true
+          ignorePartials: false
         }
       },
       {
         test: /\.svg$/,
-        loader: 'svg-inline'
+        loader: 'svg-inline?idPrefix=shopify-'
       }
     ]
   },

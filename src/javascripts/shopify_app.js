@@ -248,7 +248,7 @@ var ShopifyApp = {
   },
 
   loadSprites: function() {
-    var svg = require('svg-inline?classPrefix!zd-svg-icons/dist/index.svg');
+    var svg = require('zd-svg-icons/dist/index.svg');
     var $svg = $('<object id="mySVG" type="image/svg+xml"/>').css('display', 'none').append(svg);
     $('body').prepend($svg);
   },

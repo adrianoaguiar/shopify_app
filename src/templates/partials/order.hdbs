@@ -51,6 +51,14 @@
         <div>{{billing_address.city}}, {{billing_address.province_code}} {{billing_address.zip}}</div>
       </div>
       {{/if}}
+      {{#if fulfillments}}
+      <div class="u-mv-sm">
+          <div class="u-semibold o-label">{{t "app.parameters.tracking_code.label.value"}}</div>
+          {{#each fulfillments}}
+            <div> <a href="{{tracking_url}}">{{tracking_number}}</a></div>
+          {{/each}}
+      </div>
+      {{/if}}
       {{#if note}}
       <div class="u-mv-sm">
         <div class="u-semibold o-label">{{t "app.parameters.order_notes.label.value"}}</div>

@@ -77,6 +77,12 @@
           "value": "Billing Address"
         }
       },
+      "tracking_code": {
+        "label": {
+          "title": "tracking_code",
+          "value": "Tracking Codes"
+        }
+      },
       "customer_notes" : {
         "label": {
           "title": "customer_notes",

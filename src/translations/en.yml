@@ -224,7 +224,7 @@ parts:
 - translation:
       key: "txt.apps.shopify_app.orders.view"
       title: "Link text to show the order on Shopify"
-      value: "View order"
+      value: "Click here to view order in Shopify"
 - translation:
       key: "txt.apps.shopify_app.global.setup"
       title: "Setup notification"

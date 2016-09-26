@@ -65,6 +65,11 @@
         <div class="order-note">{{note}}</div>
       </div>
       {{/if}}
+      {{#if uri}}
+      <div class="u-mv-sm">
+        <a href="{{uri}}" target="_blank">{{t "orders.view" }}</a>
+      </div>
+      {{/if}}
     <!-- /#panel-body -->
     </div>
   <!-- /#order-{{id}} -->

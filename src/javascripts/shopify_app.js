@@ -221,7 +221,7 @@ var ShopifyApp = {
     newOrder.order_status = "not_fulfilled";
 
     if (!_.isUndefined(order.fulfillment_status)) {
-      if (order.fulfillment_status != null) {
+      if (order.fulfillment_status !== null) {
         newOrder.order_status = order.fulfillment_status;
       }
       newOrder.fulfillment_status = true;
@@ -236,6 +236,17 @@ var ShopifyApp = {
     if (order.created_at) {
       newOrder.created_at = this.localeDate(order.created_at);
     }
+
+    let trackingNumbers = _.filter(order.fulfillments, function(fulfillment) {
+      if(fulfillment.tracking_number != null) {
+        return {
+          tracking_number : fulfillment.tracking_number,
+          tracking_url : fulfillment.tracking_url
+        }
+      }
+    });
+
+    newOrder.tracking_numbers = trackingNumbers;
 
     return newOrder;
   },

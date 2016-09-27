@@ -32,32 +32,32 @@
         </div>
       {{/if}}
       {{#if shipping_lines}}
-      <div class="u-mv-sm">
-        <div class="u-semibold o-label">{{t "app.parameters.shipping_method.label.value"}}</div>
-        <div>{{title}}</div>
-      </div>
+        <div class="u-mv-sm">
+          <div class="u-semibold o-label">{{t "app.parameters.shipping_method.label.value"}}</div>
+          <div>{{title}}</div>
+        </div>
       {{/if}}
       {{#if shipping_address}}
-      <div class="u-mv-sm">
-        <div class="u-semibold o-label">{{t "app.parameters.shipping_address.label.value"}}</div>
-        <div>{{shipping_address.address1}} {{shipping_address.address2}}</div>
-        <div>{{shipping_address.city}}, {{shipping_address.province_code}} {{shipping_address.zip}}</div>
-      </div>
+        <div class="u-mv-sm">
+          <div class="u-semibold o-label">{{t "app.parameters.shipping_address.label.value"}}</div>
+          <div>{{shipping_address.address1}} {{shipping_address.address2}}</div>
+          <div>{{shipping_address.city}}, {{shipping_address.province_code}} {{shipping_address.zip}}</div>
+        </div>
       {{/if}}
       {{#if billing_address}}
-      <div class="u-mv-sm">
-        <div class="u-semibold o-label">{{t "app.parameters.billing_address.label.value"}}</div>
-        <div>{{billing_address.address1}} {{billing_address.address2}}</div>
-        <div>{{billing_address.city}}, {{billing_address.province_code}} {{billing_address.zip}}</div>
-      </div>
+        <div class="u-mv-sm">
+          <div class="u-semibold o-label">{{t "app.parameters.billing_address.label.value"}}</div>
+          <div>{{billing_address.address1}} {{billing_address.address2}}</div>
+          <div>{{billing_address.city}}, {{billing_address.province_code}} {{billing_address.zip}}</div>
+        </div>
       {{/if}}
-      {{#if fulfillments}}
-      <div class="u-mv-sm">
-          <div class="u-semibold o-label">{{t "app.parameters.tracking_code.label.value"}}</div>
-          {{#each fulfillments}}
-            <div> <a href="{{tracking_url}}">{{tracking_number}}</a></div>
-          {{/each}}
-      </div>
+      {{#if tracking_numbers}}
+        <div class="u-mv-sm">
+            <div class="u-semibold o-label">{{t "app.parameters.tracking_numbers.label.value"}}</div>
+            {{#each tracking_numbers}}
+              <div> <a href="{{tracking_url}}">{{tracking_number}}</a></div>
+            {{/each}}
+        </div>
       {{/if}}
       {{#if note}}
       <div class="u-mv-sm">

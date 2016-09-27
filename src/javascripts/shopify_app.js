@@ -49,7 +49,7 @@ var ShopifyApp = {
     },
     'getOrders' : function(customer_id) {
       var self = this;
-      var additional_fields = 'name,id,currency';
+      var additional_fields = 'name,id,currency,fulfillments';
       var fields = _.reject(this.orderFieldsMap, function(value, key) {
         return !self.setting(key);
       });
@@ -236,6 +236,17 @@ var ShopifyApp = {
     if (order.created_at) {
       newOrder.created_at = this.localeDate(order.created_at);
     }
+
+    let trackingNumbers = _.filter(order.fulfillments, function(fulfillment) {
+      if(fulfillment.tracking_number != null) {
+        return {
+          tracking_number : fulfillment.tracking_number,
+          tracking_url : fulfillment.tracking_url
+        }
+      }
+    });
+
+    newOrder.tracking_numbers = trackingNumbers;
 
     return newOrder;
   },

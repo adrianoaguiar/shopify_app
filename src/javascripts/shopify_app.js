@@ -221,7 +221,7 @@ var ShopifyApp = {
     newOrder.order_status = "not_fulfilled";
 
     if (!_.isUndefined(order.fulfillment_status)) {
-      if (order.fulfillment_status !== null) {
+      if (order.fulfillment_status != null) {
         newOrder.order_status = order.fulfillment_status;
       }
       newOrder.fulfillment_status = true;

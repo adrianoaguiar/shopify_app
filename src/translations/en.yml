@@ -202,9 +202,9 @@ parts:
       title: "Checkbox label if billing address should be displayed"
       value: "Billing Address"
   - translation:
-      key: "txt.apps.shopify_app.app.parameters.tracking_code.label"
-      title: "Label for displaying tracking codes"
-      value: "Tracking Codes"
+      key: "txt.apps.shopify_app.app.parameters.tracking_numbers.label"
+      title: "Label for displaying tracking numbers"
+      value: "Tracking Numbers"
   - translation:
       key: "txt.apps.shopify_app.app.parameters.customer_notes.label"
       title: "Checkbox label if customer notes should be displayed"

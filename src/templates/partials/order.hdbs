@@ -67,7 +67,7 @@
       {{/if}}
       {{#if uri}}
         <div class="u-mv-sm">
-          <a href="{{uri}}" target="_blank">{{t "orders.view" }}</a>
+          <a href="{{uri}}" target="_blank">{{t "orders.view_single" }}</a>
         </div>
       {{/if}}
     <!-- /#panel-body -->

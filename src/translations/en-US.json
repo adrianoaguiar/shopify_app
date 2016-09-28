@@ -114,8 +114,8 @@
     "id": "RECENT ORDERS",
     "recent_orders": "Recent orders",
     "status": "FULFILLMENT",
-    "view": "Click here to view order in Shopify",
-    "view_all": "View all orders"
+    "view_all": "View all orders",
+    "view_single": "Click here to view order in Shopify"
   },
   "customer": {
     "orders_count": "Orders count",

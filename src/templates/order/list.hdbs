@@ -2,7 +2,7 @@
   <div class="l-grid__item u-1/2">
     <span>{{t "orders.recent_orders"}}</span>
   </div>
-  <div class="l-grid__item u-1/2 u-ta-right u-pr-sm">
+  <div class="l-grid__item u-1/2 u-ta-right u-pr-sm u-m-xs-">
     <a href="{{ordersUri}}" target="_blank">{{t "orders.view_all"}}</a>
   </div>
 </div>

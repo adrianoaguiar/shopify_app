@@ -60,10 +60,15 @@
         </div>
       {{/if}}
       {{#if note}}
-      <div class="u-mv-sm">
-        <div class="u-semibold o-label">{{t "app.parameters.order_notes.label.value"}}</div>
-        <div class="order-note">{{note}}</div>
-      </div>
+        <div class="u-mv-sm">
+          <div class="u-semibold o-label">{{t "app.parameters.order_notes.label.value"}}</div>
+          <div class="order-note">{{note}}</div>
+        </div>
+      {{/if}}
+      {{#if uri}}
+        <div class="u-mv-sm">
+          <a href="{{uri}}" target="_blank">{{t "orders.view_single" }}</a>
+        </div>
       {{/if}}
     <!-- /#panel-body -->
     </div>

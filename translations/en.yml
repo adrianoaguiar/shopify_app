@@ -15,7 +15,7 @@ parts:
   - translation:
       key: "txt.apps.shopify_app.app.parameters.api_key.label"
       title: "Token from the user"
-      value: "Api Key"
+      value: "API Key"
   - translation:
       key: "txt.apps.shopify_app.app.parameters.password.label"
       title: "Password from the user"
@@ -80,7 +80,7 @@ parts:
   - translation:
       key: "txt.apps.shopify_app.customer.total_spent"
       title: "Total amount spent"
-      value: "Total Spent"
+      value: "Total spent"
   - translation:
       key: "txt.apps.shopify_app.customer.notes"
       title: "Random notes about the user"
@@ -100,7 +100,7 @@ parts:
   - translation:
       key: "txt.apps.shopify_app.order.cancelled"
       title: "Message to be displayed in the app when the order has been cancelled"
-      value: "This order was cancelled"
+      value: "This order was canceled"
   - translation:
       key: "txt.apps.shopify_app.order.cancel_reason"
       title: "Reason of cancellation title"
@@ -112,11 +112,11 @@ parts:
   - translation:
       key: "txt.apps.shopify_app.order.payment_status"
       title: "Status of the payment"
-      value: "Payment Status"
+      value: "Payment status"
   - translation:
       key: "txt.apps.shopify_app.order.fulfillment_status"
       title: "Status of fulfillment"
-      value: "Fulfillment Status"
+      value: "Fulfillment status"
   - translation:
       key: "txt.apps.shopify_app.order.notes"
       title: "Notes about the order"
@@ -136,7 +136,7 @@ parts:
   - translation:
       key: "txt.apps.shopify_app.order.subtotal"
       title: "Subtotal price of the order"
-      value: "Subtotal Price"
+      value: "Subtotal price"
   - translation:
       key: "txt.apps.shopify_app.order.shipping_lines"
       title: "Shipping costs"
@@ -144,8 +144,8 @@ parts:
   - translation:
       key: "txt.apps.shopify_app.order.total_price"
       title: "Total price"
-      value: "Total Price"
+      value: "Total price"
   - translation:
       key: "txt.apps.shopify_app.order.date_created"
       title: "Date created"
-      value: "Date Created"
+      value: "Date created"
